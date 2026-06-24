@@ -23,8 +23,8 @@
    Find them in Supabase → Project Settings → API.
    Leave blank to run local-only (no sync).
    ============================================================ */
-const SUPABASE_URL = "https://mwdjhinpicvxjetrcvkc.supabase.co/rest/v1/";       // e.g. https://abcd1234.supabase.co
-const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im13ZGpoaW5waWN2eGpldHJjdmtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODIzMzA5OTgsImV4cCI6MjA5NzkwNjk5OH0.0al_Or5mVF1zQ2sRgLyudq-mFKUVgSTy3glpVRHAYXI";  // the "anon public" key
+const SUPABASE_URL = "";       // e.g. https://abcd1234.supabase.co
+const SUPABASE_ANON_KEY = "";  // the "anon public" key
 /* ============================================================ */
 
 import { h, render } from "https://esm.sh/preact@10.19.3";
@@ -98,6 +98,7 @@ function App() {
   const [session, setSession] = useState(null);
   const [email, setEmail] = useState("");
   const [sync, setSync] = useState(supa ? "idle" : "local");
+  const [lastError, setLastError] = useState("");
   const pushTimer = useRef(null);
 
   const decisions = state.decisions || {};
@@ -112,8 +113,8 @@ function App() {
       if (error) throw error;
       if (data && data.data) { setState(data.data); saveLocal(data.data); }
       else { await supa.from("bd_state").upsert({ user_id: uid, data: loadLocal(), updated_at: new Date().toISOString() }); }
-      setSync("synced");
-    } catch (e) { console.error(e); setSync("error"); }
+      setLastError(""); setSync("synced");
+    } catch (e) { console.error(e); setLastError(e?.message || String(e)); setSync("error"); }
   };
   const push = (next, uid) => {
     if (!supa || !uid) return;
@@ -123,8 +124,8 @@ function App() {
       try {
         const { error } = await supa.from("bd_state").upsert({ user_id: uid, data: next, updated_at: new Date().toISOString() });
         if (error) throw error;
-        setSync("synced");
-      } catch (e) { console.error(e); setSync("error"); }
+        setLastError(""); setSync("synced");
+      } catch (e) { console.error(e); setLastError(e?.message || String(e)); setSync("error"); }
     }, 600);
   };
 
@@ -175,7 +176,7 @@ function App() {
         options: { emailRedirectTo: window.location.href.split("#")[0] } });
       if (error) throw error;
       setSync("link-sent");
-    } catch (e) { console.error(e); setSync("error"); }
+    } catch (e) { console.error(e); setLastError(e?.message || String(e)); setSync("error"); }
   };
   const signOut = async () => { if (supa) { await supa.auth.signOut(); setSession(null); setSync("idle"); } };
 
@@ -265,6 +266,13 @@ function App() {
           Running locally on this device. Add your Supabase URL and key at the top of this file to turn on cross-device sync.
         </div>
       `}
+
+      ${sync==="error" ? html`
+        <div style=${{ background:T.claySoft, border:`1px solid ${T.clay}55`, borderRadius:"12px", padding:"12px 14px", marginBottom:"14px", display:"flex", alignItems:"center", gap:"10px", flexWrap:"wrap" }}>
+          <span style=${{ fontSize:"13px", color:"#6E2A22", flex:"1 1 260px" }}>Sync error: ${lastError || "the database refused the request."}</span>
+          <span style=${{ fontSize:"11.5px", color:"#8A4339" }}>signed in: ${session?"yes":"no"} · keys set: ${supa?"yes":"no"}</span>
+          <button onClick=${()=>{ if(session){ pull(session.user.id); } }} style=${btn(false)}>Retry sync</button>
+        </div>` : null}
 
       <!-- Controls -->
       <div style=${{ display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:"12px", marginBottom:"16px" }}>
