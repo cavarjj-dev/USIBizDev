@@ -25,8 +25,8 @@
    Use your PUBLISHABLE key (starts with sb_publishable_).
    Leave blank to run local-only (no sync).
    ============================================================ */
-const SUPABASE_URL = "https://mwdjhinpicvxjetrcvkc.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_Xd2C9xM7nIbuFJgxAg7rbg_mNZEhTIi";
+const SUPABASE_URL = "";
+const SUPABASE_ANON_KEY = "";
 /* ============================================================ */
 
 import { h, render } from "https://esm.sh/preact@10.19.3";
@@ -85,6 +85,8 @@ const BASE = [
   {id:"netspi", company:"NetSPI", loc:"Minneapolis, MN", seg:"C", trigger:"scale", why:"~$500M raised; scaling org with a People function.", contact:"Head of L&D", channel:"", stage:"maybe"},
 ];
 
+const buildRoster = (st) => [...BASE, ...((st&&st.custom)||[])].map(b => { const r = { ...b, ...(((st&&st.records)||{})[b.id]||{}) }; return { id:b.id, company:r.company, contact:r.contact||"", email:r.email||"", stage:r.stage }; });
+
 const TRIGGERS = ["funding","growth","scale","scaling","integration","new-leader","other"];
 const CHANNELS = {"":"—", email:"Email", linkedin:"LinkedIn", other:"Other"};
 
@@ -115,14 +117,46 @@ function App() {
   const records = state.records || {};
   const custom = state.custom || [];
 
+  const ingestSignals = async (uid, st) => {
+    try {
+      const { data: sigs, error } = await supa.from("bd_signals").select("*").eq("user_id", uid).eq("applied", false).order("created_at");
+      if (error || !sigs || !sigs.length) return st;
+      let records = { ...(st.records||{}) };
+      let custom = [ ...(st.custom||[]) ];
+      const baseAll = () => [...BASE, ...custom].map(b => ({ ...b, ...(records[b.id]||{}) }));
+      const done = [];
+      for (const sig of sigs) {
+        if (sig.kind === "prospect" && sig.company) {
+          const exists = baseAll().some(p => (p.company||"").toLowerCase() === sig.company.toLowerCase());
+          if (!exists) custom.push({ id:"sig-"+sig.id, company:sig.company, loc:sig.loc||"", seg:sig.seg||"B", trigger:sig.trigger||"other", why:sig.detail||"", contact:sig.contact||"", email:sig.email||"", channel:"", stage:"suggested", custom:true, activity:[{t:todayStr(),label:"Auto-captured from intake"}] });
+        } else if (sig.kind === "reply" || sig.kind === "meeting") {
+          const target = sig.kind === "reply" ? "replied" : "meeting";
+          const all2 = baseAll();
+          const m = all2.find(p => sig.email && p.email && p.email.toLowerCase()===sig.email.toLowerCase())
+                 || all2.find(p => sig.hint && ((p.company && sig.hint.toLowerCase().includes(p.company.toLowerCase())) || (p.contact && sig.hint.toLowerCase().includes(p.contact.toLowerCase()))));
+          if (m && !["won","lost","pass"].includes(m.stage) && sIdx(target) > sIdx(m.stage)) {
+            const cur = records[m.id] || {};
+            records[m.id] = { ...cur, stage:target, activity:[ ...(m.activity||[]), { t:todayStr(), label: sig.kind==="reply"?"Auto: reply detected":"Auto: call booked" } ] };
+          }
+        }
+        done.push(sig.id);
+      }
+      if (done.length) await supa.from("bd_signals").update({ applied:true }).in("id", done);
+      return { ...st, records, custom };
+    } catch (e) { console.error("ingest", e); return st; }
+  };
+
   const pull = async (uid) => {
     if (!supa) return;
     setSync("syncing");
     try {
       const { data, error } = await supa.from("bd_state").select("data").eq("user_id", uid).maybeSingle();
       if (error) throw error;
-      if (data && data.data) { setState(data.data); saveLocal(data.data); }
-      else { await supa.from("bd_state").upsert({ user_id: uid, data: loadLocal(), updated_at: new Date().toISOString() }); }
+      let st = (data && data.data) ? data.data : loadLocal();
+      st = await ingestSignals(uid, st);
+      st = { ...st, roster: buildRoster(st) };
+      setState(st); saveLocal(st);
+      await supa.from("bd_state").upsert({ user_id: uid, data: st, updated_at: new Date().toISOString() });
       setLastError(""); setSync("synced");
     } catch (e) { console.error(e); setLastError(e?.message || String(e)); setSync("error"); }
   };
@@ -148,7 +182,7 @@ function App() {
     return () => { sub.subscription.unsubscribe(); window.removeEventListener("focus", onFocus); };
   }, []);
 
-  const commit = (next) => { setState(next); saveLocal(next); if (session) push(next, session.user.id); };
+  const commit = (next) => { next = { ...next, roster: buildRoster(next) }; setState(next); saveLocal(next); if (session) push(next, session.user.id); };
 
   const all = [...BASE, ...custom].map(b => ({ ...b, ...(records[b.id] || {}) }));
   const update = (id, patch) => {
