@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>Unified Solutions — BD Console</title>
+<title>Unified Solutions — BD Pipeline</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='7' fill='%231B2430'/><circle cx='16' cy='16' r='6' fill='none' stroke='%2315705A' stroke-width='2.5'/></svg>" />
 <style>
   * { box-sizing: border-box; }
@@ -11,20 +11,22 @@
     font-family: system-ui, -apple-system, "Segoe UI", sans-serif; -webkit-font-smoothing: antialiased; }
   input, select, textarea, button { font-family: inherit; }
   textarea { resize: vertical; }
+  select { -webkit-appearance: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%235B6472' fill='none' stroke-width='1.5'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 9px center; padding-right: 24px; }
   @media (prefers-reduced-motion: no-preference) { button { transition: all .12s ease; } }
 </style>
 </head>
 <body>
-<div id="app" style="padding:40px;color:#5B6472">Loading your console…</div>
+<div id="app" style="padding:40px;color:#5B6472">Loading your pipeline…</div>
 
 <script type="module">
 /* ============================================================
    CONFIG  — paste your two Supabase values here, then re-host.
-   Find them in Supabase → Project Settings → API.
+   Find them in Supabase -> Project Settings -> API.
+   Use your PUBLISHABLE key (starts with sb_publishable_).
    Leave blank to run local-only (no sync).
    ============================================================ */
-const SUPABASE_URL = "https://mwdjhinpicvxjetrcvkc.supabase.co";       // e.g. https://abcd1234.supabase.co
-const SUPABASE_ANON_KEY = "sb_publishable_Xd2C9xM7nIbuFJgxAg7rbg_mNZEhTIi";  // your PUBLISHABLE key — starts with sb_publishable_  (never the sb_secret_ one)
+const SUPABASE_URL = "";
+const SUPABASE_ANON_KEY = "";
 /* ============================================================ */
 
 import { h, render } from "https://esm.sh/preact@10.19.3";
@@ -45,55 +47,62 @@ const SEG = {
   B:{label:"Just-raised startups", color:T.blue, soft:T.blueSoft},
   C:{label:"Established People / L&D", color:T.amber, soft:T.amberSoft},
 };
-const STATUS = {
-  pursue:{label:"Pursue", color:T.pine, sym:"check"},
-  maybe:{label:"Maybe", color:T.amber, sym:"minus"},
-  pass:{label:"Pass", color:T.clay, sym:"x"},
+// Funnel stages in order, plus terminal states
+const STAGES = {
+  suggested:{label:"Suggested", color:"#8B93A0", funnel:true},
+  maybe:{label:"Maybe", color:"#C08A2B", funnel:true},
+  approved:{label:"Approved", color:"#2D6CA6", funnel:true},
+  sent:{label:"Outreach sent", color:"#15705A", funnel:true},
+  replied:{label:"Replied", color:"#7A4FB0", funnel:true},
+  meeting:{label:"Call booked", color:"#0E7C86", funnel:true},
+  won:{label:"Won", color:"#2E7D32", funnel:true},
+  lost:{label:"Lost", color:"#9A463B", funnel:false},
+  pass:{label:"Pass", color:"#6B7280", funnel:false},
 };
-const PROSPECTS = [
-  {id:"total-expert", company:"Total Expert", loc:"Mendota Heights, MN", seg:"A", why:"Years of explosive revenue growth — the manager layer is strained.", contact:"Joe Welu (CEO) / COO"},
-  {id:"phdata", company:"phData", loc:"Minneapolis, MN", seg:"A", why:"Data/AI consulting scale-up minting new team leads constantly.", contact:"Head of Delivery / COO"},
-  {id:"fulcrum", company:"Fulcrum", loc:"Minneapolis, MN", seg:"A", why:"~$40M raised plus acquired Wayland — live team-integration pain.", contact:"CEO / People lead"},
-  {id:"75f", company:"75F", loc:"Bloomington, MN", seg:"A", why:"Global hardware + software growth opening new management gaps.", contact:"COO / VP People"},
-  {id:"bold-orange", company:"Bold Orange", loc:"Minneapolis, MN", seg:"A", why:"Twin Cities Fast 50 agency, founder-led and scaling.", contact:"Founder / CEO"},
-  {id:"irrigreen", company:"Irrigreen", loc:"Edina, MN", seg:"B", why:"$19M Series A, partner program up 5x, new facility — first-time managers everywhere.", contact:"Shane Dyer (CEO)"},
-  {id:"niron", company:"Niron Magnetics", loc:"Minneapolis, MN", seg:"B", why:"Scaling pre-revenue into manufacturing buildout — a wave of brand-new managers.", contact:"COO / Head of People"},
-  {id:"justifi", company:"JustiFi", loc:"Minneapolis, MN", seg:"B", why:"Early-scale fintech infrastructure; repeat founder who decides fast.", contact:"Joe Keeley (CEO)"},
-  {id:"visana", company:"Visana Health", loc:"Minnesota / remote", seg:"B", why:"Growth-stage women's health, expanding the team.", contact:"Founder / People lead"},
-  {id:"yoursix", company:"YourSix", loc:"Roseville, MN", seg:"B", why:"Repeat Inc. 5000 fast-grower in security SaaS.", contact:"CEO / COO"},
-  {id:"arctic-wolf", company:"Arctic Wolf", loc:"Eden Prairie, MN", seg:"C", why:"Cybersecurity hypergrowth with a mature L&D budget and real demand.", contact:"VP Leadership Dev / CHRO"},
-  {id:"netspi", company:"NetSPI", loc:"Minneapolis, MN", seg:"C", why:"~$500M raised; scaling org with an established People function.", contact:"Head of L&D"},
-  {id:"branch", company:"Branch", loc:"Minneapolis, MN", seg:"C", why:"$638M raised; established People org navigating rapid scale.", contact:"VP People"},
-];
-const PHASES = [
-  {n:1, label:"Qualify & outreach"},
-  {n:2, label:"Calendar & email bridge"},
-  {n:3, label:"Learning loop"},
+const STAGE_ORDER = ["suggested","maybe","approved","sent","replied","meeting","won"];
+const sIdx = (s) => STAGE_ORDER.indexOf(s);
+const reachedSent = (s) => ["sent","replied","meeting","won"].includes(s);
+const reachedReply = (s) => ["replied","meeting","won"].includes(s);
+
+const TODAY = "2026-06-25";
+
+// Base prospects. Stored per-id overrides merge on top of these.
+const BASE = [
+  {id:"total-expert", company:"Total Expert", loc:"Mendota Heights, MN", seg:"A", trigger:"growth", why:"Years of explosive growth straining the manager layer.", contact:"Joe Welu (CEO)", channel:"email", stage:"approved", note:"Email drafted in Gmail, pending your send."},
+  {id:"fulcrum", company:"Fulcrum", loc:"Minneapolis, MN", seg:"A", trigger:"funding", why:"~$40M raised and rapid growth; team scaling fast.", contact:"Sunny Han (CEO)", channel:"linkedin", stage:"sent", dateSent:TODAY},
+  {id:"yoursix", company:"YourSix", loc:"Roseville, MN", seg:"B", trigger:"growth", why:"Fast-growing, service-disabled veteran-owned security SaaS.", contact:"Eric Styles (CEO)", channel:"linkedin", stage:"sent", dateSent:TODAY, note:"Veteran-to-veteran angle."},
+  {id:"branch", company:"Branch", loc:"Minneapolis, MN", seg:"C", trigger:"scale", why:"$638M raised; managers leading at new scale.", contact:"Atif Siddiqi (CEO)", channel:"linkedin", stage:"approved", note:"Founder-direct; connection note ready."},
+  {id:"justifi", company:"JustiFi", loc:"Minneapolis, MN", seg:"B", trigger:"growth", why:"Repeat founder building the next leadership team.", contact:"Joe Keeley", channel:"linkedin", stage:"sent", dateSent:TODAY, note:"Contact moved roles; confirm current company."},
+  {id:"arctic-wolf", company:"Arctic Wolf", loc:"Eden Prairie, MN", seg:"C", trigger:"scale", why:"Cybersecurity hypergrowth; mature L&D demand.", contact:"Kristin Dean", channel:"linkedin", stage:"sent", dateSent:TODAY, note:"Contact moved roles; confirm current company."},
+  {id:"phdata", company:"phData", loc:"Minneapolis, MN", seg:"A", trigger:"growth", why:"Consulting scale-up minting new team leads constantly.", contact:"Head of Delivery / COO", channel:"", stage:"maybe"},
+  {id:"75f", company:"75F", loc:"Bloomington, MN", seg:"A", trigger:"growth", why:"Global hardware + software growth, new management gaps.", contact:"COO / VP People", channel:"", stage:"maybe"},
+  {id:"bold-orange", company:"Bold Orange", loc:"Minneapolis, MN", seg:"A", trigger:"growth", why:"Fast 50 agency, founder-led and scaling.", contact:"Founder / CEO", channel:"", stage:"maybe"},
+  {id:"irrigreen", company:"Irrigreen", loc:"Edina, MN", seg:"B", trigger:"funding", why:"$19M Series A; partner program 5x; new facility.", contact:"Shane Dyer (CEO)", channel:"", stage:"maybe"},
+  {id:"niron", company:"Niron Magnetics", loc:"Minneapolis, MN", seg:"B", trigger:"scaling", why:"Scaling into manufacturing; a wave of new managers.", contact:"COO / Head of People", channel:"", stage:"maybe"},
+  {id:"visana", company:"Visana Health", loc:"Minnesota / remote", seg:"B", trigger:"growth", why:"Growth-stage women's health, expanding team.", contact:"Founder / People lead", channel:"", stage:"maybe"},
+  {id:"netspi", company:"NetSPI", loc:"Minneapolis, MN", seg:"C", trigger:"scale", why:"~$500M raised; scaling org with a People function.", contact:"Head of L&D", channel:"", stage:"maybe"},
 ];
 
-const LS_KEY = "usi-bd-state";
-const loadLocal = () => { try { return JSON.parse(localStorage.getItem(LS_KEY)) || {decisions:{},custom:[]}; } catch { return {decisions:{},custom:[]}; } };
+const TRIGGERS = ["funding","growth","scale","scaling","integration","new-leader","other"];
+const CHANNELS = {"":"—", email:"Email", linkedin:"LinkedIn", other:"Other"};
+
+const LS_KEY = "usi-bd-pipeline-v2";
+const loadLocal = () => { try { return JSON.parse(localStorage.getItem(LS_KEY)) || {records:{},custom:[]}; } catch { return {records:{},custom:[]}; } };
 const saveLocal = (s) => { try { localStorage.setItem(LS_KEY, JSON.stringify(s)); } catch {} };
 
-const supa = (SUPABASE_URL && SUPABASE_ANON_KEY)
-  ? createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+const supa = (SUPABASE_URL && SUPABASE_ANON_KEY) ? createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
 function Icon({ sym, size=14, color="currentColor" }) {
-  const p = {
-    check:"M4 8.5l3 3 5-6.5", x:"M5 5l6 6M11 5l-6 6", minus:"M4 8h8",
-    plus:"M8 4v8M4 8h8", pin:"M8 14s4-4.2 4-7A4 4 0 1 0 4 7c0 2.8 4 7 4 7z",
-    flag:"M4 14V3m0 1h7l-1.5 2.5L11 9H4",
-  }[sym] || "";
-  return html`<svg width=${size} height=${size} viewBox="0 0 16 16" fill="none"
-    stroke=${color} stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d=${p}/></svg>`;
+  const p = { plus:"M8 4v8M4 8h8", pin:"M8 14s4-4.2 4-7A4 4 0 1 0 4 7c0 2.8 4 7 4 7z", flag:"M4 14V3m0 1h7l-1.5 2.5L11 9H4", chart:"M3 13V7M8 13V3M13 13V9", clock:"M8 4v4l2.5 1.5M14 8A6 6 0 1 1 2 8a6 6 0 0 1 12 0z" }[sym] || "";
+  return html`<svg width=${size} height=${size} viewBox="0 0 16 16" fill="none" stroke=${color} stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d=${p}/></svg>`;
 }
 
 function App() {
   const [state, setState] = useState(loadLocal());
   const [seg, setSeg] = useState("all");
-  const [view, setView] = useState("all");
+  const [stageFilter, setStageFilter] = useState("all");
   const [adding, setAdding] = useState(false);
-  const [draft, setDraft] = useState({company:"",loc:"",seg:"A",why:"",contact:""});
+  const [draft, setDraft] = useState({company:"",loc:"",seg:"A",why:"",contact:"",channel:"linkedin",trigger:"growth"});
   const [exportText, setExportText] = useState(null);
   const [session, setSession] = useState(null);
   const [email, setEmail] = useState("");
@@ -101,10 +110,9 @@ function App() {
   const [lastError, setLastError] = useState("");
   const pushTimer = useRef(null);
 
-  const decisions = state.decisions || {};
+  const records = state.records || {};
   const custom = state.custom || [];
 
-  // ---- cloud sync ----
   const pull = async (uid) => {
     if (!supa) return;
     setSync("syncing");
@@ -131,115 +139,112 @@ function App() {
 
   useEffect(() => {
     if (!supa) return;
-    supa.auth.getSession().then(({ data }) => {
-      setSession(data.session);
-      if (data.session) pull(data.session.user.id);
-    });
-    const { data: sub } = supa.auth.onAuthStateChange((_e, s) => {
-      setSession(s);
-      if (s) pull(s.user.id);
-    });
+    supa.auth.getSession().then(({ data }) => { setSession(data.session); if (data.session) pull(data.session.user.id); });
+    const { data: sub } = supa.auth.onAuthStateChange((_e, s) => { setSession(s); if (s) pull(s.user.id); });
     const onFocus = () => { supa.auth.getSession().then(({ data }) => { if (data.session) pull(data.session.user.id); }); };
     window.addEventListener("focus", onFocus);
     return () => { sub.subscription.unsubscribe(); window.removeEventListener("focus", onFocus); };
   }, []);
 
-  const commit = (next) => {
-    setState(next); saveLocal(next);
-    if (session) push(next, session.user.id);
+  const commit = (next) => { setState(next); saveLocal(next); if (session) push(next, session.user.id); };
+
+  const all = [...BASE, ...custom].map(b => ({ ...b, ...(records[b.id] || {}) }));
+  const update = (id, patch) => {
+    const cur = records[id] || {};
+    let next = { ...cur, ...patch };
+    if (patch.stage && reachedSent(patch.stage) && !next.dateSent) next.dateSent = TODAY;
+    commit({ ...state, records: { ...records, [id]: next } });
   };
 
-  // ---- mutations ----
-  const dec = (id) => decisions[id] || { status:null, priority:"med", notes:"" };
-  const setStatus = (id, status) => {
-    const c = dec(id);
-    commit({ ...state, decisions: { ...decisions, [id]: { ...c, status: c.status===status?null:status } } });
-  };
-  const setPriority = (id, priority) => commit({ ...state, decisions: { ...decisions, [id]: { ...dec(id), priority } } });
-  const setNotes = (id, notes) => commit({ ...state, decisions: { ...decisions, [id]: { ...dec(id), notes } } });
   const addProspect = () => {
     if (!draft.company.trim()) return;
-    const item = { ...draft, id:"custom-"+Date.now(), company:draft.company.trim(), custom:true };
+    const item = { ...draft, id:"custom-"+Date.now(), company:draft.company.trim(), stage:"suggested", custom:true };
     commit({ ...state, custom:[...custom, item] });
-    setDraft({company:"",loc:"",seg:"A",why:"",contact:""}); setAdding(false);
+    setDraft({company:"",loc:"",seg:"A",why:"",contact:"",channel:"linkedin",trigger:"growth"});
+    setAdding(false);
   };
   const removeCustom = (id) => {
-    const nd = { ...decisions }; delete nd[id];
-    commit({ ...state, custom: custom.filter(c=>c.id!==id), decisions: nd });
+    const nr = { ...records }; delete nr[id];
+    commit({ ...state, custom: custom.filter(c=>c.id!==id), records: nr });
   };
 
   const sendLink = async () => {
     if (!supa || !email.trim()) return;
     setSync("syncing");
     try {
-      const { error } = await supa.auth.signInWithOtp({ email: email.trim(),
-        options: { emailRedirectTo: window.location.href.split("#")[0] } });
+      const { error } = await supa.auth.signInWithOtp({ email: email.trim(), options: { emailRedirectTo: window.location.href.split("#")[0] } });
       if (error) throw error;
       setSync("link-sent");
     } catch (e) { console.error(e); setLastError(e?.message || String(e)); setSync("error"); }
   };
   const signOut = async () => { if (supa) { await supa.auth.signOut(); setSession(null); setSync("idle"); } };
 
-  // ---- derived ----
-  const all = [...PROSPECTS, ...custom];
-  const tally = { pursue:0, maybe:0, pass:0, undecided:0 };
-  all.forEach(p => { tally[dec(p.id).status || "undecided"]++; });
+  // ---- derived: funnel + analytics ----
+  const funnelCounts = {};
+  STAGE_ORDER.forEach(s => funnelCounts[s] = 0);
+  let lostN = 0, passN = 0;
+  all.forEach(p => { if (p.stage==="lost") lostN++; else if (p.stage==="pass") passN++; else if (funnelCounts[p.stage]!==undefined) funnelCounts[p.stage]++; });
+
+  const sentSet = all.filter(p => reachedSent(p.stage));
+  const repliedSet = all.filter(p => reachedReply(p.stage));
+  const meetingSet = all.filter(p => ["meeting","won"].includes(p.stage));
+  const wonSet = all.filter(p => p.stage==="won");
+  const rate = (a,b) => b>0 ? Math.round((a/b)*100)+"%" : "—";
+
+  const byKey = (keyFn) => {
+    const m = {};
+    all.forEach(p => { const k = keyFn(p); if (!k) return; if (!m[k]) m[k]={sent:0,replied:0}; if (reachedSent(p.stage)) m[k].sent++; if (reachedReply(p.stage)) m[k].replied++; });
+    return m;
+  };
+  const bySeg = byKey(p => p.seg);
+  const byChan = byKey(p => reachedSent(p.stage) ? p.channel : null);
+
   const visible = all.filter(p => {
     if (seg!=="all" && p.seg!==seg) return false;
-    const s = dec(p.id).status;
-    if (view==="all") return true;
-    if (view==="undecided") return !s;
-    return s===view;
-  });
+    if (stageFilter!=="all" && p.stage!==stageFilter) return false;
+    return true;
+  }).sort((a,b) => (sIdx(b.stage)-sIdx(a.stage)) || a.company.localeCompare(b.company));
 
   const buildExport = () => {
-    const order = { high:0, med:1, low:2 };
-    const rows = (st) => all.filter(p=>dec(p.id).status===st).sort((a,b)=>order[dec(a.id).priority]-order[dec(b.id).priority]);
-    const line = (p) => { const d=dec(p.id); const pr=d.priority==="high"?"[HIGH] ":d.priority==="low"?"[low] ":""; const nt=d.notes?` — note: ${d.notes}`:""; return `  • ${pr}${p.company} (${p.loc}) · Seg ${p.seg} · ${p.contact}${nt}`; };
-    const sec = (t,st)=>{ const r=rows(st); return r.length?`${t} (${r.length}):\n${r.map(line).join("\n")}`:null; };
-    const txt = ["UNIFIED SOLUTIONS — BD CONSOLE / Phase 1 decisions","",
-      sec("PURSUE","pursue"), sec("MAYBE","maybe"), sec("PASS","pass"),"",
-      "Next: draft first-touch outreach in my voice for the PURSUE list, highest priority first."]
-      .filter(Boolean).join("\n\n");
+    const grp = {};
+    Object.keys(STAGES).forEach(s => grp[s]=[]);
+    all.forEach(p => grp[p.stage] && grp[p.stage].push(p));
+    const line = (p) => `  - ${p.company} (${p.contact||"contact TBD"}, ${CHANNELS[p.channel||""]})${p.dateSent?" sent "+p.dateSent:""}${p.notes?" | "+p.notes:""}`;
+    const sec = (s) => grp[s].length ? `${STAGES[s].label.toUpperCase()} (${grp[s].length}):\n${grp[s].map(line).join("\n")}` : null;
+    const txt = ["UNIFIED SOLUTIONS — BD PIPELINE", "", ...Object.keys(STAGES).map(sec).filter(Boolean),
+      "", `Response rate: ${rate(repliedSet.length, sentSet.length)} (${repliedSet.length}/${sentSet.length} of outreach sent)`].join("\n\n");
     setExportText(txt);
     if (navigator.clipboard) navigator.clipboard.writeText(txt).catch(()=>{});
   };
 
-  const inp = { border:"1px solid rgba(27,36,48,0.18)", borderRadius:"8px", padding:"7px 10px", fontSize:"13px", color:T.text, background:"#fff", outline:"none" };
+  const inp = { border:"1px solid rgba(27,36,48,0.18)", borderRadius:"8px", padding:"6px 9px", fontSize:"12.5px", color:T.text, background:"#fff", outline:"none" };
   const btn = (primary) => ({ display:"inline-flex", alignItems:"center", gap:"6px", padding:"8px 14px", borderRadius:"9px", cursor:"pointer", fontSize:"13px", fontWeight:600, border:`1px solid ${primary?T.pine:"rgba(27,36,48,0.16)"}`, background:primary?T.pine:"#fff", color:primary?"#fff":T.text });
-  const seg_ = (active, dot) => ({ display:"inline-flex", alignItems:"center", gap:"6px", padding:"6px 12px", borderRadius:"999px", cursor:"pointer", fontSize:"12.5px", fontWeight:600, border:`1px solid ${active?T.ink:"rgba(27,36,48,0.14)"}`, background:active?T.ink:"#fff", color:active?"#fff":T.muted });
+  const pill = (active, color) => ({ display:"inline-flex", alignItems:"center", gap:"6px", padding:"6px 11px", borderRadius:"999px", cursor:"pointer", fontSize:"12px", fontWeight:600, border:`1px solid ${active?T.ink:"rgba(27,36,48,0.14)"}`, background:active?T.ink:"#fff", color:active?"#fff":T.muted });
 
-  const syncLabel = { idle:"Not signed in", local:"Local only", syncing:"Syncing…", synced:"Synced", error:"Sync error — retry", "link-sent":"Check your email" }[sync] || "";
+  const syncLabel = { idle:"Not signed in", local:"Local only", syncing:"Syncing…", synced:"Synced", error:"Sync error", "link-sent":"Check your email" }[sync] || "";
   const syncColor = { synced:T.pine, error:T.clay, syncing:T.amber }[sync] || T.faint;
+
+  const maxFunnel = Math.max(1, ...STAGE_ORDER.map(s => funnelCounts[s]));
 
   return html`
   <div>
-    <!-- Console header -->
+    <!-- Header -->
     <div style=${{ background:T.ink, color:"#fff", padding:"22px 24px 18px", borderBottom:`3px solid ${T.pine}` }}>
       <div style=${{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", flexWrap:"wrap", gap:"16px" }}>
         <div>
-          <div style=${{ color:T.pineSoft, fontSize:"12px", letterSpacing:".14em", textTransform:"uppercase", marginBottom:"6px" }}>Business Development Console</div>
-          <div style=${{ fontFamily:T.serif, fontSize:"26px", fontWeight:600, letterSpacing:"-.01em" }}>Unified Solutions — prospect pipeline</div>
-          <div style=${{ color:"#A9B2BE", fontSize:"13px", marginTop:"4px" }}>Phase 1 · Qualify & outreach — your call on each.</div>
+          <div style=${{ color:T.pineSoft, fontSize:"12px", letterSpacing:".14em", textTransform:"uppercase", marginBottom:"6px" }}>Business Development Pipeline</div>
+          <div style=${{ fontFamily:T.serif, fontSize:"26px", fontWeight:600 }}>Unified Solutions — end to end</div>
+          <div style=${{ color:"#A9B2BE", fontSize:"13px", marginTop:"4px" }}>Prospect to won, with live response metrics. Updates save automatically.</div>
         </div>
         <div style=${{ display:"flex", gap:"10px", flexWrap:"wrap" }}>
-          ${[["Pursue",tally.pursue,T.pine],["Maybe",tally.maybe,T.amber],["Pass",tally.pass,T.clay],["Open",tally.undecided,"#5B6472"]].map(([l,n,c]) => html`
+          ${[["Outreach", sentSet.length, T.pine],["Replied", repliedSet.length, "#7A4FB0"],["Calls", meetingSet.length, "#0E7C86"],["Won", wonSet.length, "#2E7D32"]].map(([l,n,c]) => html`
             <div key=${l} style=${{ background:T.ink2, borderRadius:"10px", padding:"8px 14px", minWidth:"62px", textAlign:"center", borderTop:`2px solid ${c}` }}>
-              <div style=${{ fontSize:"22px", fontWeight:700, fontVariantNumeric:"tabular-nums" }}>${n}</div>
-              <div style=${{ fontSize:"11px", color:"#9AA3AF", textTransform:"uppercase", letterSpacing:".08em" }}>${l}</div>
+              <div style=${{ fontSize:"22px", fontWeight:700 }}>${n}</div>
+              <div style=${{ fontSize:"10.5px", color:"#9AA3AF", textTransform:"uppercase", letterSpacing:".06em" }}>${l}</div>
             </div>`)}
         </div>
       </div>
-      <div style=${{ display:"flex", alignItems:"center", gap:"8px", marginTop:"16px", flexWrap:"wrap" }}>
-        ${PHASES.map((p,i) => html`
-          <div key=${p.n} style=${{ display:"flex", alignItems:"center", gap:"8px" }}>
-            <div style=${{ display:"flex", alignItems:"center", gap:"8px", padding:"5px 12px", borderRadius:"999px",
-              background:p.n===1?T.pine:"transparent", border:p.n===1?"none":"1px solid rgba(255,255,255,0.18)",
-              color:p.n===1?"#fff":"#8B93A0", fontSize:"12.5px", fontWeight:500 }}>
-              <span style=${{ width:"18px", height:"18px", borderRadius:"999px", display:"grid", placeItems:"center", fontSize:"11px", fontWeight:700, background:p.n===1?"rgba(255,255,255,0.22)":"rgba(255,255,255,0.08)" }}>${p.n}</span>${p.label}
-            </div>
-            ${i<PHASES.length-1 ? html`<span style=${{ color:"#5B6472" }}>›</span>` : null}
-          </div>`)}
+      <div style=${{ display:"flex", alignItems:"center", gap:"8px", marginTop:"14px" }}>
         <div style=${{ marginLeft:"auto", display:"flex", alignItems:"center", gap:"7px" }}>
           <span style=${{ width:"8px", height:"8px", borderRadius:"999px", background:syncColor }}></span>
           <span style=${{ fontSize:"12px", color:"#A9B2BE" }}>${syncLabel}${session?` · ${session.user.email}`:""}</span>
@@ -249,116 +254,167 @@ function App() {
 
     <div style=${{ padding:"18px 24px 40px", maxWidth:"1180px", margin:"0 auto" }}>
 
-      <!-- Auth bar -->
       ${supa ? (session ? html`
         <div style=${{ display:"flex", justifyContent:"flex-end", marginBottom:"12px" }}>
           <button onClick=${signOut} style=${{ ...btn(false), padding:"5px 11px", fontSize:"12px" }}>Sign out</button>
-        </div>
-      ` : html`
+        </div>` : html`
         <div style=${{ background:T.surface, border:`1px solid ${T.line}`, borderRadius:"12px", padding:"12px 14px", marginBottom:"14px", display:"flex", alignItems:"center", gap:"10px", flexWrap:"wrap" }}>
-          <span style=${{ fontSize:"13px", color:T.muted }}>${sync==="link-sent" ? "Magic link sent — open it on any device to sign in and sync." : "Sign in to sync your decisions across every device."}</span>
+          <span style=${{ fontSize:"13px", color:T.muted }}>${sync==="link-sent" ? "Magic link sent. Open it on any device to sign in and sync." : "Sign in to sync across devices."}</span>
           ${sync!=="link-sent" ? html`
             <input value=${email} onInput=${e=>setEmail(e.target.value)} placeholder="you@unifiedsolutionsinc.com" style=${{ ...inp, flex:"1 1 220px", minWidth:"180px" }} />
             <button onClick=${sendLink} style=${btn(true)}>Send magic link</button>` : null}
-        </div>
-      `) : html`
+        </div>`) : html`
         <div style=${{ background:T.amberSoft, border:`1px solid ${T.amber}33`, borderRadius:"12px", padding:"10px 14px", marginBottom:"14px", fontSize:"12.5px", color:"#6E4D12" }}>
-          Running locally on this device. Add your Supabase URL and key at the top of this file to turn on cross-device sync.
-        </div>
-      `}
+          Running locally on this device. Add your Supabase URL and publishable key at the top of this file to turn on cross-device sync.
+        </div>`}
 
       ${sync==="error" ? html`
         <div style=${{ background:T.claySoft, border:`1px solid ${T.clay}55`, borderRadius:"12px", padding:"12px 14px", marginBottom:"14px", display:"flex", alignItems:"center", gap:"10px", flexWrap:"wrap" }}>
           <span style=${{ fontSize:"13px", color:"#6E2A22", flex:"1 1 260px" }}>Sync error: ${lastError || "the database refused the request."}</span>
           <span style=${{ fontSize:"11.5px", color:"#8A4339" }}>signed in: ${session?"yes":"no"} · keys set: ${supa?"yes":"no"}</span>
-          <button onClick=${()=>{ if(session){ pull(session.user.id); } }} style=${btn(false)}>Retry sync</button>
+          <button onClick=${()=>{ if(session) pull(session.user.id); }} style=${btn(false)}>Retry</button>
         </div>` : null}
 
+      <!-- Funnel -->
+      <div style=${{ background:T.surface, border:`1px solid ${T.line}`, borderRadius:"14px", padding:"16px 18px", marginBottom:"14px" }}>
+        <div style=${{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:"12px" }}>
+          <div style=${{ fontSize:"12px", letterSpacing:".1em", textTransform:"uppercase", color:T.muted }}>Funnel</div>
+          <div style=${{ fontSize:"12px", color:T.muted }}>Lost ${lostN} · Pass ${passN}</div>
+        </div>
+        <div style=${{ display:"flex", gap:"6px", alignItems:"flex-end", height:"86px" }}>
+          ${STAGE_ORDER.map(s => {
+            const n = funnelCounts[s]; const hPct = 12 + (n/maxFunnel)*88;
+            return html`<div key=${s} onClick=${()=>setStageFilter(stageFilter===s?"all":s)} style=${{ flex:1, display:"flex", flexDirection:"column", justifyContent:"flex-end", alignItems:"center", cursor:"pointer", height:"100%" }}>
+              <div style=${{ fontSize:"13px", fontWeight:700, color:STAGES[s].color, marginBottom:"3px" }}>${n}</div>
+              <div style=${{ width:"100%", height:hPct+"%", minHeight:"10px", background:STAGES[s].color, opacity:stageFilter==="all"||stageFilter===s?1:0.35, borderRadius:"6px 6px 0 0" }}></div>
+            </div>`;
+          })}
+        </div>
+        <div style=${{ display:"flex", gap:"6px", marginTop:"6px" }}>
+          ${STAGE_ORDER.map(s => html`<div key=${s} style=${{ flex:1, textAlign:"center", fontSize:"10px", color:T.muted, lineHeight:1.2 }}>${STAGES[s].label}</div>`)}
+        </div>
+      </div>
+
+      <!-- Analytics -->
+      <div style=${{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(220px, 1fr))", gap:"12px", marginBottom:"16px" }}>
+        <div style=${{ background:T.ink, color:"#fff", borderRadius:"14px", padding:"16px" }}>
+          <div style=${{ fontSize:"11px", letterSpacing:".1em", textTransform:"uppercase", color:T.pineSoft, marginBottom:"10px", display:"flex", alignItems:"center", gap:"6px" }}><${Icon} sym="chart" size=${13} color=${T.pineSoft}/> Conversion</div>
+          ${[["Reply rate", rate(repliedSet.length,sentSet.length), `${repliedSet.length}/${sentSet.length} sent`],
+             ["Reply to call", rate(meetingSet.length,repliedSet.length), `${meetingSet.length}/${repliedSet.length}`],
+             ["Call to won", rate(wonSet.length,meetingSet.length), `${wonSet.length}/${meetingSet.length}`]].map(([l,v,sub]) => html`
+            <div key=${l} style=${{ display:"flex", justifyContent:"space-between", alignItems:"baseline", padding:"5px 0", borderBottom:"1px solid rgba(255,255,255,0.08)" }}>
+              <span style=${{ fontSize:"12.5px", color:"#C7CDD6" }}>${l}</span>
+              <span><b style=${{ fontSize:"15px" }}>${v}</b> <span style=${{ fontSize:"11px", color:"#8B93A0" }}>${sub}</span></span>
+            </div>`)}
+        </div>
+        <div style=${{ background:T.surface, border:`1px solid ${T.line}`, borderRadius:"14px", padding:"16px" }}>
+          <div style=${{ fontSize:"11px", letterSpacing:".1em", textTransform:"uppercase", color:T.muted, marginBottom:"10px" }}>Reply rate by segment</div>
+          ${Object.keys(SEG).map(k => { const d=bySeg[k]||{sent:0,replied:0}; return html`
+            <div key=${k} style=${{ display:"flex", justifyContent:"space-between", padding:"5px 0", borderBottom:`1px solid ${T.lineSoft||T.line}` }}>
+              <span style=${{ fontSize:"12.5px", color:T.text }}><span style=${{ display:"inline-block", width:"8px", height:"8px", borderRadius:"999px", background:SEG[k].color, marginRight:"6px" }}></span>Seg ${k}</span>
+              <span style=${{ fontSize:"12.5px", color:T.muted }}>${rate(d.replied,d.sent)} <span style=${{ color:T.faint }}>(${d.replied}/${d.sent})</span></span>
+            </div>`; })}
+        </div>
+        <div style=${{ background:T.surface, border:`1px solid ${T.line}`, borderRadius:"14px", padding:"16px" }}>
+          <div style=${{ fontSize:"11px", letterSpacing:".1em", textTransform:"uppercase", color:T.muted, marginBottom:"10px" }}>Reply rate by channel</div>
+          ${["email","linkedin"].map(k => { const d=byChan[k]||{sent:0,replied:0}; return html`
+            <div key=${k} style=${{ display:"flex", justifyContent:"space-between", padding:"5px 0", borderBottom:`1px solid ${T.line}` }}>
+              <span style=${{ fontSize:"12.5px", color:T.text }}>${CHANNELS[k]}</span>
+              <span style=${{ fontSize:"12.5px", color:T.muted }}>${rate(d.replied,d.sent)} <span style=${{ color:T.faint }}>(${d.replied}/${d.sent})</span></span>
+            </div>`; })}
+          <div style=${{ fontSize:"11px", color:T.faint, marginTop:"8px" }}>Fills in as replies land. This is your learning loop.</div>
+        </div>
+      </div>
+
       <!-- Controls -->
-      <div style=${{ display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:"12px", marginBottom:"16px" }}>
+      <div style=${{ display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:"12px", marginBottom:"14px" }}>
         <div style=${{ display:"flex", gap:"6px", flexWrap:"wrap", alignItems:"center" }}>
-          <button onClick=${()=>setSeg("all")} style=${seg_(seg==="all")}>All segments</button>
-          ${Object.entries(SEG).map(([k,v]) => html`<button key=${k} onClick=${()=>setSeg(k)} style=${seg_(seg===k)}><span style=${{ width:"8px", height:"8px", borderRadius:"999px", background:v.color }}></span>Seg ${k}</button>`)}
-          <span style=${{ width:"1px", height:"22px", background:T.line, margin:"0 4px" }}></span>
-          <button onClick=${()=>setView("all")} style=${seg_(view==="all")}>All</button>
-          <button onClick=${()=>setView("pursue")} style=${seg_(view==="pursue")}><span style=${{ width:"8px",height:"8px",borderRadius:"999px",background:T.pine }}></span>Pursue</button>
-          <button onClick=${()=>setView("maybe")} style=${seg_(view==="maybe")}><span style=${{ width:"8px",height:"8px",borderRadius:"999px",background:T.amber }}></span>Maybe</button>
-          <button onClick=${()=>setView("undecided")} style=${seg_(view==="undecided")}><span style=${{ width:"8px",height:"8px",borderRadius:"999px",background:"#9AA3AF" }}></span>Open</button>
+          <button onClick=${()=>setStageFilter("all")} style=${pill(stageFilter==="all")}>All stages</button>
+          ${Object.keys(STAGES).map(s => html`<button key=${s} onClick=${()=>setStageFilter(stageFilter===s?"all":s)} style=${pill(stageFilter===s)}><span style=${{ width:"8px", height:"8px", borderRadius:"999px", background:STAGES[s].color }}></span>${STAGES[s].label}</button>`)}
         </div>
         <div style=${{ display:"flex", gap:"8px" }}>
           <button onClick=${()=>setAdding(!adding)} style=${btn(false)}><${Icon} sym="plus"/> Add prospect</button>
-          <button onClick=${buildExport} style=${btn(true)}>Export decisions</button>
+          <button onClick=${buildExport} style=${btn(true)}>Export</button>
         </div>
+      </div>
+      <div style=${{ display:"flex", gap:"6px", flexWrap:"wrap", marginBottom:"14px" }}>
+        <button onClick=${()=>setSeg("all")} style=${pill(seg==="all")}>All segments</button>
+        ${Object.entries(SEG).map(([k,v]) => html`<button key=${k} onClick=${()=>setSeg(k)} style=${pill(seg===k)}><span style=${{ width:"8px", height:"8px", borderRadius:"999px", background:v.color }}></span>Seg ${k} · ${v.label}</button>`)}
       </div>
 
       ${adding ? html`
         <div style=${{ background:T.surface, border:`1px solid ${T.line}`, borderRadius:"14px", padding:"16px", marginBottom:"16px", display:"flex", gap:"10px", flexWrap:"wrap", alignItems:"flex-end" }}>
-          ${[["Company","company",180],["Location","loc",150],["Who to contact","contact",180],["Why now (trigger)","why",300]].map(([lab,key,w]) => html`
-            <div key=${key}><div style=${{ fontSize:"11px", color:T.muted, marginBottom:"4px", textTransform:"uppercase", letterSpacing:".06em" }}>${lab}</div>
+          ${[["Company","company",170],["Location","loc",140],["Contact","contact",160],["Why now","why",260]].map(([lab,key,w]) => html`
+            <div key=${key}><div style=${{ fontSize:"11px", color:T.muted, marginBottom:"4px" }}>${lab}</div>
             <input value=${draft[key]} onInput=${e=>setDraft({...draft,[key]:e.target.value})} style=${{ ...inp, width:w+"px" }}/></div>`)}
-          <div><div style=${{ fontSize:"11px", color:T.muted, marginBottom:"4px", textTransform:"uppercase", letterSpacing:".06em" }}>Segment</div>
-            <select value=${draft.seg} onChange=${e=>setDraft({...draft,seg:e.target.value})} style=${{ ...inp, width:"210px" }}>
-              ${Object.entries(SEG).map(([k,v]) => html`<option key=${k} value=${k}>${k} — ${v.label}</option>`)}
-            </select></div>
+          <div><div style=${{ fontSize:"11px", color:T.muted, marginBottom:"4px" }}>Segment</div>
+            <select value=${draft.seg} onChange=${e=>setDraft({...draft,seg:e.target.value})} style=${{ ...inp, width:"190px" }}>${Object.entries(SEG).map(([k,v]) => html`<option key=${k} value=${k}>${k} — ${v.label}</option>`)}</select></div>
+          <div><div style=${{ fontSize:"11px", color:T.muted, marginBottom:"4px" }}>Channel</div>
+            <select value=${draft.channel} onChange=${e=>setDraft({...draft,channel:e.target.value})} style=${{ ...inp, width:"120px" }}>${Object.entries(CHANNELS).map(([k,v]) => html`<option key=${k} value=${k}>${v}</option>`)}</select></div>
           <button onClick=${addProspect} style=${btn(true)}>Add</button>
         </div>` : null}
 
       ${exportText ? html`
         <div style=${{ background:T.ink, color:"#fff", borderRadius:"14px", padding:"16px", marginBottom:"16px" }}>
           <div style=${{ display:"flex", justifyContent:"space-between", alignItems:"center", marginBottom:"8px" }}>
-            <span style=${{ fontSize:"13px", fontWeight:600, color:T.pineSoft }}>Copied to clipboard — paste back to your coach to draft outreach</span>
+            <span style=${{ fontSize:"13px", fontWeight:600, color:T.pineSoft }}>Copied to clipboard</span>
             <button onClick=${()=>setExportText(null)} style=${{ ...btn(false), background:"transparent", color:"#fff", border:"1px solid rgba(255,255,255,0.2)" }}>Close</button>
           </div>
-          <textarea readOnly onFocus=${e=>e.target.select()} style=${{ width:"100%", minHeight:"150px", background:T.ink2, color:"#E8ECF1", border:"none", borderRadius:"8px", padding:"12px", fontSize:"12.5px", fontFamily:"ui-monospace, monospace" }}>${exportText}</textarea>
+          <textarea readOnly onFocus=${e=>e.target.select()} style=${{ width:"100%", minHeight:"160px", background:T.ink2, color:"#E8ECF1", border:"none", borderRadius:"8px", padding:"12px", fontSize:"12px", fontFamily:"ui-monospace, monospace" }}>${exportText}</textarea>
         </div>` : null}
 
-      <!-- Grid -->
-      <div style=${{ display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(320px, 1fr))", gap:"14px" }}>
+      <!-- Cards -->
+      <div style=${{ display:"grid", gridTemplateColumns:"repeat(auto-fill, minmax(330px, 1fr))", gap:"14px" }}>
         ${visible.map(p => {
-          const d = dec(p.id); const sm = SEG[p.seg]; const active = d.status?STATUS[d.status]:null;
+          const sm = SEG[p.seg]; const st = STAGES[p.stage] || STAGES.suggested;
           return html`
-          <div key=${p.id} style=${{ background:T.surface, borderRadius:"14px", border:`1px solid ${active?active.color+"55":T.line}`, borderLeft:`4px solid ${sm.color}`, padding:"16px", display:"flex", flexDirection:"column", gap:"12px" }}>
+          <div key=${p.id} style=${{ background:T.surface, borderRadius:"14px", border:`1px solid ${T.line}`, borderLeft:`4px solid ${sm.color}`, padding:"15px", display:"flex", flexDirection:"column", gap:"10px" }}>
             <div style=${{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", gap:"8px" }}>
               <div>
                 <div style=${{ display:"flex", alignItems:"center", gap:"7px" }}>
-                  <span style=${{ fontSize:"16.5px", fontWeight:600, fontFamily:T.serif }}>${p.company}</span>
+                  <span style=${{ fontSize:"16px", fontWeight:600, fontFamily:T.serif }}>${p.company}</span>
                   ${p.custom ? html`<span style=${{ fontSize:"10px", color:T.muted, border:`1px solid ${T.line}`, borderRadius:"5px", padding:"1px 5px" }}>yours</span>` : null}
                 </div>
-                <div style=${{ display:"flex", alignItems:"center", gap:"5px", color:T.muted, fontSize:"12.5px", marginTop:"3px" }}><${Icon} sym="pin" size=${12} color=${T.faint}/> ${p.loc}</div>
+                <div style=${{ display:"flex", alignItems:"center", gap:"5px", color:T.muted, fontSize:"12px", marginTop:"2px" }}><${Icon} sym="pin" size=${11} color=${T.faint}/> ${p.loc}</div>
               </div>
-              <span style=${{ fontSize:"11px", fontWeight:600, color:sm.color, background:sm.soft, borderRadius:"6px", padding:"3px 8px", whiteSpace:"nowrap" }}>Seg ${p.seg}</span>
+              <span style=${{ fontSize:"11px", fontWeight:700, color:"#fff", background:st.color, borderRadius:"6px", padding:"3px 8px", whiteSpace:"nowrap" }}>${st.label}</span>
             </div>
-            <div style=${{ fontSize:"13.5px", color:"#3A4350", lineHeight:1.5 }}>${p.why}</div>
-            <div style=${{ fontSize:"12.5px", color:T.muted }}>${p.contact}</div>
-            <div style=${{ display:"flex", gap:"6px" }}>
-              ${Object.entries(STATUS).map(([k,v]) => {
-                const on = d.status===k;
-                return html`<button key=${k} onClick=${()=>setStatus(p.id,k)} style=${{ flex:1, display:"flex", alignItems:"center", justifyContent:"center", gap:"5px", padding:"7px 0", borderRadius:"8px", cursor:"pointer", fontSize:"12.5px", fontWeight:600, border:`1px solid ${on?v.color:T.line}`, background:on?v.color:"#fff", color:on?"#fff":T.muted }}><${Icon} sym=${v.sym} size=${13} color=${on?"#fff":T.muted}/> ${v.label}</button>`;
-              })}
+
+            <div style=${{ fontSize:"13px", color:"#3A4350", lineHeight:1.45 }}>${p.why}</div>
+
+            <div style=${{ display:"flex", gap:"6px", flexWrap:"wrap", alignItems:"center" }}>
+              <span style=${{ fontSize:"10.5px", fontWeight:600, color:sm.color, background:sm.soft, borderRadius:"5px", padding:"2px 7px" }}>Seg ${p.seg}</span>
+              <span style=${{ fontSize:"10.5px", color:T.muted, background:T.paper, borderRadius:"5px", padding:"2px 7px" }}>${p.trigger}</span>
+              ${p.dateSent ? html`<span style=${{ fontSize:"10.5px", color:T.muted, display:"inline-flex", alignItems:"center", gap:"3px" }}><${Icon} sym="clock" size=${10} color=${T.faint}/> sent ${p.dateSent}</span>` : null}
             </div>
-            ${(d.status==="pursue"||d.status==="maybe") ? html`
-              <div style=${{ display:"flex", flexDirection:"column", gap:"8px", paddingTop:"4px", borderTop:`1px dashed ${T.line}` }}>
-                <div style=${{ display:"flex", alignItems:"center", gap:"8px" }}>
-                  <${Icon} sym="flag" size=${13} color=${T.faint}/><span style=${{ fontSize:"12px", color:T.muted }}>Priority</span>
-                  <div style=${{ display:"flex", gap:"4px", marginLeft:"auto" }}>
-                    ${["high","med","low"].map(pr => html`<button key=${pr} onClick=${()=>setPriority(p.id,pr)} style=${{ padding:"3px 10px", borderRadius:"6px", fontSize:"11.5px", fontWeight:600, cursor:"pointer", textTransform:"capitalize", border:`1px solid ${d.priority===pr?T.ink:T.line}`, background:d.priority===pr?T.ink:"#fff", color:d.priority===pr?"#fff":T.muted }}>${pr}</button>`)}
-                  </div>
-                </div>
-                <input value=${d.notes} onInput=${e=>setNotes(p.id,e.target.value)} placeholder="Adjustment or angle — e.g. warm intro via…" style=${{ ...inp, width:"100%", fontSize:"12.5px" }}/>
-              </div>` : null}
-            ${p.custom ? html`<button onClick=${()=>removeCustom(p.id)} style=${{ alignSelf:"flex-start", background:"none", border:"none", color:T.faint, fontSize:"11.5px", cursor:"pointer", padding:0 }}>Remove</button>` : null}
+
+            <div style=${{ display:"flex", gap:"8px", flexWrap:"wrap" }}>
+              <div style=${{ flex:"1 1 130px" }}>
+                <div style=${{ fontSize:"10px", color:T.muted, marginBottom:"3px", textTransform:"uppercase", letterSpacing:".05em" }}>Stage</div>
+                <select value=${p.stage} onChange=${e=>update(p.id,{stage:e.target.value})} style=${{ ...inp, width:"100%" }}>
+                  ${Object.entries(STAGES).map(([k,v]) => html`<option key=${k} value=${k}>${v.label}</option>`)}
+                </select>
+              </div>
+              <div style=${{ flex:"1 1 110px" }}>
+                <div style=${{ fontSize:"10px", color:T.muted, marginBottom:"3px", textTransform:"uppercase", letterSpacing:".05em" }}>Channel</div>
+                <select value=${p.channel||""} onChange=${e=>update(p.id,{channel:e.target.value})} style=${{ ...inp, width:"100%" }}>
+                  ${Object.entries(CHANNELS).map(([k,v]) => html`<option key=${k} value=${k}>${v}</option>`)}
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <div style=${{ fontSize:"10px", color:T.muted, marginBottom:"3px", textTransform:"uppercase", letterSpacing:".05em" }}>Contact</div>
+              <input value=${p.contact||""} onInput=${e=>update(p.id,{contact:e.target.value})} style=${{ ...inp, width:"100%" }}/>
+            </div>
+
+            <input value=${p.notes ?? p.note ?? ""} onInput=${e=>update(p.id,{notes:e.target.value})} placeholder="Notes, angle, next step…" style=${{ ...inp, width:"100%" }}/>
+
+            ${p.custom ? html`<button onClick=${()=>removeCustom(p.id)} style=${{ alignSelf:"flex-start", background:"none", border:"none", color:T.faint, fontSize:"11px", cursor:"pointer", padding:0 }}>Remove</button>` : null}
           </div>`;
         })}
       </div>
-      ${visible.length===0 ? html`<div style=${{ textAlign:"center", color:T.muted, padding:"40px", background:T.surface, borderRadius:"14px", border:`1px dashed ${T.line}` }}>Nothing in this view. Switch filters or add a prospect of your own.</div>` : null}
-
-      <!-- Phase 3 preview -->
-      <div style=${{ marginTop:"22px", background:T.surface, border:`1px solid ${T.line}`, borderRadius:"14px", padding:"18px" }}>
-        <div style=${{ color:T.muted, fontSize:"12px", letterSpacing:".1em", textTransform:"uppercase", marginBottom:"10px" }}>Phase 3 · Learning loop — unlocks once outreach is running</div>
-        <div style=${{ display:"flex", gap:"14px", flexWrap:"wrap" }}>
-          ${["Response rate by segment","Time: first touch → conversation","Conversation → paid client","Which triggers convert best"].map(m => html`<div key=${m} style=${{ flex:"1 1 200px", color:T.faint, fontSize:"13px", background:T.paper, borderRadius:"9px", padding:"10px 12px" }}>${m}</div>`)}
-        </div>
-      </div>
+      ${visible.length===0 ? html`<div style=${{ textAlign:"center", color:T.muted, padding:"40px", background:T.surface, borderRadius:"14px", border:`1px dashed ${T.line}` }}>Nothing in this view. Adjust the filters or add a prospect.</div>` : null}
     </div>
   </div>`;
 }
