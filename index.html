@@ -23,14 +23,14 @@
    Find them in Supabase → Project Settings → API.
    Leave blank to run local-only (no sync).
    ============================================================ */
-const SUPABASE_URL = "https://mwdjhinpicvxjetrcvkc.supabase.co/rest/v1/";       // e.g. https://abcd1234.supabase.co
-const SUPABASE_ANON_KEY = "sb_publishable_Xd2C9xM7nIbuFJgxAg7rbg_mNZEhTIi";  // the "anon public" key
+const SUPABASE_URL = "";       // e.g. https://abcd1234.supabase.co
+const SUPABASE_ANON_KEY = "";  // your PUBLISHABLE key — starts with sb_publishable_  (never the sb_secret_ one)
 /* ============================================================ */
 
 import { h, render } from "https://esm.sh/preact@10.19.3";
 import { useState, useEffect, useRef } from "https://esm.sh/preact@10.19.3/hooks";
 import htm from "https://esm.sh/htm@3.1.1";
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2.39.7";
+import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 const html = htm.bind(h);
 
 const T = {
