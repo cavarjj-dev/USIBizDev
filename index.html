@@ -25,8 +25,8 @@
    Use your PUBLISHABLE key (starts with sb_publishable_).
    Leave blank to run local-only (no sync).
    ============================================================ */
-const SUPABASE_URL = "https://mwdjhinpicvxjetrcvkc.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_Xd2C9xM7nIbuFJgxAg7rbg_mNZEhTIi";
+const SUPABASE_URL = "";
+const SUPABASE_ANON_KEY = "";
 /* ============================================================ */
 
 import { h, render } from "https://esm.sh/preact@10.19.3";
@@ -65,10 +65,12 @@ const reachedSent = (s) => ["sent","replied","meeting","won"].includes(s);
 const reachedReply = (s) => ["replied","meeting","won"].includes(s);
 
 const TODAY = "2026-06-25";
+const todayStr = () => new Date().toISOString().slice(0,10);
+const addDays = (dateStr, n) => { const d = new Date((dateStr||todayStr())+"T00:00:00"); d.setDate(d.getDate()+n); return d.toISOString().slice(0,10); };
 
 // Base prospects. Stored per-id overrides merge on top of these.
 const BASE = [
-  {id:"total-expert", company:"Total Expert", loc:"Mendota Heights, MN", seg:"A", trigger:"growth", why:"Years of explosive growth straining the manager layer.", contact:"Joe Welu (CEO)", channel:"email", stage:"approved", note:"Email drafted in Gmail, pending your send."},
+  {id:"total-expert", company:"Total Expert", loc:"Mendota Heights, MN", seg:"A", trigger:"growth", why:"Years of explosive growth straining the manager layer.", contact:"Joe Welu (CEO)", email:"Joe@totalexpert.com", channel:"email", stage:"approved", note:"Email drafted in Gmail, pending your send."},
   {id:"fulcrum", company:"Fulcrum", loc:"Minneapolis, MN", seg:"A", trigger:"funding", why:"~$40M raised and rapid growth; team scaling fast.", contact:"Sunny Han (CEO)", channel:"linkedin", stage:"sent", dateSent:TODAY},
   {id:"yoursix", company:"YourSix", loc:"Roseville, MN", seg:"B", trigger:"growth", why:"Fast-growing, service-disabled veteran-owned security SaaS.", contact:"Eric Styles (CEO)", channel:"linkedin", stage:"sent", dateSent:TODAY, note:"Veteran-to-veteran angle."},
   {id:"branch", company:"Branch", loc:"Minneapolis, MN", seg:"C", trigger:"scale", why:"$638M raised; managers leading at new scale.", contact:"Atif Siddiqi (CEO)", channel:"linkedin", stage:"approved", note:"Founder-direct; connection note ready."},
@@ -150,10 +152,20 @@ function App() {
 
   const all = [...BASE, ...custom].map(b => ({ ...b, ...(records[b.id] || {}) }));
   const update = (id, patch) => {
+    const merged = all.find(x=>x.id===id) || {};
     const cur = records[id] || {};
     let next = { ...cur, ...patch };
-    if (patch.stage && reachedSent(patch.stage) && !next.dateSent) next.dateSent = TODAY;
+    if (patch.stage) {
+      if (reachedSent(patch.stage) && !merged.dateSent && !next.dateSent) next.dateSent = TODAY;
+      if (patch.stage !== merged.stage) next.activity = [ ...(merged.activity||[]), { t: todayStr(), label: "Stage to "+(STAGES[patch.stage]?.label||patch.stage) } ];
+      if (patch.stage==="sent" && !merged.followUp && !next.followUp) next.followUp = addDays(todayStr(),4);
+    }
     commit({ ...state, records: { ...records, [id]: next } });
+  };
+  const logTouch = (p) => {
+    const t = todayStr();
+    const act = [ ...(p.activity||[]), { t, label: p.nextAction ? ("Touch: "+p.nextAction) : "Touch logged" } ];
+    update(p.id, { activity: act, followUp: addDays(t,5), nextAction: "" });
   };
 
   const addProspect = () => {
@@ -326,6 +338,26 @@ function App() {
         </div>
       </div>
 
+      ${(() => {
+        const t = todayStr();
+        const items = [];
+        all.filter(p => p.stage==="approved").forEach(p => items.push({p, label:"Send outreach", tone:T.blue}));
+        all.filter(p => p.stage==="replied").forEach(p => items.push({p, label:"Replied — book a call", tone:"#7A4FB0"}));
+        all.filter(p => p.followUp && p.followUp<=t && !["won","lost","pass"].includes(p.stage)).forEach(p =>
+          items.push({p, label:(p.followUp<t?"Follow-up overdue":"Follow-up due")+(p.nextAction?": "+p.nextAction:""), tone:p.followUp<t?T.clay:T.amber}));
+        if (!items.length) return null;
+        return html`<div style=${{ background:T.surface, border:`1px solid ${T.line}`, borderLeft:`4px solid ${T.pine}`, borderRadius:"14px", padding:"14px 16px", marginBottom:"16px" }}>
+          <div style=${{ fontSize:"12px", letterSpacing:".1em", textTransform:"uppercase", color:T.pine, marginBottom:"10px", fontWeight:700 }}>Needs attention today (${items.length})</div>
+          <div style=${{ display:"flex", flexDirection:"column", gap:"7px" }}>
+            ${items.map((it,i) => html`<div key=${i} style=${{ display:"flex", alignItems:"center", gap:"10px", fontSize:"13px" }}>
+              <span style=${{ width:"7px", height:"7px", borderRadius:"999px", background:it.tone, flexShrink:0 }}></span>
+              <span style=${{ fontWeight:600 }}>${it.p.company}</span>
+              <span style=${{ color:T.muted }}>${it.label}</span>
+            </div>`)}
+          </div>
+        </div>`;
+      })()}
+
       <!-- Controls -->
       <div style=${{ display:"flex", justifyContent:"space-between", alignItems:"center", flexWrap:"wrap", gap:"12px", marginBottom:"14px" }}>
         <div style=${{ display:"flex", gap:"6px", flexWrap:"wrap", alignItems:"center" }}>
@@ -408,7 +440,24 @@ function App() {
               <input value=${p.contact||""} onInput=${e=>update(p.id,{contact:e.target.value})} style=${{ ...inp, width:"100%" }}/>
             </div>
 
-            <input value=${p.notes ?? p.note ?? ""} onInput=${e=>update(p.id,{notes:e.target.value})} placeholder="Notes, angle, next step…" style=${{ ...inp, width:"100%" }}/>
+            <div style=${{ display:"flex", gap:"8px", flexWrap:"wrap" }}>
+              <div style=${{ flex:"1 1 150px" }}>
+                <div style=${{ fontSize:"10px", color:T.muted, marginBottom:"3px", textTransform:"uppercase", letterSpacing:".05em" }}>Email</div>
+                <input value=${p.email||""} onInput=${e=>update(p.id,{email:e.target.value})} placeholder="name@company.com" style=${{ ...inp, width:"100%" }}/>
+              </div>
+              <div style=${{ flex:"1 1 120px" }}>
+                <div style=${{ fontSize:"10px", color:T.muted, marginBottom:"3px", textTransform:"uppercase", letterSpacing:".05em" }}>Follow-up</div>
+                <input type="date" value=${p.followUp||""} onInput=${e=>update(p.id,{followUp:e.target.value})} style=${{ ...inp, width:"100%" }}/>
+              </div>
+            </div>
+
+            <input value=${p.nextAction||""} onInput=${e=>update(p.id,{nextAction:e.target.value})} placeholder="Next action…" style=${{ ...inp, width:"100%" }}/>
+            <input value=${p.notes ?? p.note ?? ""} onInput=${e=>update(p.id,{notes:e.target.value})} placeholder="Notes, angle, context…" style=${{ ...inp, width:"100%" }}/>
+
+            ${(p.activity&&p.activity.length) ? html`<div style=${{ fontSize:"11px", color:T.muted, display:"flex", flexDirection:"column", gap:"2px", maxHeight:"68px", overflow:"auto", borderTop:`1px dashed ${T.line}`, paddingTop:"7px" }}>
+              ${p.activity.slice(-4).reverse().map((a,i) => html`<div key=${i}><span style=${{ color:T.faint }}>${a.t}</span> · ${a.label}</div>`)}
+            </div>` : null}
+            <button onClick=${()=>logTouch(p)} style=${{ alignSelf:"flex-start", ...btn(false), padding:"5px 10px", fontSize:"11.5px" }}>Log touch, set +5d follow-up</button>
 
             ${p.custom ? html`<button onClick=${()=>removeCustom(p.id)} style=${{ alignSelf:"flex-start", background:"none", border:"none", color:T.faint, fontSize:"11px", cursor:"pointer", padding:0 }}>Remove</button>` : null}
           </div>`;
