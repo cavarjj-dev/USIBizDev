@@ -16,7 +16,11 @@
 </style>
 </head>
 <body>
-<div id="app" style="padding:40px;color:#5B6472">Loading your pipeline…</div>
+<div id="app"></div>
+<script>
+  // Clear immediately so "Loading…" never flashes or persists
+  document.getElementById('app').textContent = '';
+</script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.39.3/dist/umd/supabase.js"></script>
 <script type="module">
 /* ============================================================
@@ -25,8 +29,8 @@
    Use your PUBLISHABLE key (starts with sb_publishable_).
    Leave blank to run local-only (no sync).
    ============================================================ */
-const SUPABASE_URL = "https://mwdjhinpicvxjetrcvkc.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_Xd2C9xM7nIbuFJgxAg7rbg_mNZEhTIi";
+const SUPABASE_URL = "";
+const SUPABASE_ANON_KEY = "";
 /* ============================================================ */
 
 import { h, render } from "https://esm.sh/preact@10.19.3";
