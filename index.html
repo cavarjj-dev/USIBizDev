@@ -29,8 +29,8 @@
    Use your PUBLISHABLE key (starts with sb_publishable_).
    Leave blank to run local-only (no sync).
    ============================================================ */
-const SUPABASE_URL = "https://mwdjhinpicvxjetrcvkc.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_Xd2C9xM7nIbuFJgxAg7rbg_mNZEhTIi";
+const SUPABASE_URL = "";
+const SUPABASE_ANON_KEY = "";
 /* ============================================================ */
 
 import { h, render } from "https://esm.sh/preact@10.19.3";
@@ -294,7 +294,26 @@ function App() {
             </div>`)}
         </div>
       </div>
-      <div style=${{ display:"flex", alignItems:"center", gap:"8px", marginTop:"14px" }}>
+      <div style=${{ display:"flex", alignItems:"center", gap:"8px", marginTop:"14px", flexWrap:"wrap" }}>
+        ${[
+          {n:1, label:"Foundation", state:"complete", note:"Pipeline live, intake running, metrics seeding"},
+          {n:2, label:"Semi-autonomous", state:"active", note:"Auto-follow-up, scheduled prospecting, weekly digest"},
+          {n:3, label:"Self-learning", state:"next", note:"Outcome-tuned targeting, message optimizer, COO autonomy"},
+        ].map((p,i,arr) => html`
+          <div key=${p.n} style=${{ display:"flex", alignItems:"center", gap:"8px" }}>
+            <div title=${p.note} style=${{ display:"flex", alignItems:"center", gap:"8px", padding:"5px 12px", borderRadius:"999px",
+              background: p.state==="complete" ? T.pine : p.state==="active" ? "rgba(255,255,255,0.12)" : "transparent",
+              border: p.state==="active" ? "1px solid rgba(255,255,255,0.5)" : p.state==="complete" ? "none" : "1px solid rgba(255,255,255,0.18)",
+              color: p.state==="next" ? "#8B93A0" : "#fff", fontSize:"12.5px", fontWeight:500, cursor:"default" }}>
+              <span style=${{ width:"18px", height:"18px", borderRadius:"999px", display:"grid", placeItems:"center", fontSize:"11px", fontWeight:700,
+                background: p.state==="complete" ? "rgba(255,255,255,0.22)" : "rgba(255,255,255,0.08)" }}>
+                ${p.state==="complete" ? "✓" : p.n}
+              </span>
+              ${p.label}
+              ${p.state==="active" ? html`<span style=${{ fontSize:"10px", background:"rgba(255,255,255,0.18)", borderRadius:"999px", padding:"1px 6px" }}>active</span>` : null}
+            </div>
+            ${i<arr.length-1 ? html`<span style=${{ color:"#5B6472" }}>›</span>` : null}
+          </div>`)}
         <div style=${{ marginLeft:"auto", display:"flex", alignItems:"center", gap:"7px" }}>
           <span style=${{ width:"8px", height:"8px", borderRadius:"999px", background:syncColor }}></span>
           <span style=${{ fontSize:"12px", color:"#A9B2BE" }}>${syncLabel}${session?` · ${session.user.email}`:""}</span>
