@@ -29,8 +29,8 @@
    Use your PUBLISHABLE key (starts with sb_publishable_).
    Leave blank to run local-only (no sync).
    ============================================================ */
-const SUPABASE_URL = "https://mwdjhinpicvxjetrcvkc.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_Xd2C9xM7nIbuFJgxAg7rbg_mNZEhTIi";
+const SUPABASE_URL = "";
+const SUPABASE_ANON_KEY = "";
 /* ============================================================ */
 
 import { h, render } from "https://esm.sh/preact@10.19.3";
@@ -141,6 +141,20 @@ function App() {
           if (m && !["won","lost","pass"].includes(m.stage) && sIdx(target) > sIdx(m.stage)) {
             const cur = records[m.id] || {};
             records[m.id] = { ...cur, stage:target, activity:[ ...(m.activity||[]), { t:todayStr(), label: sig.kind==="reply"?"Auto: reply detected":"Auto: call booked" } ] };
+          }
+        } else if (sig.kind === "followup") {
+          const all2 = baseAll();
+          const m = all2.find(p => sig.hint && p.company && p.company.toLowerCase() === sig.hint.toLowerCase());
+          if (m) {
+            const cur = records[m.id] || {};
+            const touches = (cur.followUpTouches || m.followUpTouches || 0) + 1;
+            records[m.id] = {
+              ...cur,
+              followUpTouches: touches,
+              followUp: addDays(todayStr(), touches < 3 ? 5 : 7),
+              nextAction: sig.detail || ("Follow-up touch " + touches + " drafted"),
+              activity: [...(m.activity||[]), { t: todayStr(), label: sig.detail || "Follow-up drafted" }]
+            };
           }
         }
         done.push(sig.id);
