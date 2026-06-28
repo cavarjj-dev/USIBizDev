@@ -29,8 +29,8 @@
    Use your PUBLISHABLE key (starts with sb_publishable_).
    Leave blank to run local-only (no sync).
    ============================================================ */
-const SUPABASE_URL = "https://mwdjhinpicvxjetrcvkc.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_Xd2C9xM7nIbuFJgxAg7rbg_mNZEhTIi";
+const SUPABASE_URL = "";
+const SUPABASE_ANON_KEY = "";
 /* ============================================================ */
 
 import { h, render } from "https://esm.sh/preact@10.19.3";
@@ -135,25 +135,40 @@ function App() {
           if (!exists) custom.push({ id:"sig-"+sig.id, company:sig.company, loc:sig.loc||"", seg:sig.seg||"B", trigger:sig.trigger||"other", why:sig.detail||"", contact:sig.contact||"", email:sig.email||"", channel:"", stage:"suggested", custom:true, activity:[{t:todayStr(),label:"Auto-captured from intake"}] });
         } else if (sig.kind === "reply" || sig.kind === "meeting") {
           const target = sig.kind === "reply" ? "replied" : "meeting";
-          const all2 = baseAll();
-          const m = all2.find(p => sig.email && p.email && p.email.toLowerCase()===sig.email.toLowerCase())
-                 || all2.find(p => sig.hint && ((p.company && sig.hint.toLowerCase().includes(p.company.toLowerCase())) || (p.contact && sig.hint.toLowerCase().includes(p.contact.toLowerCase()))));
-          if (m && !["won","lost","pass"].includes(m.stage) && sIdx(target) > sIdx(m.stage)) {
-            const cur = records[m.id] || {};
-            records[m.id] = { ...cur, stage:target, activity:[ ...(m.activity||[]), { t:todayStr(), label: sig.kind==="reply"?"Auto: reply detected":"Auto: call booked" } ] };
+          const allRM = baseAll();
+          const mRM = allRM.find(p => sig.email && p.email && p.email.toLowerCase()===sig.email.toLowerCase())
+                   || allRM.find(p => sig.hint && ((p.company && sig.hint.toLowerCase().includes(p.company.toLowerCase())) || (p.contact && sig.hint.toLowerCase().includes(p.contact.toLowerCase()))));
+          if (mRM && !["won","lost","pass"].includes(mRM.stage) && sIdx(target) > sIdx(mRM.stage)) {
+            const cur = records[mRM.id] || {};
+            records[mRM.id] = { ...cur, stage:target, activity:[ ...(mRM.activity||[]), { t:todayStr(), label: sig.kind==="reply"?"Auto: reply detected":"Auto: call booked" } ] };
+          }
+        } else if (sig.kind === "enrichment") {
+          const allEN = baseAll();
+          const mEN = allEN.find(p => sig.hint && p.company && p.company.toLowerCase() === sig.hint.toLowerCase());
+          if (mEN) {
+            const cur = records[mEN.id] || {};
+            let patch = { enriched: true, activity: [...(mEN.activity||[]), { t: todayStr(), label: "Auto-enriched: contact and news updated" }] };
+            try {
+              const d = JSON.parse(sig.detail || "{}");
+              if (d.contact && (!cur.contact || cur.contact.indexOf("/") >= 0)) patch.contact = d.contact;
+              if (d.email && !cur.email) patch.email = d.email;
+              if (d.why && d.why.length > (cur.why||"").length) patch.why = d.why;
+              if (d.newsLine) patch.newsLine = d.newsLine;
+            } catch(e) {}
+            records[mEN.id] = { ...cur, ...patch };
           }
         } else if (sig.kind === "followup") {
-          const all2 = baseAll();
-          const m = all2.find(p => sig.hint && p.company && p.company.toLowerCase() === sig.hint.toLowerCase());
-          if (m) {
-            const cur = records[m.id] || {};
-            const touches = (cur.followUpTouches || m.followUpTouches || 0) + 1;
-            records[m.id] = {
+          const allFU = baseAll();
+          const mFU = allFU.find(p => sig.hint && p.company && p.company.toLowerCase() === sig.hint.toLowerCase());
+          if (mFU) {
+            const cur = records[mFU.id] || {};
+            const touches = (cur.followUpTouches || mFU.followUpTouches || 0) + 1;
+            records[mFU.id] = {
               ...cur,
               followUpTouches: touches,
               followUp: addDays(todayStr(), touches < 3 ? 5 : 7),
               nextAction: sig.detail || ("Follow-up touch " + touches + " drafted"),
-              activity: [...(m.activity||[]), { t: todayStr(), label: sig.detail || "Follow-up drafted" }]
+              activity: [...(mFU.activity||[]), { t: todayStr(), label: sig.detail || "Follow-up drafted" }]
             };
           }
         }
@@ -484,6 +499,7 @@ function App() {
             </div>
 
             <div style=${{ fontSize:"13px", color:"#3A4350", lineHeight:1.45 }}>${p.why}</div>
+            ${p.newsLine ? html`<div style=${{ fontSize:"12px", color:T.pine, background:T.pineSoft, borderRadius:"6px", padding:"5px 9px", lineHeight:1.4 }}>Latest: ${p.newsLine}</div>` : null}
 
             <div style=${{ display:"flex", gap:"6px", flexWrap:"wrap", alignItems:"center" }}>
               <span style=${{ fontSize:"10.5px", fontWeight:600, color:sm.color, background:sm.soft, borderRadius:"5px", padding:"2px 7px" }}>Seg ${p.seg}</span>
