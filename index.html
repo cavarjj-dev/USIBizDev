@@ -29,8 +29,8 @@
    Use your PUBLISHABLE key (starts with sb_publishable_).
    Leave blank to run local-only (no sync).
    ============================================================ */
-const SUPABASE_URL = "https://mwdjhinpicvxjetrcvkc.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_Xd2C9xM7nIbuFJgxAg7rbg_mNZEhTIi";
+const SUPABASE_URL = "";
+const SUPABASE_ANON_KEY = "";
 /* ============================================================ */
 
 import { h, render } from "https://esm.sh/preact@10.19.3";
@@ -156,6 +156,18 @@ function App() {
               if (d.newsLine) patch.newsLine = d.newsLine;
             } catch(e) {}
             records[mEN.id] = { ...cur, ...patch };
+          }
+        } else if (sig.kind === "drafted") {
+          const allDR = baseAll();
+          const mDR = allDR.find(p => sig.hint && p.company && p.company.toLowerCase() === sig.hint.toLowerCase());
+          if (mDR) {
+            const cur = records[mDR.id] || {};
+            records[mDR.id] = {
+              ...cur,
+              drafted: true,
+              nextAction: "Review draft in Gmail and send",
+              activity: [...(mDR.activity||[]), { t: todayStr(), label: "Auto-draft created in Gmail: " + (sig.detail||"") }]
+            };
           }
         } else if (sig.kind === "followup") {
           const allFU = baseAll();
@@ -427,7 +439,8 @@ function App() {
       ${(() => {
         const t = todayStr();
         const items = [];
-        all.filter(p => p.stage==="approved").forEach(p => items.push({p, label:"Send outreach", tone:T.blue}));
+        all.filter(p => p.stage==="approved" && p.drafted).forEach(p => items.push({p, label:"Draft in Gmail — review and send", tone:T.blue}));
+        all.filter(p => p.stage==="approved" && !p.drafted).forEach(p => items.push({p, label:"Send outreach", tone:T.blue}));
         all.filter(p => p.stage==="replied").forEach(p => items.push({p, label:"Replied — book a call", tone:"#7A4FB0"}));
         all.filter(p => p.followUp && p.followUp<=t && !["won","lost","pass"].includes(p.stage)).forEach(p =>
           items.push({p, label:(p.followUp<t?"Follow-up overdue":"Follow-up due")+(p.nextAction?": "+p.nextAction:""), tone:p.followUp<t?T.clay:T.amber}));
@@ -507,6 +520,8 @@ function App() {
             <div style=${{ display:"flex", gap:"6px", flexWrap:"wrap", alignItems:"center" }}>
               <span style=${{ fontSize:"10.5px", fontWeight:600, color:sm.color, background:sm.soft, borderRadius:"5px", padding:"2px 7px" }}>Seg ${p.seg}</span>
               <span style=${{ fontSize:"10.5px", color:T.muted, background:T.paper, borderRadius:"5px", padding:"2px 7px" }}>${p.trigger}</span>
+              ${p.drafted ? html`<span style=${{ fontSize:"10.5px", fontWeight:700, color:"#fff", background:T.blue, borderRadius:"5px", padding:"2px 7px" }}>Draft in Gmail</span>` : null}
+              ${p.enriched ? html`<span style=${{ fontSize:"10.5px", color:T.pine, background:T.pineSoft, borderRadius:"5px", padding:"2px 7px" }}>Enriched</span>` : null}
               ${p.dateSent ? html`<span style=${{ fontSize:"10.5px", color:T.muted, display:"inline-flex", alignItems:"center", gap:"3px" }}><${Icon} sym="clock" size=${10} color=${T.faint}/> sent ${p.dateSent}</span>` : null}
             </div>
 
