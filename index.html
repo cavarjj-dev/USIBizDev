@@ -29,8 +29,8 @@
    Use your PUBLISHABLE key (starts with sb_publishable_).
    Leave blank to run local-only (no sync).
    ============================================================ */
-const SUPABASE_URL = "https://mwdjhinpicvxjetrcvkc.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_Xd2C9xM7nIbuFJgxAg7rbg_mNZEhTIi";
+const SUPABASE_URL = "";
+const SUPABASE_ANON_KEY = "";
 /* ============================================================ */
 
 import { h, render } from "https://esm.sh/preact@10.19.3";
@@ -498,8 +498,11 @@ function App() {
               <span style=${{ fontSize:"11px", fontWeight:700, color:"#fff", background:st.color, borderRadius:"6px", padding:"3px 8px", whiteSpace:"nowrap" }}>${st.label}</span>
             </div>
 
-            <div style=${{ fontSize:"13px", color:"#3A4350", lineHeight:1.45 }}>${p.why}</div>
-            ${p.newsLine ? html`<div style=${{ fontSize:"12px", color:T.pine, background:T.pineSoft, borderRadius:"6px", padding:"5px 9px", lineHeight:1.4 }}>Latest: ${p.newsLine}</div>` : null}
+            <div style=${{ fontSize:"13px", color:"#3A4350", lineHeight:1.45 }}>${(p.why||"").replace(/https?:\/\/\S+/g,"").replace(/\s+[-|]\s+[A-Z][A-Za-z\s]+$/,"").trim()}</div>
+            ${p.newsLine ? html`<div style=${{ fontSize:"11.5px", color:T.pine, background:T.pineSoft, borderRadius:"6px", padding:"5px 9px", lineHeight:1.4, display:"flex", alignItems:"flex-start", gap:"5px" }}>
+              <span style=${{ flexShrink:0, marginTop:"1px" }}>📰</span>
+              <span>${p.newsLine.replace(/https?:\/\/\S+/g,"").replace(/\s+[-|]\s+[A-Z][A-Za-z\s]+$/,"").trim().slice(0,100)}</span>
+            </div>` : null}
 
             <div style=${{ display:"flex", gap:"6px", flexWrap:"wrap", alignItems:"center" }}>
               <span style=${{ fontSize:"10.5px", fontWeight:600, color:sm.color, background:sm.soft, borderRadius:"5px", padding:"2px 7px" }}>Seg ${p.seg}</span>
