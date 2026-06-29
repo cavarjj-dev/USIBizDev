@@ -29,8 +29,8 @@
    Use your PUBLISHABLE key (starts with sb_publishable_).
    Leave blank to run local-only (no sync).
    ============================================================ */
-const SUPABASE_URL = "https://mwdjhinpicvxjetrcvkc.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_Xd2C9xM7nIbuFJgxAg7rbg_mNZEhTIi";
+const SUPABASE_URL = "";
+const SUPABASE_ANON_KEY = "";
 /* ============================================================ */
 
 import { h, render } from "https://esm.sh/preact@10.19.3";
@@ -156,6 +156,19 @@ function App() {
               if (d.newsLine) patch.newsLine = d.newsLine;
             } catch(e) {}
             records[mEN.id] = { ...cur, ...patch };
+          }
+        } else if (sig.kind === "availability") {
+          const allAV = baseAll();
+          const mAV = allAV.find(p => sig.hint && p.company && p.company.toLowerCase() === sig.hint.toLowerCase());
+          if (mAV) {
+            const cur = records[mAV.id] || {};
+            records[mAV.id] = {
+              ...cur,
+              availabilitySurfaced: true,
+              availabilitySlots: sig.detail || "",
+              nextAction: "Availability draft in Gmail — review and send",
+              activity: [...(mAV.activity||[]), { t: todayStr(), label: "Auto: availability draft created in Gmail" }]
+            };
           }
         } else if (sig.kind === "drafted") {
           const allDR = baseAll();
@@ -441,7 +454,8 @@ function App() {
         const items = [];
         all.filter(p => p.stage==="approved" && p.drafted).forEach(p => items.push({p, label:"Draft in Gmail — review and send", tone:T.blue}));
         all.filter(p => p.stage==="approved" && !p.drafted).forEach(p => items.push({p, label:"Send outreach", tone:T.blue}));
-        all.filter(p => p.stage==="replied").forEach(p => items.push({p, label:"Replied — book a call", tone:"#7A4FB0"}));
+        all.filter(p => p.stage==="replied" && p.availabilitySurfaced).forEach(p => items.push({p, label:"Availability draft in Gmail — send it", tone:"#0E7C86"}));
+        all.filter(p => p.stage==="replied" && !p.availabilitySurfaced).forEach(p => items.push({p, label:"Replied — book a call", tone:"#7A4FB0"}));
         all.filter(p => p.followUp && p.followUp<=t && !["won","lost","pass"].includes(p.stage)).forEach(p =>
           items.push({p, label:(p.followUp<t?"Follow-up overdue":"Follow-up due")+(p.nextAction?": "+p.nextAction:""), tone:p.followUp<t?T.clay:T.amber}));
         if (!items.length) return null;
@@ -522,8 +536,10 @@ function App() {
               <span style=${{ fontSize:"10.5px", color:T.muted, background:T.paper, borderRadius:"5px", padding:"2px 7px" }}>${p.trigger}</span>
               ${p.drafted ? html`<span style=${{ fontSize:"10.5px", fontWeight:700, color:"#fff", background:T.blue, borderRadius:"5px", padding:"2px 7px" }}>Draft in Gmail</span>` : null}
               ${p.enriched ? html`<span style=${{ fontSize:"10.5px", color:T.pine, background:T.pineSoft, borderRadius:"5px", padding:"2px 7px" }}>Enriched</span>` : null}
+              ${p.availabilitySurfaced ? html`<span style=${{ fontSize:"10.5px", fontWeight:700, color:"#fff", background:"#0E7C86", borderRadius:"5px", padding:"2px 7px" }}>Avail. draft ready</span>` : null}
               ${p.dateSent ? html`<span style=${{ fontSize:"10.5px", color:T.muted, display:"inline-flex", alignItems:"center", gap:"3px" }}><${Icon} sym="clock" size=${10} color=${T.faint}/> sent ${p.dateSent}</span>` : null}
             </div>
+            ${p.availabilitySlots ? html`<div style=${{ fontSize:"12px", background:"#E8F5F6", border:"1px solid #B2DFE3", borderRadius:"7px", padding:"8px 10px", lineHeight:1.6, color:"#0E5C63", whiteSpace:"pre-line" }}><strong style=${{ fontSize:"10.5px", letterSpacing:".06em", textTransform:"uppercase" }}>Open slots</strong>\n${p.availabilitySlots}</div>` : null}
 
             <div style=${{ display:"flex", gap:"8px", flexWrap:"wrap" }}>
               <div style=${{ flex:"1 1 130px" }}>
