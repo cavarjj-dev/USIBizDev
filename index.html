@@ -29,8 +29,8 @@
    Use your PUBLISHABLE key (starts with sb_publishable_).
    Leave blank to run local-only (no sync).
    ============================================================ */
-const SUPABASE_URL = "https://mwdjhinpicvxjetrcvkc.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_Xd2C9xM7nIbuFJgxAg7rbg_mNZEhTIi";
+const SUPABASE_URL = "";
+const SUPABASE_ANON_KEY = "";
 /* ============================================================ */
 
 import { h, render } from "https://esm.sh/preact@10.19.3";
@@ -104,6 +104,21 @@ function Icon({ sym, size=14, color="currentColor" }) {
   const p = { plus:"M8 4v8M4 8h8", pin:"M8 14s4-4.2 4-7A4 4 0 1 0 4 7c0 2.8 4 7 4 7z", flag:"M4 14V3m0 1h7l-1.5 2.5L11 9H4", chart:"M3 13V7M8 13V3M13 13V9", clock:"M8 4v4l2.5 1.5M14 8A6 6 0 1 1 2 8a6 6 0 0 1 12 0z" }[sym] || "";
   return html`<svg width=${size} height=${size} viewBox="0 0 16 16" fill="none" stroke=${color} stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d=${p}/></svg>`;
 }
+
+
+const buildRecommendation_ = (segWin, trigWin, chanWin, bestSeg, bestTrigger, sentCount) => {
+  if (sentCount < 5) return "Send more outreach to build enough data for the learning loop to calibrate.";
+  const recs = [];
+  if (bestSeg && segWin[bestSeg].total >= 2)
+    recs.push("Focus prospecting on Segment " + bestSeg + " — highest win rate so far.");
+  if (bestTrigger && trigWin[bestTrigger].total >= 2)
+    recs.push("Prioritize " + bestTrigger + " trigger companies — they convert best.");
+  const bestChan = Object.keys(chanWin).sort((a,b)=>
+    ((chanWin[b].wins/Math.max(chanWin[b].total,1)) - (chanWin[a].wins/Math.max(chanWin[a].total,1))))[0];
+  if (bestChan && chanWin[bestChan].total >= 2)
+    recs.push(bestChan==="email" ? "Email is converting better than LinkedIn — prioritize verified emails." : "LinkedIn is converting better — prioritize founder-direct connection requests.");
+  return recs.length ? recs.join(" ") : "Keep building pipeline. The learning loop needs more closed outcomes to calibrate.";
+};
 
 function App() {
   const [state, setState] = useState(loadLocal());
@@ -242,8 +257,81 @@ function App() {
 
   const commit = (next) => { next = { ...next, roster: buildRoster(next) }; setState(next); saveLocal(next); if (session) push(next, session.user.id); };
 
-  const all = [...BASE, ...custom].map(b => ({ ...b, ...(records[b.id] || {}) }));
-  const update = (id, patch) => {
+  const sent     = all.filter(p => ["sent","replied","meeting","won"].includes(p.stage));
+  const replied  = all.filter(p => ["replied","meeting","won"].includes(p.stage));
+  const meetings = all.filter(p => ["meeting","won"].includes(p.stage));
+  const wonSet   = wonAll_;
+  const rate     = (a,b) => b>0 ? Math.round((a/b)*100)+"%" : "—";
+
+  // ── Phase 3: Learning loop analytics ─────────────────────────────────────
+  const computeLearning = (wonAll, lostAll) => {
+    const closed  = [...wonAll, ...lostAll];
+
+    // Win rate by segment
+    const segWin = {};
+    ["A","B","C"].forEach(s => {
+      const total  = closed.filter(p => p.seg===s).length;
+      const wins   = wonAll.filter(p => p.seg===s).length;
+      segWin[s] = { wins, total, rate: total>0 ? Math.round((wins/total)*100) : null };
+    });
+
+    // Win rate by trigger
+    const trigWin = {};
+    closed.forEach(p => {
+      const t = p.trigger||"other";
+      if (!trigWin[t]) trigWin[t] = { wins:0, total:0 };
+      trigWin[t].total++;
+      if (p.stage==="won") trigWin[t].wins++;
+    });
+    Object.keys(trigWin).forEach(t => {
+      trigWin[t].rate = Math.round((trigWin[t].wins/trigWin[t].total)*100);
+    });
+
+    // Win rate by channel
+    const chanWin = {};
+    closed.forEach(p => {
+      const ch = p.channel||"other";
+      if (!chanWin[ch]) chanWin[ch] = { wins:0, total:0 };
+      chanWin[ch].total++;
+      if (p.stage==="won") chanWin[ch].wins++;
+    });
+
+    // Best performing segment (most wins or highest rate with enough data)
+    const bestSeg = ["A","B","C"].sort((a,b) => {
+      const ra = segWin[a].rate||0, rb = segWin[b].rate||0;
+      return rb - ra;
+    })[0];
+
+    // Best trigger
+    const bestTrigger = Object.keys(trigWin).sort((a,b) =>
+      (trigWin[b].rate||0) - (trigWin[a].rate||0))[0];
+
+    // Revenue
+    const totalRevenue = wonAll.reduce((s,p) => s + (parseFloat(p.revenue)||0), 0);
+    const avgDealSize  = wonAll.length > 0 ? Math.round(totalRevenue/wonAll.length) : 0;
+
+    // Days to close (avg across won deals)
+    const closeTimes = wonAll.filter(p => p.dateSent && p.dateClosed).map(p => {
+      const s = new Date(p.dateSent+"T00:00:00");
+      const e = new Date(p.dateClosed+"T00:00:00");
+      return Math.floor((e-s)/(1000*60*60*24));
+    });
+    const avgDaysToClose = closeTimes.length>0
+      ? Math.round(closeTimes.reduce((a,b)=>a+b,0)/closeTimes.length) : null;
+
+    // Prospector recommendation: where to focus effort
+    const recommendation = buildRecommendation_(segWin, trigWin, chanWin, bestSeg, bestTrigger, sent.length);
+
+    return { segWin, trigWin, chanWin, bestSeg, bestTrigger,
+             totalRevenue, avgDealSize, avgDaysToClose,
+             wonCount: wonAll.length, closedCount: closed.length, recommendation };
+  };
+
+
+  const wonAll_   = all.filter(p => p.stage==="won");
+  const lostAll_  = all.filter(p => p.stage==="lost");
+  const learning  = computeLearning(wonAll_, lostAll_);
+
     const merged = all.find(x=>x.id===id) || {};
     const cur = records[id] || {};
     let next = { ...cur, ...patch };
@@ -258,6 +346,22 @@ function App() {
     const t = todayStr();
     const act = [ ...(p.activity||[]), { t, label: p.nextAction ? ("Touch: "+p.nextAction) : "Touch logged" } ];
     update(p.id, { activity: act, followUp: addDays(t,5), nextAction: "" });
+  };
+
+  const logLinkedInReply = (p, note) => {
+    const t = todayStr();
+    const act = [ ...(p.activity||[]), { t, label: "LinkedIn reply: " + (note||"replied") } ];
+    update(p.id, { stage:"replied", activity: act, followUp: addDays(t,1), nextAction: "Book the call", liReplyNote: note||"" });
+  };
+
+  const logOutcome = (p, outcome, revenueVal) => {
+    const t = todayStr();
+    const label = outcome==="won"
+      ? "Won" + (revenueVal ? " — $"+revenueVal : "")
+      : outcome==="lost" ? "Lost — no longer pursuing" : "Passed";
+    const act = [ ...(p.activity||[]), { t, label } ];
+    update(p.id, { stage: outcome, activity: act, dateClosed: t,
+      revenue: outcome==="won" ? (revenueVal||0) : 0 });
   };
 
   const addProspect = () => {
@@ -289,11 +393,9 @@ function App() {
   let lostN = 0, passN = 0;
   all.forEach(p => { if (p.stage==="lost") lostN++; else if (p.stage==="pass") passN++; else if (funnelCounts[p.stage]!==undefined) funnelCounts[p.stage]++; });
 
-  const sentSet = all.filter(p => reachedSent(p.stage));
-  const repliedSet = all.filter(p => reachedReply(p.stage));
-  const meetingSet = all.filter(p => ["meeting","won"].includes(p.stage));
-  const wonSet = all.filter(p => p.stage==="won");
-  const rate = (a,b) => b>0 ? Math.round((a/b)*100)+"%" : "—";
+  const sentSet    = sent;
+  const repliedSet = replied;
+  const meetingSet = meetings;
 
   const byKey = (keyFn) => {
     const m = {};
@@ -580,11 +682,104 @@ function App() {
             </div>` : null}
             <button onClick=${()=>logTouch(p)} style=${{ alignSelf:"flex-start", ...btn(false), padding:"5px 10px", fontSize:"11.5px" }}>Log touch, set +5d follow-up</button>
 
+            ${p.channel==="linkedin" && p.stage==="sent" ? html`
+              <div style=${{ borderTop:`1px dashed ${T.line}`, paddingTop:"8px", display:"flex", flexDirection:"column", gap:"6px" }}>
+                <div style=${{ fontSize:"10px", color:T.muted, textTransform:"uppercase", letterSpacing:".06em" }}>LinkedIn reply received?</div>
+                <div style=${{ display:"flex", gap:"6px" }}>
+                  <input id=${"li-"+p.id} placeholder="Note what they said…" style=${{ ...inp, flex:1, fontSize:"12px" }}/>
+                  <button onClick=${()=>{ const el=document.getElementById("li-"+p.id); logLinkedInReply(p, el?el.value:""); }} style=${{ ...btn(true), padding:"5px 10px", fontSize:"11.5px", background:"#0A66C2", borderColor:"#0A66C2" }}>Mark replied</button>
+                </div>
+              </div>` : null}
+
+            ${["replied","meeting"].includes(p.stage) ? html`
+              <div style=${{ borderTop:`1px dashed ${T.line}`, paddingTop:"8px", display:"flex", flexDirection:"column", gap:"6px" }}>
+                <div style=${{ fontSize:"10px", color:T.muted, textTransform:"uppercase", letterSpacing:".06em" }}>Log outcome</div>
+                <div style=${{ display:"flex", gap:"6px", flexWrap:"wrap", alignItems:"center" }}>
+                  <input id=${"rev-"+p.id} placeholder="Deal value ($)" style=${{ ...inp, width:"110px", fontSize:"12px" }}/>
+                  <button onClick=${()=>{ const el=document.getElementById("rev-"+p.id); logOutcome(p,"won",el?el.value.replace(/\D/g,""):0); }} style=${{ ...btn(true), padding:"5px 10px", fontSize:"11.5px", background:"#2E7D32", borderColor:"#2E7D32" }}>Won</button>
+                  <button onClick=${()=>logOutcome(p,"lost")} style=${{ ...btn(false), padding:"5px 10px", fontSize:"11.5px", color:T.clay, borderColor:T.clay }}>Lost</button>
+                </div>
+              </div>` : null}
+
             ${p.custom ? html`<button onClick=${()=>removeCustom(p.id)} style=${{ alignSelf:"flex-start", background:"none", border:"none", color:T.faint, fontSize:"11px", cursor:"pointer", padding:0 }}>Remove</button>` : null}
           </div>`;
         })}
       </div>
       ${visible.length===0 ? html`<div style=${{ textAlign:"center", color:T.muted, padding:"40px", background:T.surface, borderRadius:"14px", border:`1px dashed ${T.line}` }}>Nothing in this view. Adjust the filters or add a prospect.</div>` : null}
+
+      <!-- Phase 3: Learning Loop Panel -->
+      <div style=${{ marginTop:"22px", background:T.ink, borderRadius:"14px", padding:"20px 24px" }}>
+        <div style=${{ display:"flex", justifyContent:"space-between", alignItems:"flex-start", flexWrap:"wrap", gap:"12px", marginBottom:"16px" }}>
+          <div>
+            <div style=${{ fontSize:"11px", letterSpacing:".12em", textTransform:"uppercase", color:T.pineSoft, marginBottom:"4px", fontWeight:600 }}>Phase 3 · Learning Loop</div>
+            <div style=${{ fontSize:"16px", color:"#fff", fontFamily:T.serif, fontWeight:600 }}>What the data says</div>
+          </div>
+          ${learning.closedCount > 0 ? html`
+            <div style=${{ display:"flex", gap:"10px", flexWrap:"wrap" }}>
+              ${[["Won", learning.wonCount, "#2E7D32"],
+                 ["Closed", learning.closedCount, T.muted],
+                 ["Revenue", learning.totalRevenue>0?"$"+learning.totalRevenue.toLocaleString():"—", T.pine],
+                 ["Avg deal", learning.avgDealSize>0?"$"+learning.avgDealSize.toLocaleString():"—", T.blue]
+                ].map(([l,v,c]) => html`
+                <div key=${l} style=${{ background:T.ink2, borderRadius:"10px", padding:"8px 14px", textAlign:"center", borderTop:`2px solid ${c}` }}>
+                  <div style=${{ fontSize:"18px", fontWeight:700, color:"#fff" }}>${v}</div>
+                  <div style=${{ fontSize:"10px", color:"#9AA3AF", textTransform:"uppercase", letterSpacing:".06em" }}>${l}</div>
+                </div>`)}
+            </div>` : null}
+        </div>
+
+        <!-- Recommendation -->
+        <div style=${{ background:T.pineSoft, borderRadius:"10px", padding:"12px 14px", marginBottom:"16px", borderLeft:`3px solid ${T.pine}` }}>
+          <div style=${{ fontSize:"10px", letterSpacing:".1em", textTransform:"uppercase", color:T.pine, marginBottom:"5px", fontWeight:700 }}>Prospector recommendation</div>
+          <div style=${{ fontSize:"13.5px", color:"#1B3D2F", lineHeight:1.6 }}>${learning.recommendation}</div>
+        </div>
+
+        <!-- Segment and trigger win rates -->
+        <div style=${{ display:"grid", gridTemplateColumns:"repeat(auto-fit, minmax(180px, 1fr))", gap:"12px" }}>
+          <div style=${{ background:T.ink2, borderRadius:"10px", padding:"14px" }}>
+            <div style=${{ fontSize:"10.5px", letterSpacing:".1em", textTransform:"uppercase", color:"#9AA3AF", marginBottom:"10px" }}>Win rate by segment</div>
+            ${["A","B","C"].map(s => {
+              const d = learning.segWin[s];
+              const pct = d.rate !== null ? d.rate : null;
+              return html`<div key=${s} style=${{ display:"flex", alignItems:"center", gap:"8px", marginBottom:"7px" }}>
+                <span style=${{ fontSize:"12px", color:"#C7CDD6", width:"40px" }}>Seg ${s}</span>
+                <div style=${{ flex:1, height:"6px", background:"rgba(255,255,255,0.08)", borderRadius:"99px", overflow:"hidden" }}>
+                  <div style=${{ width:(pct||0)+"%", height:"100%", background:SEG[s].color, borderRadius:"99px", transition:"width .4s" }}></div>
+                </div>
+                <span style=${{ fontSize:"12px", color:"#C7CDD6", width:"36px", textAlign:"right" }}>${pct!==null ? pct+"%" : "—"}</span>
+                <span style=${{ fontSize:"10px", color:"#5B6472" }}>${d.wins}/${d.total}</span>
+              </div>`;
+            })}
+          </div>
+          <div style=${{ background:T.ink2, borderRadius:"10px", padding:"14px" }}>
+            <div style=${{ fontSize:"10.5px", letterSpacing:".1em", textTransform:"uppercase", color:"#9AA3AF", marginBottom:"10px" }}>Win rate by trigger</div>
+            ${Object.keys(learning.trigWin).length === 0
+              ? html`<div style=${{ fontSize:"12.5px", color:"#5B6472" }}>No closed deals yet. Log outcomes to activate.</div>`
+              : Object.entries(learning.trigWin).sort((a,b)=>(b[1].rate||0)-(a[1].rate||0)).map(([t,d]) => html`
+                <div key=${t} style=${{ display:"flex", justifyContent:"space-between", padding:"4px 0", borderBottom:"1px solid rgba(255,255,255,0.06)", fontSize:"12.5px" }}>
+                  <span style=${{ color:"#C7CDD6", textTransform:"capitalize" }}>${t}</span>
+                  <span style=${{ color: d.rate>=50?"#81C784":d.rate>=25?"#FFB74D":"#EF9A9A" }}>${d.rate}% <span style=${{ color:"#5B6472", fontSize:"11px" }}>(${d.wins}/${d.total})</span></span>
+                </div>`)}
+          </div>
+          <div style=${{ background:T.ink2, borderRadius:"10px", padding:"14px" }}>
+            <div style=${{ fontSize:"10.5px", letterSpacing:".1em", textTransform:"uppercase", color:"#9AA3AF", marginBottom:"10px" }}>Win rate by channel</div>
+            ${Object.keys(learning.chanWin).length === 0
+              ? html`<div style=${{ fontSize:"12.5px", color:"#5B6472" }}>No closed deals yet. Log outcomes to activate.</div>`
+              : Object.entries(learning.chanWin).map(([ch,d]) => html`
+                <div key=${ch} style=${{ display:"flex", justifyContent:"space-between", padding:"4px 0", borderBottom:"1px solid rgba(255,255,255,0.06)", fontSize:"12.5px" }}>
+                  <span style=${{ color:"#C7CDD6" }}>${CHANNELS[ch]||ch}</span>
+                  <span style=${{ color:"#C7CDD6" }}>${rate(d.wins,d.total)} <span style=${{ color:"#5B6472", fontSize:"11px" }}>(${d.wins}/${d.total})</span></span>
+                </div>`)}
+            ${learning.avgDaysToClose ? html`
+              <div style=${{ marginTop:"10px", fontSize:"12px", color:"#9AA3AF" }}>
+                Avg days to close: <strong style=${{ color:"#fff" }}>${learning.avgDaysToClose}</strong>
+              </div>` : null}
+          </div>
+        </div>
+        <div style=${{ fontSize:"11.5px", color:"#5B6472", marginTop:"14px", lineHeight:1.5 }}>
+          Log Won / Lost outcomes on call-booked cards to activate the learning loop. As data accumulates the prospector recommendation above will tune automatically — shifting effort toward the segments, triggers, and channels that actually convert for your business.
+        </div>
+      </div>
     </div>
   </div>`;
 }
