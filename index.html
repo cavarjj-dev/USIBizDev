@@ -29,8 +29,8 @@
    Use your PUBLISHABLE key (starts with sb_publishable_).
    Leave blank to run local-only (no sync).
    ============================================================ */
-const SUPABASE_URL = "https://mwdjhinpicvxjetrcvkc.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_Xd2C9xM7nIbuFJgxAg7rbg_mNZEhTIi";
+const SUPABASE_URL = "";
+const SUPABASE_ANON_KEY = "";
 /* ============================================================ */
 
 import { h, render } from "https://esm.sh/preact@10.19.3";
@@ -257,6 +257,8 @@ function App() {
 
   const commit = (next) => { next = { ...next, roster: buildRoster(next) }; setState(next); saveLocal(next); if (session) push(next, session.user.id); };
 
+  const all = [...BASE, ...custom].map(b => ({ ...b, ...(records[b.id] || {}) }));
+
   const sent     = all.filter(p => ["sent","replied","meeting","won"].includes(p.stage));
   const replied  = all.filter(p => ["replied","meeting","won"].includes(p.stage));
   const meetings = all.filter(p => ["meeting","won"].includes(p.stage));
@@ -332,6 +334,7 @@ function App() {
   const lostAll_  = all.filter(p => p.stage==="lost");
   const learning  = computeLearning(wonAll_, lostAll_);
 
+  const update = (id, patch) => {
     const merged = all.find(x=>x.id===id) || {};
     const cur = records[id] || {};
     let next = { ...cur, ...patch };
