@@ -29,8 +29,8 @@
    Use your PUBLISHABLE key (starts with sb_publishable_).
    Leave blank to run local-only (no sync).
    ============================================================ */
-const SUPABASE_URL = "https://mwdjhinpicvxjetrcvkc.supabase.co";
-const SUPABASE_ANON_KEY = "sb_publishable_Xd2C9xM7nIbuFJgxAg7rbg_mNZEhTIi";
+const SUPABASE_URL = "";
+const SUPABASE_ANON_KEY = "";
 /* ============================================================ */
 
 import { h, render } from "https://esm.sh/preact@10.19.3";
@@ -172,6 +172,12 @@ function App() {
             } catch(e) {}
             records[mEN.id] = { ...cur, ...patch };
           }
+        } else if (sig.kind === "prospector_weights") {
+          // Store the latest weights in state for the Phase 3 panel to display
+          try {
+            const w = JSON.parse(sig.detail || "{}");
+            records["__prospector_weights__"] = { weights: w.weights, trigStats: w.trigStats, segStats: w.segStats, updatedAt: sig.created_at || todayStr() };
+          } catch(e) {}
         } else if (sig.kind === "availability") {
           const allAV = baseAll();
           const mAV = allAV.find(p => sig.hint && p.company && p.company.toLowerCase() === sig.hint.toLowerCase());
@@ -735,6 +741,14 @@ function App() {
         <div style=${{ background:T.pineSoft, borderRadius:"10px", padding:"12px 14px", marginBottom:"16px", borderLeft:`3px solid ${T.pine}` }}>
           <div style=${{ fontSize:"10px", letterSpacing:".1em", textTransform:"uppercase", color:T.pine, marginBottom:"5px", fontWeight:700 }}>Prospector recommendation</div>
           <div style=${{ fontSize:"13.5px", color:"#1B3D2F", lineHeight:1.6 }}>${learning.recommendation}</div>
+          ${(() => {
+            const pw = records["__prospector_weights__"];
+            if (!pw || !pw.weights) return html`<div style=${{ fontSize:"12px", color:T.pine, marginTop:"8px", opacity:0.7 }}>Prospector running balanced plan — log ${3 - learning.closedCount} more closed deal${3-learning.closedCount===1?"":"s"} to activate auto-tune.</div>`;
+            const topTriggers = Object.keys(pw.weights).sort((a,b)=>(pw.weights[b]||0)-(pw.weights[a]||0)).slice(0,3);
+            return html`<div style=${{ fontSize:"12px", color:T.pine, marginTop:"8px" }}>
+              Auto-tune active · Top triggers: ${topTriggers.map(t => t + " (" + Math.round((pw.weights[t]||0)*100) + "%)").join(", ")}
+            </div>`;
+          })()}
         </div>
 
         <!-- Segment and trigger win rates -->
