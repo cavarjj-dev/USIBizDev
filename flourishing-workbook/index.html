@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex,nofollow,noarchive" />
+<meta name="theme-color" content="#0f1419" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-title" content="FL Workbook" />
+<link rel="manifest" href="manifest.webmanifest" />
+<title>Flourishing Learning Workbook</title>
+<style>
+  :root {
+    --bg: #0f1419;
+    --panel: #1a2332;
+    --panel2: #243044;
+    --text: #e7ecf3;
+    --muted: #9aa8bc;
+    --accent: #3d9cfd;
+    --good: #3ecf8e;
+    --warn: #f0b429;
+    --bad: #f07178;
+    --border: #2e3a4d;
+    --radius: 12px;
+    font-family: "Segoe UI", system-ui, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    line-height: 1.45; min-height: 100vh;
+  }
+  header {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(15,20,25,.92); backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--border);
+    padding: 12px 16px;
+  }
+  header h1 { margin: 0; font-size: 1.1rem; font-weight: 650; letter-spacing: .02em; }
+  header p { margin: 4px 0 0; color: var(--muted); font-size: .85rem; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 16px; }
+  nav {
+    display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 20px;
+  }
+  nav button {
+    background: var(--panel); color: var(--text); border: 1px solid var(--border);
+    border-radius: 999px; padding: 8px 14px; cursor: pointer; font-size: .85rem;
+  }
+  nav button.active { background: var(--accent); border-color: var(--accent); color: #041018; font-weight: 600; }
+  section.panel {
+    display: none; background: var(--panel); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 18px; margin-bottom: 18px;
+  }
+  section.panel.active { display: block; }
+  h2 { margin: 0 0 12px; font-size: 1.15rem; }
+  h3 { margin: 18px 0 8px; font-size: 1rem; color: var(--accent); }
+  label { display: block; font-size: .8rem; color: var(--muted); margin: 10px 0 4px; }
+  input[type=text], input[type=number], input[type=date], textarea, select {
+    width: 100%; background: var(--bg); color: var(--text);
+    border: 1px solid var(--border); border-radius: 8px; padding: 10px 12px;
+    font: inherit;
+  }
+  textarea { min-height: 72px; resize: vertical; }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 640px) { .row { grid-template-columns: 1fr; } }
+  .grid7 { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .chk {
+    aspect-ratio: 1; border: 1px solid var(--border); border-radius: 6px;
+    background: var(--bg); cursor: pointer; display: flex; align-items: center; justify-content: center;
+    font-size: .75rem; user-select: none;
+  }
+  .chk.on { background: var(--good); color: #042016; border-color: var(--good); font-weight: 700; }
+  .chk.partial { background: var(--warn); color: #1a1400; border-color: var(--warn); }
+  .actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  button.primary, button.ghost, button.danger {
+    border-radius: 8px; padding: 10px 14px; cursor: pointer; font: inherit; border: 1px solid var(--border);
+  }
+  button.primary { background: var(--accent); color: #041018; border-color: var(--accent); font-weight: 600; }
+  button.ghost { background: var(--panel2); color: var(--text); }
+  button.danger { background: transparent; color: var(--bad); border-color: var(--bad); }
+  table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+  th, td { border-bottom: 1px solid var(--border); padding: 8px 6px; text-align: left; vertical-align: top; }
+  th { color: var(--muted); font-weight: 600; font-size: .75rem; text-transform: uppercase; letter-spacing: .04em; }
+  .mantra {
+    background: linear-gradient(135deg, #1a2a40, #1a2332);
+    border-left: 4px solid var(--accent); padding: 14px 16px; border-radius: 8px;
+    font-size: .95rem; margin-bottom: 16px;
+  }
+  .status { font-size: .8rem; color: var(--muted); margin-top: 8px; }
+  .status.ok { color: var(--good); }
+  .pill { display: inline-block; background: var(--panel2); border-radius: 999px; padding: 2px 10px; font-size: .75rem; color: var(--muted); }
+  .gate { display: flex; gap: 10px; align-items: flex-start; padding: 8px 0; border-bottom: 1px solid var(--border); }
+  .gate input { width: auto; margin-top: 4px; }
+  .score-row { display: grid; grid-template-columns: 140px 80px 1fr; gap: 8px; align-items: center; margin-bottom: 8px; }
+  @media (max-width: 640px) { .score-row { grid-template-columns: 1fr; } }
+  footer { color: var(--muted); font-size: .75rem; text-align: center; padding: 24px 16px 40px; }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <h1>Flourishing Learning Workbook</h1>
+    <p>v1.1 · Live · Multi-sport · Multi-art · Learning that sticks · <span class="pill" id="saveState">Ready</span></p>
+  </div>
+</header>
+<div class="wrap">
+  <nav id="nav"></nav>
+
+  <!-- HOME -->
+  <section class="panel active" id="home">
+    <h2>Start here</h2>
+    <div class="mantra">
+      Sleep. Retrieve. Practice at the edge. Play. Create. Space it. Teach it. Rest.<br/>
+      Breadth now, depth when identity and joy can carry it.<br/>
+      Competence is built. Character is practiced. Knowledge that serves others is the point.
+    </div>
+    <p style="color:var(--muted); font-size:.9rem;">This is the <strong>live</strong> workbook. Changes autosave on this device. Use <strong>Sync</strong> to move data between phone and laptop, or Export JSON for a file backup. Bookmark this URL. Add to Home Screen on phone for one-tap access.</p>
+    <h3>30-day install</h3>
+    <div id="installChecks"></div>
+    <h3>Pocket card — learning that sticks</h3>
+    <table>
+      <tr><th>Do this</th><th>Not this</th></tr>
+      <tr><td>Quiz / blank page / teach-back</td><td>Only re-read &amp; highlight</td></tr>
+      <tr><td>Space reviews across days</td><td>Cram once</td></tr>
+      <tr><td>Interleave related skills</td><td>One type forever then switch</td></tr>
+      <tr><td>Explain why + draw it</td><td>Passive words only</td></tr>
+    </table>
+    <div class="actions">
+      <button class="primary" onclick="show('daily')">Today’s log</button>
+      <button class="ghost" onclick="show('profile')">Edit profile</button>
+      <button class="ghost" onclick="show('sync')">Sync / backup</button>
+      <button class="ghost" onclick="exportData()">Export JSON</button>
+    </div>
+  </section>
+
+  <!-- SYNC -->
+  <section class="panel" id="sync">
+    <h2>Sync &amp; backup</h2>
+    <p style="color:var(--muted);font-size:.9rem;">Autosave is per browser/device. To use phone and laptop together: Export on one device → Import on the other, or copy the sync pack below.</p>
+    <h3>File backup</h3>
+    <div class="actions">
+      <button class="primary" onclick="exportData()">Download JSON backup</button>
+      <label class="ghost" style="display:inline-block;padding:10px 14px;cursor:pointer;border:1px solid var(--border);border-radius:8px;background:var(--panel2);">
+        Import JSON file<input type="file" accept="application/json,.json" style="display:none" onchange="importData(event)" />
+      </label>
+    </div>
+    <h3>Sync pack (copy / paste between devices)</h3>
+    <p style="color:var(--muted);font-size:.85rem;">Generate on device A, paste into device B, then Apply. This replaces data on the receiving device.</p>
+    <div class="actions">
+      <button class="primary" onclick="makeSyncPack()">Generate sync pack</button>
+      <button class="ghost" onclick="copySyncPack()">Copy pack</button>
+    </div>
+    <label>Sync pack</label>
+    <textarea id="syncPack" rows="8" placeholder="Paste a sync pack here, then Apply"></textarea>
+    <div class="actions">
+      <button class="primary" onclick="applySyncPack()">Apply pack to this device</button>
+      <button class="danger" onclick="clearAllData()">Clear this device data</button>
+    </div>
+    <p class="status" id="syncStatus"></p>
+    <h3>Tips</h3>
+    <ul style="color:var(--muted);font-size:.9rem;">
+      <li>Pick one primary device for daily ticks if you can.</li>
+      <li>After a big week, Export JSON and email it to yourself.</li>
+      <li>This page is unlisted (noindex). Do not post the link publicly.</li>
+    </ul>
+  </section>
+
+  <!-- PROFILE -->
+  <section class="panel" id="profile">
+    <h2>Profile</h2>
+    <div class="row">
+      <div><label>Preferred name</label><input data-k="profile.name" type="text" /></div>
+      <div><label>Age / grade</label><input data-k="profile.ageGrade" type="text" placeholder="12 / 7th" /></div>
+    </div>
+    <div class="row">
+      <div><label>Phase</label>
+        <select data-k="profile.phase">
+          <option>A — Foundation &amp; Sampling</option>
+          <option>B — Identity &amp; Skill Architecture</option>
+          <option>C — Investment &amp; Contribution</option>
+          <option>D — Adult craft</option>
+        </select>
+      </div>
+      <div><label>Last updated</label><input data-k="profile.updated" type="date" /></div>
+    </div>
+    <label>Sports</label><textarea data-k="profile.sports"></textarea>
+    <label>Music</label><input data-k="profile.music" type="text" />
+    <label>Drawing / visual art</label><input data-k="profile.art" type="text" />
+    <label>Math / reading focus</label><textarea data-k="profile.mind"></textarea>
+    <label>Flourishing in his words</label><textarea data-k="profile.hisWords"></textarea>
+    <label>Adult definition of flourishing</label><textarea data-k="profile.adultWords"></textarea>
+    <label>Strengths (evidence)</label><textarea data-k="profile.strengths"></textarea>
+    <label>Growth edges</label><textarea data-k="profile.edges"></textarea>
+    <label>Non-negotiables (sleep, device, art minimum, multi-sport rule)</label><textarea data-k="profile.nonneg"></textarea>
+    <label>Environment cues</label><textarea data-k="profile.env"></textarea>
+  </section>
+
+  <!-- PHASE -->
+  <section class="panel" id="phase">
+    <h2>Phase A gates</h2>
+    <p style="color:var(--muted);font-size:.9rem;">Stay until gates are mostly true for 4+ weeks. No shame metrics.</p>
+    <div id="gates"></div>
+    <label>Gate review notes</label><textarea data-k="phase.notes"></textarea>
+    <h3>Daily skeleton (your times)</h3>
+    <label>Bed / wake targets</label><input data-k="phase.sleepWindow" type="text" placeholder="e.g. 9:00 pm – 6:30 am" />
+    <label>Deep cognitive window</label><input data-k="phase.deepTime" type="text" />
+    <label>Art block plan</label><input data-k="phase.artPlan" type="text" />
+    <label>Sport / play plan</label><input data-k="phase.sportPlan" type="text" />
+  </section>
+
+  <!-- AIMS -->
+  <section class="panel" id="aims">
+    <h2>12-week aims</h2>
+    <div class="row">
+      <div><label>Cycle start</label><input data-k="aims.start" type="date" /></div>
+      <div><label>Cycle end</label><input data-k="aims.end" type="date" /></div>
+    </div>
+    <label>Year theme (one line)</label><input data-k="aims.theme" type="text" />
+    <h3>Mind</h3>
+    <textarea data-k="aims.mind" placeholder="Aim, weekly actions, done-looks-like, feedback source"></textarea>
+    <h3>Body / sport</h3>
+    <textarea data-k="aims.body" placeholder="Narrow cue + play/breadth rule"></textarea>
+    <h3>Art</h3>
+    <textarea data-k="aims.art" placeholder="Contact minimum + finished work target"></textarea>
+    <h3>Character / agency</h3>
+    <textarea data-k="aims.character"></textarea>
+    <label>Week 6 load check notes</label><textarea data-k="aims.mid"></textarea>
+  </section>
+
+  <!-- WEEKLY -->
+  <section class="panel" id="weekly">
+    <h2>This week</h2>
+    <div class="row">
+      <div><label>Week of</label><input data-k="weekly.weekOf" type="date" /></div>
+      <div><label>Week # in cycle</label><input data-k="weekly.num" type="number" min="1" max="12" /></div>
+    </div>
+    <label>Three aims (max)</label><textarea data-k="weekly.aims"></textarea>
+    <label>Mon–Sun anchors (sport / art / retrieval)</label><textarea data-k="weekly.schedule" rows="8"></textarea>
+    <h3>Must-dos</h3>
+    <div id="weeklyMust"></div>
+    <label>Sunday review</label><textarea data-k="weekly.review" placeholder="Strategy that worked · transfer · joy/dread · keep/cut/add"></textarea>
+  </section>
+
+  <!-- DAILY -->
+  <section class="panel" id="daily">
+    <h2>Daily log</h2>
+    <div class="row">
+      <div><label>Date</label><input id="dailyDate" type="date" /></div>
+      <div><label>Sleep hours</label><input id="dailySleep" type="number" step="0.5" min="0" max="14" /></div>
+    </div>
+    <div class="row">
+      <div><label>Energy 1–5</label><input id="dailyEnergy" type="number" min="1" max="5" /></div>
+      <div><label>Mood 1–5</label><input id="dailyMood" type="number" min="1" max="5" /></div>
+    </div>
+    <h3>Anchors</h3>
+    <div id="dailyAnchors"></div>
+    <label>Retrieval today</label><textarea id="dailyRetrieval"></textarea>
+    <label>Strategy that worked</label><textarea id="dailyStrategy"></textarea>
+    <label>Miss + next strategy</label><textarea id="dailyMiss"></textarea>
+    <label>Transfer / real-life use</label><textarea id="dailyTransfer"></textarea>
+    <label>Win (process counts)</label><textarea id="dailyWin"></textarea>
+    <div class="actions">
+      <button class="primary" onclick="saveDaily()">Save this day</button>
+      <button class="ghost" onclick="loadDaily()">Reload date</button>
+    </div>
+    <h3>Recent days</h3>
+    <div id="dailyList" style="color:var(--muted);font-size:.9rem;"></div>
+  </section>
+
+  <!-- HABITS -->
+  <section class="panel" id="habits">
+    <h2>Habit install</h2>
+    <p style="color:var(--muted);font-size:.9rem;">After ANCHOR → tiny behavior → celebrate. ~66 days average to automaticity.</p>
+    <div class="row">
+      <div>
+        <label>Habit 1 recipe</label>
+        <textarea data-k="habits.h1recipe" placeholder="After I ___, I will ___, then celebrate ___"></textarea>
+      </div>
+      <div>
+        <label>Habit 2 recipe</label>
+        <textarea data-k="habits.h2recipe"></textarea>
+      </div>
+    </div>
+    <label>Habit 3 recipe</label><textarea data-k="habits.h3recipe"></textarea>
+    <h3>Habit 1 — 70-day grid (tap: empty → done → partial → empty)</h3>
+    <div class="grid7" id="h1grid"></div>
+    <h3>Habit 2</h3>
+    <div class="grid7" id="h2grid"></div>
+    <h3>Habit 3</h3>
+    <div class="grid7" id="h3grid"></div>
+  </section>
+
+  <!-- SCORECARD -->
+  <section class="panel" id="scorecard">
+    <h2>Monthly scorecard</h2>
+    <div class="row">
+      <div><label>Month label</label><input id="scMonth" type="text" placeholder="2026-08" /></div>
+      <div><label>Review date</label><input id="scDate" type="date" /></div>
+    </div>
+    <div id="scDomains"></div>
+    <label>KPI — accessed knowledge when it counted?</label><textarea id="scKpi"></textarea>
+    <label>Keep / Cut / Add</label><textarea id="scDecisions"></textarea>
+    <div class="actions">
+      <button class="primary" onclick="saveScorecard()">Save scorecard</button>
+    </div>
+    <h3>History</h3>
+    <div id="scHistory" style="color:var(--muted);font-size:.9rem;"></div>
+  </section>
+
+  <!-- OS -->
+  <section class="panel" id="os">
+    <h2>Operating system (reference)</h2>
+    <h3>Deliberate practice recipe</h3>
+    <ol>
+      <li>One narrow target</li>
+      <li>Edge of ability (~60–80% success)</li>
+      <li>Full attention, short block (age 12: 15–25 min slices)</li>
+      <li>Immediate feedback</li>
+      <li>Adjust and repeat; stop when quality collapses</li>
+      <li>One-line log</li>
+    </ol>
+    <h3>Youth rule</h3>
+    <p>Deliberate play and breadth stay high in Phase A. Avoid early year-round single-sport max volume.</p>
+    <h3>Adult rules</h3>
+    <ul>
+      <li>Environment &gt; sermons</li>
+      <li>Defend sleep</li>
+      <li>Process/strategy praise, not trait praise</li>
+      <li>Agency ladder: show → together → he does → he plans</li>
+      <li>Art is not the spare tire</li>
+      <li>Measure access under pressure</li>
+    </ul>
+    <h3>Anti-patterns</h3>
+    <ul>
+      <li>Every hour optimized</li>
+      <li>Sleep as residual</li>
+      <li>Re-read as main study</li>
+      <li>Shame coaching</li>
+      <li>Parent owns 100% of motivation</li>
+    </ul>
+  </section>
+
+  <div class="status" id="footerStatus"></div>
+</div>
+<footer>
+  Flourishing Learning Workbook · Family use · Paired with HQ research roadmap 2026-07-26
+</footer>
+<script>
+const KEY = 'flw_workbook_v1';
+const TABS = [
+  ['home','Home'],['profile','Profile'],['phase','Phase'],['aims','Aims'],
+  ['weekly','Weekly'],['daily','Daily'],['habits','Habits'],['scorecard','Score'],['sync','Sync'],['os','OS']
+];
+const GATES = [
+  'Sleep stable in range most nights (4+ weeks)',
+  'One retrieval habit per core subject',
+  'Multi-sport rotation or seasonal sampling; play still strong',
+  'Art weekly protected; finished small work every 2 weeks',
+  'Name one weakness per domain + drill that attacks it',
+  'Recovers from a miss without identity collapse',
+  'Monthly family scorecard without war'
+];
+const INSTALL = [
+  'Week 1: Sleep window + phone outside room + tiny art anchor',
+  'Week 2: 10 min post-school retrieval',
+  'Week 3: 15 min deliberate weak-skill slice 3×',
+  'Week 4: First family scorecard'
+];
+const DAILY_ANCHORS = [
+  'Sleep window / phone out of room',
+  'Retrieval block',
+  'Art tiny or full',
+  'Deliberate slice',
+  'Movement / practice',
+  'Unstructured play',
+  'Wind-down honored'
+];
+const WEEKLY_MUST = [
+  'Interleaved review once',
+  'Teach-back once',
+  'Longer creative/project once',
+  'True rest / pure play once',
+  'Sleep window held ≥5 nights'
+];
+const DOMAINS = ['Body / sport','Art','Mind','Character','Relationships','Agency','Rest / play'];
+
+function defaultData() {
+  return {
+    profile: {}, phase: {gates:{}}, aims: {}, weekly: {must:{}},
+    habits: {h1:[], h2:[], h3:[]},
+    install: {},
+    dailies: {},
+    scorecards: {}
+  };
+}
+
+let data = load();
+
+function load() {
+  try {
+    const raw = localStorage.getItem(KEY);
+    if (!raw) return defaultData();
+    return Object.assign(defaultData(), JSON.parse(raw));
+  } catch { return defaultData(); }
+}
+
+function save() {
+  localStorage.setItem(KEY, JSON.stringify(data));
+  const el = document.getElementById('saveState');
+  el.textContent = 'Saved ' + new Date().toLocaleTimeString();
+  el.style.color = 'var(--good)';
+  document.getElementById('footerStatus').textContent = 'All changes stored in this browser · Export JSON for backup';
+  document.getElementById('footerStatus').className = 'status ok';
+}
+
+function show(id) {
+  document.querySelectorAll('section.panel').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('nav button').forEach(b => b.classList.toggle('active', b.dataset.id===id));
+  if (id === 'daily') { prepareDaily(); renderDailyList(); }
+  if (id === 'scorecard') renderScHistory();
+}
+
+function buildNav() {
+  const nav = document.getElementById('nav');
+  TABS.forEach(([id,label],i) => {
+    const b = document.createElement('button');
+    b.textContent = label; b.dataset.id = id;
+    if (i===0) b.classList.add('active');
+    b.onclick = () => show(id);
+    nav.appendChild(b);
+  });
+}
+
+function bindFields() {
+  document.querySelectorAll('[data-k]').forEach(el => {
+    const path = el.getAttribute('data-k').split('.');
+    let ref = data;
+    for (let i=0;i<path.length-1;i++) {
+      if (!ref[path[i]]) ref[path[i]] = {};
+      ref = ref[path[i]];
+    }
+    const key = path[path.length-1];
+    if (ref[key] != null) el.value = ref[key];
+    el.addEventListener('input', () => {
+      let r = data;
+      for (let i=0;i<path.length-1;i++) {
+        if (!r[path[i]]) r[path[i]] = {};
+        r = r[path[i]];
+      }
+      r[key] = el.value;
+      save();
+    });
+  });
+}
+
+function renderInstall() {
+  const box = document.getElementById('installChecks');
+  box.innerHTML = '';
+  INSTALL.forEach((t,i) => {
+    const id = 'inst'+i;
+    const lab = document.createElement('label');
+    lab.style.display = 'flex'; lab.style.gap = '8px'; lab.style.alignItems = 'center';
+    lab.style.margin = '8px 0'; lab.style.color = 'var(--text)'; lab.style.fontSize = '.9rem';
+    const cb = document.createElement('input');
+    cb.type = 'checkbox'; cb.checked = !!data.install[id];
+    cb.onchange = () => { data.install[id] = cb.checked; save(); };
+    lab.appendChild(cb); lab.appendChild(document.createTextNode(t));
+    box.appendChild(lab);
+  });
+}
+
+function renderGates() {
+  const box = document.getElementById('gates');
+  box.innerHTML = '';
+  if (!data.phase.gates) data.phase.gates = {};
+  GATES.forEach((t,i) => {
+    const id = 'g'+i;
+    const row = document.createElement('div');
+    row.className = 'gate';
+    const cb = document.createElement('input');
+    cb.type = 'checkbox'; cb.checked = !!data.phase.gates[id];
+    cb.onchange = () => { data.phase.gates[id] = cb.checked; save(); };
+    const div = document.createElement('div');
+    div.innerHTML = `<div>${t}</div>`;
+    const ev = document.createElement('input');
+    ev.type = 'text'; ev.placeholder = 'Evidence / date';
+    ev.value = data.phase.gates[id+'_ev'] || '';
+    ev.oninput = () => { data.phase.gates[id+'_ev'] = ev.value; save(); };
+    div.appendChild(ev);
+    row.appendChild(cb); row.appendChild(div);
+    box.appendChild(row);
+  });
+}
+
+function renderWeeklyMust() {
+  const box = document.getElementById('weeklyMust');
+  box.innerHTML = '';
+  if (!data.weekly.must) data.weekly.must = {};
+  WEEKLY_MUST.forEach((t,i) => {
+    const id = 'wm'+i;
+    const lab = document.createElement('label');
+    lab.style.display='flex'; lab.style.gap='8px'; lab.style.margin='6px 0';
+    const cb = document.createElement('input');
+    cb.type='checkbox'; cb.checked=!!data.weekly.must[id];
+    cb.onchange=()=>{ data.weekly.must[id]=cb.checked; save(); };
+    lab.appendChild(cb); lab.appendChild(document.createTextNode(t));
+    box.appendChild(lab);
+  });
+}
+
+function cycleCell(el, arr, idx) {
+  const cur = arr[idx] || 0;
+  const next = (cur + 1) % 3; // 0 empty, 1 done, 2 partial
+  arr[idx] = next;
+  el.className = 'chk' + (next===1?' on': next===2?' partial':'');
+  el.textContent = next===1?'✓': next===2?'~':'';
+  save();
+}
+
+function renderHabitGrid(containerId, key) {
+  const box = document.getElementById(containerId);
+  box.innerHTML = '';
+  if (!data.habits[key] || data.habits[key].length < 70) {
+    const old = data.habits[key] || [];
+    data.habits[key] = Array.from({length:70}, (_,i)=> old[i]||0);
+  }
+  const arr = data.habits[key];
+  for (let i=0;i<70;i++) {
+    const el = document.createElement('div');
+    const v = arr[i]||0;
+    el.className = 'chk' + (v===1?' on': v===2?' partial':'');
+    el.textContent = v===1?'✓': v===2?'~':'';
+    el.title = 'Day '+(i+1);
+    el.onclick = () => cycleCell(el, arr, i);
+    box.appendChild(el);
+  }
+}
+
+function prepareDaily() {
+  const d = document.getElementById('dailyDate');
+  if (!d.value) d.value = new Date().toISOString().slice(0,10);
+  d.onchange = loadDaily;
+  // anchors UI
+  const box = document.getElementById('dailyAnchors');
+  box.innerHTML = '';
+  DAILY_ANCHORS.forEach((t,i) => {
+    const lab = document.createElement('label');
+    lab.style.display='flex'; lab.style.gap='8px'; lab.style.margin='4px 0';
+    const cb = document.createElement('input');
+    cb.type='checkbox'; cb.id='da'+i;
+    lab.appendChild(cb); lab.appendChild(document.createTextNode(t));
+    box.appendChild(lab);
+  });
+  loadDaily();
+}
+
+function loadDaily() {
+  const date = document.getElementById('dailyDate').value;
+  const row = data.dailies[date] || {};
+  document.getElementById('dailySleep').value = row.sleep ?? '';
+  document.getElementById('dailyEnergy').value = row.energy ?? '';
+  document.getElementById('dailyMood').value = row.mood ?? '';
+  document.getElementById('dailyRetrieval').value = row.retrieval || '';
+  document.getElementById('dailyStrategy').value = row.strategy || '';
+  document.getElementById('dailyMiss').value = row.miss || '';
+  document.getElementById('dailyTransfer').value = row.transfer || '';
+  document.getElementById('dailyWin').value = row.win || '';
+  DAILY_ANCHORS.forEach((_,i) => {
+    document.getElementById('da'+i).checked = !!(row.anchors && row.anchors[i]);
+  });
+}
+
+function saveDaily() {
+  const date = document.getElementById('dailyDate').value;
+  if (!date) return alert('Pick a date');
+  const anchors = DAILY_ANCHORS.map((_,i)=> document.getElementById('da'+i).checked);
+  data.dailies[date] = {
+    sleep: document.getElementById('dailySleep').value,
+    energy: document.getElementById('dailyEnergy').value,
+    mood: document.getElementById('dailyMood').value,
+    anchors,
+    retrieval: document.getElementById('dailyRetrieval').value,
+    strategy: document.getElementById('dailyStrategy').value,
+    miss: document.getElementById('dailyMiss').value,
+    transfer: document.getElementById('dailyTransfer').value,
+    win: document.getElementById('dailyWin').value
+  };
+  save();
+  renderDailyList();
+}
+
+function renderDailyList() {
+  const dates = Object.keys(data.dailies).sort().reverse().slice(0,14);
+  document.getElementById('dailyList').innerHTML = dates.length
+    ? dates.map(d => {
+        const r = data.dailies[d];
+        return `<div style="padding:6px 0;border-bottom:1px solid var(--border)"><strong>${d}</strong> · sleep ${r.sleep||'—'} · E${r.energy||'—'}/M${r.mood||'—'} · ${(r.win||'').slice(0,60)}</div>`;
+      }).join('')
+    : 'No days saved yet.';
+}
+
+function renderScDomains() {
+  const box = document.getElementById('scDomains');
+  box.innerHTML = '';
+  DOMAINS.forEach((name,i) => {
+    const row = document.createElement('div');
+    row.className = 'score-row';
+    row.innerHTML = `<div>${name}</div>`;
+    const num = document.createElement('input');
+    num.type='number'; num.min=1; num.max=5; num.id='sc'+i; num.placeholder='1-5';
+    const note = document.createElement('input');
+    note.type='text'; note.id='scn'+i; note.placeholder='Signal / adjust';
+    row.appendChild(num); row.appendChild(note);
+    box.appendChild(row);
+  });
+}
+
+function saveScorecard() {
+  const month = document.getElementById('scMonth').value || new Date().toISOString().slice(0,7);
+  const scores = {};
+  DOMAINS.forEach((name,i) => {
+    scores[name] = {
+      score: document.getElementById('sc'+i).value,
+      note: document.getElementById('scn'+i).value
+    };
+  });
+  data.scorecards[month] = {
+    date: document.getElementById('scDate').value,
+    scores,
+    kpi: document.getElementById('scKpi').value,
+    decisions: document.getElementById('scDecisions').value
+  };
+  save();
+  renderScHistory();
+  alert('Scorecard saved for '+month);
+}
+
+function renderScHistory() {
+  const keys = Object.keys(data.scorecards).sort().reverse();
+  document.getElementById('scHistory').innerHTML = keys.length
+    ? keys.map(m => {
+        const s = data.scorecards[m];
+        const avg = DOMAINS.map(d => Number(s.scores[d]?.score)||0).filter(Boolean);
+        const a = avg.length ? (avg.reduce((x,y)=>x+y,0)/avg.length).toFixed(1) : '—';
+        return `<div style="padding:6px 0;border-bottom:1px solid var(--border)"><strong>${m}</strong> · avg ${a} · ${(s.decisions||'').slice(0,80)}</div>`;
+      }).join('')
+    : 'No scorecards yet.';
+}
+
+function exportData() {
+  const blob = new Blob([JSON.stringify(data,null,2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'flourishing-workbook-backup-'+new Date().toISOString().slice(0,10)+'.json';
+  a.click();
+}
+
+function importData(ev) {
+  const file = ev.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = () => {
+    try {
+      data = Object.assign(defaultData(), JSON.parse(reader.result));
+      save();
+      location.reload();
+    } catch(e) { alert('Invalid JSON'); }
+  };
+  reader.readAsText(file);
+}
+
+
+function makeSyncPack() {
+  const pack = {
+    app: 'flw_workbook',
+    v: 1,
+    exportedAt: new Date().toISOString(),
+    data
+  };
+  const raw = JSON.stringify(pack);
+  const b64 = btoa(unescape(encodeURIComponent(raw)));
+  document.getElementById('syncPack').value = 'FLW1.' + b64;
+  document.getElementById('syncStatus').textContent = 'Pack ready · ' + Math.round(b64.length/1024) + ' KB · Copy and open this page on the other device';
+  document.getElementById('syncStatus').className = 'status ok';
+}
+
+function copySyncPack() {
+  const el = document.getElementById('syncPack');
+  if (!el.value) makeSyncPack();
+  el.select();
+  navigator.clipboard.writeText(el.value).then(() => {
+    document.getElementById('syncStatus').textContent = 'Copied to clipboard';
+    document.getElementById('syncStatus').className = 'status ok';
+  }).catch(() => {
+    document.getElementById('syncStatus').textContent = 'Copy failed — select the pack and copy manually';
+  });
+}
+
+function applySyncPack() {
+  let text = (document.getElementById('syncPack').value || '').trim();
+  if (!text) return alert('Paste a sync pack first');
+  try {
+    if (text.startsWith('FLW1.')) {
+      text = decodeURIComponent(escape(atob(text.slice(5))));
+    }
+    const pack = JSON.parse(text);
+    const incoming = pack.data || pack;
+    if (!incoming || typeof incoming !== 'object') throw new Error('bad shape');
+    if (!confirm('Replace ALL workbook data on this device with the pack?')) return;
+    data = Object.assign(defaultData(), incoming);
+    data.phase = Object.assign({gates:{}}, data.phase||{});
+    data.weekly = Object.assign({must:{}}, data.weekly||{});
+    data.habits = Object.assign({h1:[],h2:[],h3:[]}, data.habits||{});
+    save();
+    location.reload();
+  } catch (e) {
+    alert('Could not read pack. Check you copied the full FLW1... string or a JSON backup.');
+  }
+}
+
+function clearAllData() {
+  if (!confirm('Clear all workbook data on THIS device only?')) return;
+  if (!confirm('Really clear? Export a backup first if unsure.')) return;
+  localStorage.removeItem(KEY);
+  location.reload();
+}
+
+
+// init
+buildNav();
+bindFields();
+renderInstall();
+renderGates();
+renderWeeklyMust();
+renderHabitGrid('h1grid','h1');
+renderHabitGrid('h2grid','h2');
+renderHabitGrid('h3grid','h3');
+renderScDomains();
+if (!data.profile.updated) {
+  // set today on first run display only
+}
+document.getElementById('footerStatus').textContent = 'Loaded · autosave on';
+</script>
+</body>
+</html>
