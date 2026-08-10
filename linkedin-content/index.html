@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex,nofollow,noarchive" />
+<meta name="theme-color" content="#0B1D30" />
+<title>LinkedIn Content OS — Scorecard</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --navy: #0B1D30;
+    --navy-mid: #152A42;
+    --navy-light: #1D3A57;
+    --gold: #C4903A;
+    --gold-dim: #8B6422;
+    --cream: #F7F3ED;
+    --cream-2: #EFE8DC;
+    --ink: #1a1a1a;
+    --muted: #6B7280;
+    --ok: #1B5E35;
+    --warn: #9A6B12;
+    --bad: #9B2226;
+    --card: #ffffff;
+    --line: rgba(11,29,48,0.10);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', system-ui, sans-serif;
+    background: linear-gradient(160deg, #0B1D30 0%, #152A42 40%, #1a2740 100%);
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 28px 20px 60px;
+  }
+  .wrap { max-width: 1280px; margin: 0 auto; }
+  header {
+    display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px;
+    align-items: flex-end; margin-bottom: 22px; color: #fff;
+  }
+  header h1 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 400; font-size: 30px; letter-spacing: 0.2px;
+  }
+  header h1 em { color: var(--gold); font-style: italic; }
+  header .sub { color: rgba(255,255,255,0.55); font-size: 13px; margin-top: 6px; max-width: 560px; line-height: 1.45; }
+  .header-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+  button, .btn {
+    font-family: inherit; font-size: 13px; font-weight: 500;
+    border: 1px solid rgba(196,144,58,0.45); background: rgba(196,144,58,0.12);
+    color: #F7F3ED; padding: 9px 14px; border-radius: 4px; cursor: pointer;
+  }
+  button:hover, .btn:hover { background: rgba(196,144,58,0.22); }
+  button.primary { background: var(--gold); color: var(--navy); border-color: var(--gold); font-weight: 600; }
+  button.ghost { background: transparent; border-color: rgba(255,255,255,0.18); }
+  button.danger { border-color: rgba(155,34,38,0.5); color: #f2c4c6; background: rgba(155,34,38,0.12); }
+
+  .tabs {
+    display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 18px;
+  }
+  .tab {
+    background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.10);
+    color: rgba(255,255,255,0.7); padding: 8px 14px; border-radius: 999px; cursor: pointer; font-size: 13px;
+  }
+  .tab.active { background: var(--gold); color: var(--navy); border-color: var(--gold); font-weight: 600; }
+
+  .panel { display: none; }
+  .panel.active { display: block; }
+
+  .grid { display: grid; gap: 14px; }
+  .grid-4 { grid-template-columns: repeat(4, minmax(0,1fr)); }
+  .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+  .grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+  @media (max-width: 980px) {
+    .grid-4, .grid-3, .grid-2 { grid-template-columns: 1fr; }
+  }
+
+  .card {
+    background: var(--cream); border-radius: 10px; padding: 18px 18px 16px;
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.18);
+  }
+  .card h2 {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 18px; font-weight: 400; color: var(--navy); margin-bottom: 12px;
+  }
+  .card h3 { font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 8px; font-weight: 600; }
+  .kpi {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-size: 34px; color: var(--navy); line-height: 1;
+  }
+  .kpi small { display: block; font-family: 'DM Sans', sans-serif; font-size: 12px; color: var(--muted); margin-top: 6px; font-weight: 400; }
+  .muted { color: var(--muted); font-size: 13px; line-height: 1.45; }
+
+  .pillars { display: flex; flex-direction: column; gap: 10px; }
+  .pillar-row { display: grid; grid-template-columns: 150px 1fr 36px; gap: 10px; align-items: center; }
+  .pillar-row .label { font-size: 13px; color: var(--navy); }
+  .bar {
+    height: 10px; background: var(--cream-2); border-radius: 999px; overflow: hidden;
+  }
+  .bar > span { display: block; height: 100%; border-radius: 999px; min-width: 0; }
+  .count { font-size: 13px; color: var(--muted); text-align: right; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { text-align: left; padding: 10px 8px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { color: var(--gold-dim); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; font-weight: 600; }
+  tr:hover td { background: rgba(196,144,58,0.06); }
+  .status {
+    display: inline-block; padding: 3px 8px; border-radius: 999px; font-size: 11px; font-weight: 600;
+    letter-spacing: 0.3px; text-transform: uppercase;
+  }
+  .status.ready { background: #E8F0FE; color: #1D4ED8; }
+  .status.scheduled { background: #FEF3C7; color: #92400E; }
+  .status.published { background: #DCFCE7; color: #166534; }
+  .status.draft { background: #F3F4F6; color: #4B5563; }
+  .status.killed { background: #FEE2E2; color: #991B1B; }
+
+  .badge {
+    display: inline-block; padding: 2px 7px; border-radius: 4px; font-size: 11px;
+    background: rgba(11,29,48,0.08); color: var(--navy); margin-right: 4px; margin-bottom: 2px;
+  }
+  .hook { color: var(--muted); font-size: 12px; max-width: 360px; }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  @media (max-width: 800px) { .form-grid { grid-template-columns: 1fr; } }
+  label { display: block; font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--gold-dim); margin-bottom: 5px; font-weight: 600; }
+  input, select, textarea {
+    width: 100%; border: 1px solid var(--line); background: #fff; border-radius: 4px;
+    padding: 9px 10px; font-family: inherit; font-size: 13px; color: var(--navy);
+  }
+  textarea { min-height: 72px; resize: vertical; }
+  .full { grid-column: 1 / -1; }
+  .row-actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 8px; }
+
+  .score { font-weight: 600; }
+  .score.good { color: var(--ok); }
+  .score.mid { color: var(--warn); }
+  .score.low { color: var(--bad); }
+  .score.na { color: var(--muted); font-weight: 400; }
+
+  .calendar { display: grid; gap: 10px; }
+  .cal-item {
+    display: grid; grid-template-columns: 110px 1fr auto; gap: 12px; align-items: start;
+    padding: 12px; background: #fff; border-radius: 8px; border: 1px solid var(--line);
+  }
+  .cal-date { font-weight: 600; color: var(--navy); font-size: 13px; }
+  .cal-meta { font-size: 12px; color: var(--muted); margin-top: 4px; }
+
+  .playbook p { font-size: 13px; color: var(--navy); line-height: 1.55; margin-bottom: 8px; }
+  .playbook ul { margin: 0 0 12px 18px; color: var(--navy); font-size: 13px; line-height: 1.5; }
+  .ban { color: var(--bad); }
+  .okline { color: var(--ok); }
+
+  .toast {
+    position: fixed; bottom: 20px; right: 20px; background: var(--navy); color: #fff;
+    padding: 12px 16px; border-radius: 6px; border-left: 3px solid var(--gold);
+    display: none; z-index: 50; font-size: 13px; max-width: 320px;
+  }
+  .toast.show { display: block; }
+  .empty { color: var(--muted); font-size: 13px; padding: 12px 0; }
+  .split { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-bottom: 12px; }
+  .tiny { font-size: 11px; color: var(--muted); }
+  a.link { color: var(--gold-dim); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div>
+      <h1>LinkedIn Content OS <em>Scorecard</em></h1>
+      <div class="sub">Wave posts, five pillars, quality vs effectiveness. Browser saves locally; Export JSON to keep the repo seed current. Live: cavarjj-dev.github.io/USIBizDev/linkedin-content/ · KPI: humans moved.</div>
+    </div>
+    <div class="header-actions">
+      <button class="ghost" id="btnImport">Import JSON</button>
+      <button class="ghost" id="btnExport">Export JSON</button>
+      <button class="ghost" id="btnResetSeed">Reload seed file data</button>
+      <button class="primary" id="btnAdd">Add / edit post</button>
+      <input type="file" id="fileImport" accept="application/json,.json" hidden />
+    </div>
+  </header>
+
+  <div class="tabs" id="tabs">
+    <button class="tab active" data-tab="overview">Overview</button>
+    <button class="tab" data-tab="calendar">Publish cycle</button>
+    <button class="tab" data-tab="log">Post log</button>
+    <button class="tab" data-tab="score">Scorecards</button>
+    <button class="tab" data-tab="edit">Editor</button>
+    <button class="tab" data-tab="playbook">Playbook</button>
+  </div>
+
+  <!-- OVERVIEW -->
+  <section class="panel active" id="tab-overview">
+    <div class="grid grid-4" style="margin-bottom:14px">
+      <div class="card"><h3>Ready to ship</h3><div class="kpi" id="kpiReady">0</div><small>status = ready</small></div>
+      <div class="card"><h3>Published</h3><div class="kpi" id="kpiPublished">0</div><small>in log</small></div>
+      <div class="card"><h3>Avg quality</h3><div class="kpi" id="kpiQuality">—</div><small>believable + essence bar: 6 / 8</small></div>
+      <div class="card"><h3>Inbound flags</h3><div class="kpi" id="kpiInbound">0</div><small>serious conversations</small></div>
+    </div>
+    <div class="grid grid-2">
+      <div class="card">
+        <h2>Game of five — pillar coverage</h2>
+        <div class="pillars" id="pillarBars"></div>
+        <p class="muted" style="margin-top:12px">Target: each pillar at least once per wave.</p>
+      </div>
+      <div class="card">
+        <h2>Audience + funnel mix</h2>
+        <div id="audienceMix" class="pillars"></div>
+        <div style="height:14px"></div>
+        <div id="funnelMix" class="pillars"></div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:14px">
+      <h2>Next up</h2>
+      <div id="nextUp" class="calendar"></div>
+    </div>
+  </section>
+
+  <!-- CALENDAR -->
+  <section class="panel" id="tab-calendar">
+    <div class="card">
+      <h2>Publish cycle</h2>
+      <p class="muted" style="margin-bottom:14px">Mon Room · Wed Bridge/Thinking · Fri Signal/Contrarian · Tue/Thu engage. Monthly one BOF.</p>
+      <div id="calendarList" class="calendar"></div>
+    </div>
+  </section>
+
+  <!-- LOG -->
+  <section class="panel" id="tab-log">
+    <div class="card">
+      <div class="split">
+        <h2 style="margin:0">Post log</h2>
+        <span class="tiny" id="logMeta"></span>
+      </div>
+      <div style="overflow-x:auto">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Title</th>
+              <th>Type</th>
+              <th>Pillar</th>
+              <th>Audience</th>
+              <th>Funnel</th>
+              <th>Status</th>
+              <th>Quality</th>
+              <th>Eng %</th>
+              <th>Inbound</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="logBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCORE -->
+  <section class="panel" id="tab-score">
+    <div class="grid grid-2">
+      <div class="card">
+        <h2>Quality dimensions (published / scored)</h2>
+        <div id="qualityBars" class="pillars"></div>
+        <p class="muted" style="margin-top:12px">Ship bar: Believable ≥ 6 and Essence ≥ 8.</p>
+      </div>
+      <div class="card">
+        <h2>Effectiveness (day-7 style)</h2>
+        <div style="overflow-x:auto">
+          <table>
+            <thead>
+              <tr>
+                <th>Post</th>
+                <th>Impr.</th>
+                <th>React</th>
+                <th>Comm</th>
+                <th>Eng%</th>
+                <th>CQ</th>
+                <th>Inb</th>
+              </tr>
+            </thead>
+            <tbody id="effBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDIT -->
+  <section class="panel" id="tab-edit">
+    <div class="card">
+      <h2 id="editTitle">Add / edit post</h2>
+      <form id="postForm" class="form-grid">
+        <input type="hidden" id="f_id" />
+        <div>
+          <label>Title</label>
+          <input id="f_title" required placeholder="Short internal title" />
+        </div>
+        <div>
+          <label>Type</label>
+          <select id="f_type"></select>
+        </div>
+        <div>
+          <label>Pillar</label>
+          <select id="f_pillar"></select>
+        </div>
+        <div>
+          <label>Funnel</label>
+          <select id="f_funnel">
+            <option>TOF</option><option>MOF</option><option>BOF</option>
+          </select>
+        </div>
+        <div>
+          <label>Status</label>
+          <select id="f_status">
+            <option value="draft">draft</option>
+            <option value="ready">ready</option>
+            <option value="scheduled">scheduled</option>
+            <option value="published">published</option>
+            <option value="killed">killed</option>
+          </select>
+        </div>
+        <div>
+          <label>Wave</label>
+          <input id="f_wave" placeholder="2" />
+        </div>
+        <div>
+          <label>Planned date</label>
+          <input id="f_planned" type="date" />
+        </div>
+        <div>
+          <label>Published date</label>
+          <input id="f_published" type="date" />
+        </div>
+        <div class="full">
+          <label>Audiences (hold Ctrl/Cmd for multi)</label>
+          <select id="f_audiences" multiple size="4"></select>
+        </div>
+        <div class="full">
+          <label>Hook (first line)</label>
+          <input id="f_hook" />
+        </div>
+        <div class="full">
+          <label>Source file / note</label>
+          <input id="f_source" placeholder="linkedin-posts-market-wave2.md#post-1" />
+        </div>
+        <div class="full">
+          <label>Notes</label>
+          <textarea id="f_notes"></textarea>
+        </div>
+
+        <div class="full"><h3 style="margin:8px 0 0">Quality (1–10) — score same day as publish</h3></div>
+        <div><label>Believable</label><input id="f_q_believable" type="number" min="1" max="10" step="0.5" /></div>
+        <div><label>Essence</label><input id="f_q_essence" type="number" min="1" max="10" step="0.5" /></div>
+        <div><label>Clarity</label><input id="f_q_clarity" type="number" min="1" max="10" step="0.5" /></div>
+        <div><label>Specificity</label><input id="f_q_specificity" type="number" min="1" max="10" step="0.5" /></div>
+        <div><label>Market fit</label><input id="f_q_market" type="number" min="1" max="10" step="0.5" /></div>
+        <div><label>Attract</label><input id="f_q_attract" type="number" min="1" max="10" step="0.5" /></div>
+
+        <div class="full"><h3 style="margin:8px 0 0">Effectiveness — day 7 / 28 from LinkedIn stats</h3></div>
+        <div><label>Impressions</label><input id="f_m_impr" type="number" min="0" /></div>
+        <div><label>Reactions</label><input id="f_m_react" type="number" min="0" /></div>
+        <div><label>Comments</label><input id="f_m_comm" type="number" min="0" /></div>
+        <div><label>Reposts</label><input id="f_m_repost" type="number" min="0" /></div>
+        <div><label>Saves</label><input id="f_m_saves" type="number" min="0" /></div>
+        <div><label>Comment quality 1–5</label><input id="f_m_cq" type="number" min="1" max="5" step="1" /></div>
+        <div>
+          <label>Inbound?</label>
+          <select id="f_m_inbound"><option value="false">no</option><option value="true">yes</option></select>
+        </div>
+        <div><label>Inbound note</label><input id="f_m_inbound_note" /></div>
+        <div class="full"><label>Profile views note</label><input id="f_m_profile" /></div>
+        <div>
+          <label>Day 7 done</label>
+          <select id="f_m_d7"><option value="false">no</option><option value="true">yes</option></select>
+        </div>
+        <div>
+          <label>Day 28 done</label>
+          <select id="f_m_d28"><option value="false">no</option><option value="true">yes</option></select>
+        </div>
+
+        <div class="full row-actions">
+          <button type="submit" class="primary">Save post</button>
+          <button type="button" class="ghost" id="btnNew">Clear form (new)</button>
+          <button type="button" class="danger" id="btnDelete">Delete post</button>
+        </div>
+      </form>
+      <p class="tiny" style="margin-top:12px">Edits save to this browser (localStorage). Use Export JSON and overwrite <code>HQ/comms/linkedin-content-log.json</code> to keep a durable file backup.</p>
+    </div>
+  </section>
+
+  <!-- PLAYBOOK -->
+  <section class="panel" id="tab-playbook">
+    <div class="grid grid-2">
+      <div class="card playbook">
+        <h2>Ship checklist</h2>
+        <ul>
+          <li>No em dashes</li>
+          <li>Light contractions OK on LI only</li>
+          <li>~130–180 words default</li>
+          <li>Two of four: process, stake, bridge, unfinished edge</li>
+          <li>No techno chassis / no propositional cascade</li>
+          <li>End on claim or residue, not bait Q</li>
+          <li>No photo of Jules</li>
+          <li>Kitchen table test</li>
+        </ul>
+        <p class="ban">Stop: tip lists, humbled/excited opens, platform dunks, fee autobiography, batch-dump without scoring.</p>
+      </div>
+      <div class="card playbook">
+        <h2>Where the copy lives</h2>
+        <p><strong>Wave 2 posts:</strong> <code>HQ/comms/linkedin-posts-market-wave2.md</code></p>
+        <p><strong>Content OS:</strong> <code>HQ/strategy/linkedin-content-os.md</code></p>
+        <p><strong>Log seed:</strong> <code>HQ/comms/linkedin-content-log.json</code></p>
+        <p><strong>Voice:</strong> <code>HQ/strategy/linkedin-lived-voice-calibration.md</code></p>
+        <p class="okline">Rhythm: Mon Room · Wed Bridge/Thinking · Fri Signal · Tue/Thu engage · monthly BOF.</p>
+        <p class="muted">Primary business metric is inbound conversation, not likes.</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const STORAGE_KEY = 'usi_li_content_log_v1';
+const SEED_URL = 'linkedin-content-log.json';
+
+const DEFAULT_SEED = {
+  version: 1,
+  updated: new Date().toISOString().slice(0,10),
+  owner: 'Julian C. Johnson',
+  wave: 'market-wave-2',
+  pillars: [
+    {id:'room', label:'Room truth', color:'#2563EB'},
+    {id:'market', label:'Market sort', color:'#C4903A'},
+    {id:'bridge', label:'Operator bridge', color:'#7C3AED'},
+    {id:'whole', label:'Whole-person / integration', color:'#059669'},
+    {id:'discern', label:'Discernment / wrong layer', color:'#DC2626'}
+  ],
+  audiences: [
+    {id:'L', label:'Senior leaders'},
+    {id:'S', label:'Sponsors (CHRO/CLO/LD)'},
+    {id:'P', label:'Peers / PD / faculty'},
+    {id:'B', label:'Budget-ready (BOF)'}
+  ],
+  types: ['In the Room','Thinking Out Loud','Bridge','Contrarian','Signal','BOF Room'],
+  funnels: ['TOF','MOF','BOF'],
+  posts: []
+};
+
+let state = null;
+
+function toast(msg) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 2600);
+}
+
+function saveLocal() {
+  state.updated = new Date().toISOString().slice(0,10);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+function loadLocal() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch (e) { return null; }
+}
+
+async function loadSeedFile() {
+  try {
+    const res = await fetch(SEED_URL + '?t=' + Date.now());
+    if (!res.ok) throw new Error('no seed');
+    return await res.json();
+  } catch (e) {
+    return null;
+  }
+}
+
+function pillarById(id) {
+  return (state.pillars || []).find(p => p.id === id) || {id, label:id, color:'#999'};
+}
+function audLabel(id) {
+  const a = (state.audiences || []).find(x => x.id === id);
+  return a ? a.label : id;
+}
+
+function avg(nums) {
+  const v = nums.filter(n => typeof n === 'number' && !Number.isNaN(n));
+  if (!v.length) return null;
+  return v.reduce((a,b)=>a+b,0) / v.length;
+}
+
+function qualityAvg(q) {
+  if (!q) return null;
+  return avg([q.believable, q.essence, q.clarity, q.specificity, q.market_fit, q.attract]);
+}
+
+function engRate(m) {
+  if (!m || !m.impressions) return null;
+  const eng = (m.reactions||0) + (m.comments||0) + (m.reposts||0);
+  return (eng / m.impressions) * 100;
+}
+
+function scoreClass(n, good=7, mid=5) {
+  if (n == null) return 'na';
+  if (n >= good) return 'good';
+  if (n >= mid) return 'mid';
+  return 'low';
+}
+
+function fmtNum(n) {
+  if (n == null || n === '') return '—';
+  return Number(n).toLocaleString();
+}
+
+function fmtPct(n) {
+  if (n == null) return '—';
+  return n.toFixed(2) + '%';
+}
+
+function sortPosts(posts) {
+  return [...posts].sort((a,b) => {
+    const da = a.planned_date || a.published_date || '';
+    const db = b.planned_date || b.published_date || '';
+    return da.localeCompare(db);
+  });
+}
+
+function renderKpis() {
+  const posts = state.posts || [];
+  document.getElementById('kpiReady').textContent = posts.filter(p => p.status === 'ready').length;
+  document.getElementById('kpiPublished').textContent = posts.filter(p => p.status === 'published').length;
+  const qavgs = posts.map(p => qualityAvg(p.quality)).filter(x => x != null);
+  document.getElementById('kpiQuality').textContent = qavgs.length ? avg(qavgs).toFixed(1) : '—';
+  document.getElementById('kpiInbound').textContent = posts.filter(p => p.metrics && p.metrics.inbound).length;
+}
+
+function renderBarList(el, rows) {
+  el.innerHTML = rows.map(r => `
+    <div class="pillar-row">
+      <div class="label">${r.label}</div>
+      <div class="bar"><span style="width:${r.pct}%;background:${r.color}"></span></div>
+      <div class="count">${r.count}</div>
+    </div>
+  `).join('') || '<div class="empty">No data yet.</div>';
+}
+
+function renderPillars() {
+  const posts = state.posts || [];
+  const max = Math.max(1, ...state.pillars.map(p => posts.filter(x => x.pillar === p.id).length));
+  const rows = state.pillars.map(p => {
+    const count = posts.filter(x => x.pillar === p.id).length;
+    return {label: p.label, count, pct: Math.round((count/max)*100), color: p.color};
+  });
+  renderBarList(document.getElementById('pillarBars'), rows);
+}
+
+function renderMix() {
+  const posts = state.posts || [];
+  const audCounts = {};
+  posts.forEach(p => (p.audiences||[]).forEach(a => audCounts[a] = (audCounts[a]||0)+1));
+  const amax = Math.max(1, ...Object.values(audCounts), 1);
+  renderBarList(document.getElementById('audienceMix'), (state.audiences||[]).map(a => ({
+    label: a.label, count: audCounts[a.id]||0,
+    pct: Math.round(((audCounts[a.id]||0)/amax)*100), color: '#0B1D30'
+  })));
+
+  const fCounts = {TOF:0,MOF:0,BOF:0};
+  posts.forEach(p => { if (fCounts[p.funnel] != null) fCounts[p.funnel]++; });
+  const fmax = Math.max(1, fCounts.TOF, fCounts.MOF, fCounts.BOF);
+  renderBarList(document.getElementById('funnelMix'), [
+    {label:'TOF', count:fCounts.TOF, pct:Math.round((fCounts.TOF/fmax)*100), color:'#C4903A'},
+    {label:'MOF', count:fCounts.MOF, pct:Math.round((fCounts.MOF/fmax)*100), color:'#152A42'},
+    {label:'BOF', count:fCounts.BOF, pct:Math.round((fCounts.BOF/fmax)*100), color:'#059669'}
+  ]);
+}
+
+function calItem(p) {
+  const pil = pillarById(p.pillar);
+  const date = p.planned_date || p.published_date || 'TBD';
+  return `
+    <div class="cal-item">
+      <div class="cal-date">${date}<div class="cal-meta">${p.status}</div></div>
+      <div>
+        <strong>${escapeHtml(p.title||'Untitled')}</strong>
+        <div class="cal-meta">${escapeHtml(p.type||'')} · ${escapeHtml(pil.label)} · ${escapeHtml(p.funnel||'')}</div>
+        <div class="hook">${escapeHtml(p.hook||'')}</div>
+      </div>
+      <div><span class="status ${p.status||'draft'}">${p.status||'draft'}</span></div>
+    </div>`;
+}
+
+function renderNextUp() {
+  const upcoming = sortPosts(state.posts || [])
+    .filter(p => p.status === 'ready' || p.status === 'scheduled')
+    .slice(0, 5);
+  document.getElementById('nextUp').innerHTML = upcoming.map(calItem).join('') || '<div class="empty">Nothing queued. Add posts in Editor.</div>';
+}
+
+function renderCalendar() {
+  const list = sortPosts(state.posts || []).filter(p => p.status !== 'killed');
+  document.getElementById('calendarList').innerHTML = list.map(calItem).join('') || '<div class="empty">No posts in cycle.</div>';
+}
+
+function renderLog() {
+  const body = document.getElementById('logBody');
+  const posts = sortPosts(state.posts || []);
+  document.getElementById('logMeta').textContent = `${posts.length} posts · updated ${state.updated||'—'}`;
+  body.innerHTML = posts.map(p => {
+    const qa = qualityAvg(p.quality);
+    const er = engRate(p.metrics);
+    const pil = pillarById(p.pillar);
+    return `<tr>
+      <td>${p.published_date || p.planned_date || '—'}</td>
+      <td><strong>${escapeHtml(p.title||'')}</strong><div class="hook">${escapeHtml(p.hook||'')}</div></td>
+      <td>${escapeHtml(p.type||'')}</td>
+      <td><span class="badge" style="border-left:3px solid ${pil.color}">${escapeHtml(pil.label)}</span></td>
+      <td>${(p.audiences||[]).map(a=>`<span class="badge">${escapeHtml(a)}</span>`).join('')}</td>
+      <td>${escapeHtml(p.funnel||'')}</td>
+      <td><span class="status ${p.status||'draft'}">${p.status||'draft'}</span></td>
+      <td class="score ${scoreClass(qa)}">${qa==null?'—':qa.toFixed(1)}</td>
+      <td>${fmtPct(er)}</td>
+      <td>${p.metrics && p.metrics.inbound ? 'YES' : '—'}</td>
+      <td><button type="button" data-edit="${p.id}">Edit</button></td>
+    </tr>`;
+  }).join('') || `<tr><td colspan="11" class="empty">No posts yet.</td></tr>`;
+
+  body.querySelectorAll('button[data-edit]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      openEdit(btn.getAttribute('data-edit'));
+      activateTab('edit');
+    });
+  });
+}
+
+function renderScores() {
+  const dims = ['believable','essence','clarity','specificity','market_fit','attract'];
+  const labels = {
+    believable:'Believable', essence:'Essence', clarity:'Clarity',
+    specificity:'Specificity', market_fit:'Market fit', attract:'Attract'
+  };
+  const scored = (state.posts||[]).filter(p => qualityAvg(p.quality) != null);
+  const rows = dims.map(d => {
+    const vals = scored.map(p => p.quality[d]).filter(v => typeof v === 'number');
+    const a = avg(vals);
+    return {
+      label: labels[d],
+      count: a == null ? '—' : a.toFixed(1),
+      pct: a == null ? 0 : Math.round((a/10)*100),
+      color: d === 'believable' || d === 'essence' ? '#C4903A' : '#0B1D30'
+    };
+  });
+  renderBarList(document.getElementById('qualityBars'), rows);
+
+  const eff = (state.posts||[]).filter(p => p.status === 'published' || (p.metrics && (p.metrics.impressions || p.metrics.comments)));
+  document.getElementById('effBody').innerHTML = eff.map(p => {
+    const m = p.metrics || {};
+    return `<tr>
+      <td>${escapeHtml(p.title||'')}</td>
+      <td>${fmtNum(m.impressions)}</td>
+      <td>${fmtNum(m.reactions)}</td>
+      <td>${fmtNum(m.comments)}</td>
+      <td>${fmtPct(engRate(m))}</td>
+      <td>${m.comment_quality_1to5 ?? '—'}</td>
+      <td>${m.inbound ? 'Y' : '—'}</td>
+    </tr>`;
+  }).join('') || `<tr><td colspan="7" class="empty">No effectiveness data yet. Publish, then log day-7 stats.</td></tr>`;
+}
+
+function fillSelects() {
+  const type = document.getElementById('f_type');
+  type.innerHTML = (state.types||[]).map(t => `<option value="${t}">${t}</option>`).join('');
+  const pillar = document.getElementById('f_pillar');
+  pillar.innerHTML = (state.pillars||[]).map(p => `<option value="${p.id}">${p.label}</option>`).join('');
+  const aud = document.getElementById('f_audiences');
+  aud.innerHTML = (state.audiences||[]).map(a => `<option value="${a.id}">${a.id} — ${a.label}</option>`).join('');
+}
+
+function numOrNull(v) {
+  if (v === '' || v == null) return null;
+  const n = Number(v);
+  return Number.isNaN(n) ? null : n;
+}
+
+function clearForm() {
+  document.getElementById('editTitle').textContent = 'Add post';
+  document.getElementById('f_id').value = '';
+  document.getElementById('postForm').reset();
+  document.getElementById('f_status').value = 'ready';
+  document.getElementById('f_wave').value = state.wave ? String(state.wave).replace(/\D/g,'') || '2' : '2';
+}
+
+function openEdit(id) {
+  const p = (state.posts||[]).find(x => x.id === id);
+  if (!p) return;
+  document.getElementById('editTitle').textContent = 'Edit post';
+  document.getElementById('f_id').value = p.id;
+  document.getElementById('f_title').value = p.title || '';
+  document.getElementById('f_type').value = p.type || state.types[0];
+  document.getElementById('f_pillar').value = p.pillar || 'room';
+  document.getElementById('f_funnel').value = p.funnel || 'TOF';
+  document.getElementById('f_status').value = p.status || 'draft';
+  document.getElementById('f_wave').value = p.wave || '';
+  document.getElementById('f_planned').value = p.planned_date || '';
+  document.getElementById('f_published').value = p.published_date || '';
+  document.getElementById('f_hook').value = p.hook || '';
+  document.getElementById('f_source').value = p.source_file || '';
+  document.getElementById('f_notes').value = p.notes || '';
+  [...document.getElementById('f_audiences').options].forEach(o => {
+    o.selected = (p.audiences||[]).includes(o.value);
+  });
+  const q = p.quality || {};
+  document.getElementById('f_q_believable').value = q.believable ?? '';
+  document.getElementById('f_q_essence').value = q.essence ?? '';
+  document.getElementById('f_q_clarity').value = q.clarity ?? '';
+  document.getElementById('f_q_specificity').value = q.specificity ?? '';
+  document.getElementById('f_q_market').value = q.market_fit ?? '';
+  document.getElementById('f_q_attract').value = q.attract ?? '';
+  const m = p.metrics || {};
+  document.getElementById('f_m_impr').value = m.impressions ?? '';
+  document.getElementById('f_m_react').value = m.reactions ?? '';
+  document.getElementById('f_m_comm').value = m.comments ?? '';
+  document.getElementById('f_m_repost').value = m.reposts ?? '';
+  document.getElementById('f_m_saves').value = m.saves ?? '';
+  document.getElementById('f_m_cq').value = m.comment_quality_1to5 ?? '';
+  document.getElementById('f_m_inbound').value = m.inbound ? 'true' : 'false';
+  document.getElementById('f_m_inbound_note').value = m.inbound_note || '';
+  document.getElementById('f_m_profile').value = m.profile_views_note || '';
+  document.getElementById('f_m_d7').value = m.day7_done ? 'true' : 'false';
+  document.getElementById('f_m_d28').value = m.day28_done ? 'true' : 'false';
+}
+
+function collectForm() {
+  const id = document.getElementById('f_id').value || ('p-' + Date.now().toString(36));
+  const audiences = [...document.getElementById('f_audiences').selectedOptions].map(o => o.value);
+  return {
+    id,
+    wave: document.getElementById('f_wave').value || '',
+    title: document.getElementById('f_title').value.trim(),
+    type: document.getElementById('f_type').value,
+    pillar: document.getElementById('f_pillar').value,
+    audiences,
+    funnel: document.getElementById('f_funnel').value,
+    status: document.getElementById('f_status').value,
+    planned_date: document.getElementById('f_planned').value,
+    published_date: document.getElementById('f_published').value,
+    source_file: document.getElementById('f_source').value.trim(),
+    hook: document.getElementById('f_hook').value.trim(),
+    hashtags: [],
+    visual: 'text',
+    quality: {
+      believable: numOrNull(document.getElementById('f_q_believable').value),
+      essence: numOrNull(document.getElementById('f_q_essence').value),
+      clarity: numOrNull(document.getElementById('f_q_clarity').value),
+      specificity: numOrNull(document.getElementById('f_q_specificity').value),
+      market_fit: numOrNull(document.getElementById('f_q_market').value),
+      attract: numOrNull(document.getElementById('f_q_attract').value)
+    },
+    metrics: {
+      impressions: numOrNull(document.getElementById('f_m_impr').value),
+      reactions: numOrNull(document.getElementById('f_m_react').value),
+      comments: numOrNull(document.getElementById('f_m_comm').value),
+      reposts: numOrNull(document.getElementById('f_m_repost').value),
+      saves: numOrNull(document.getElementById('f_m_saves').value),
+      profile_views_note: document.getElementById('f_m_profile').value.trim(),
+      inbound: document.getElementById('f_m_inbound').value === 'true',
+      inbound_note: document.getElementById('f_m_inbound_note').value.trim(),
+      comment_quality_1to5: numOrNull(document.getElementById('f_m_cq').value),
+      day7_done: document.getElementById('f_m_d7').value === 'true',
+      day28_done: document.getElementById('f_m_d28').value === 'true'
+    },
+    notes: document.getElementById('f_notes').value.trim()
+  };
+}
+
+function renderAll() {
+  fillSelects();
+  renderKpis();
+  renderPillars();
+  renderMix();
+  renderNextUp();
+  renderCalendar();
+  renderLog();
+  renderScores();
+}
+
+function activateTab(name) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.tab === name));
+  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.id === 'tab-' + name));
+}
+
+function escapeHtml(s) {
+  return String(s||'').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function exportJson() {
+  const blob = new Blob([JSON.stringify(state, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `linkedin-content-log-${state.updated||'export'}.json`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast('Exported JSON backup.');
+}
+
+async function init() {
+  const local = loadLocal();
+  const seed = await loadSeedFile();
+  if (local && local.posts && local.posts.length) {
+    state = local;
+    // merge pillar defs from seed if local is old
+    if (seed && seed.pillars) state.pillars = seed.pillars;
+    if (seed && seed.audiences) state.audiences = seed.audiences;
+    if (seed && seed.types) state.types = seed.types;
+  } else if (seed) {
+    state = seed;
+    saveLocal();
+  } else {
+    state = DEFAULT_SEED;
+    saveLocal();
+  }
+  renderAll();
+
+  document.getElementById('tabs').addEventListener('click', (e) => {
+    const t = e.target.closest('.tab');
+    if (!t) return;
+    activateTab(t.dataset.tab);
+  });
+
+  document.getElementById('btnAdd').addEventListener('click', () => {
+    clearForm();
+    activateTab('edit');
+  });
+  document.getElementById('btnNew').addEventListener('click', clearForm);
+  document.getElementById('btnExport').addEventListener('click', exportJson);
+  document.getElementById('btnImport').addEventListener('click', () => document.getElementById('fileImport').click());
+  document.getElementById('fileImport').addEventListener('change', async (e) => {
+    const file = e.target.files && e.target.files[0];
+    if (!file) return;
+    try {
+      const text = await file.text();
+      const data = JSON.parse(text);
+      if (!data.posts) throw new Error('missing posts');
+      state = data;
+      saveLocal();
+      renderAll();
+      toast('Imported JSON into local dashboard.');
+    } catch (err) {
+      toast('Import failed. Need a content-log JSON.');
+    }
+    e.target.value = '';
+  });
+
+  document.getElementById('btnResetSeed').addEventListener('click', async () => {
+    if (!confirm('Reload seed from linkedin-content-log.json and replace local browser data?')) return;
+    const seed2 = await loadSeedFile();
+    if (!seed2) { toast('Could not load seed file. Open this HTML from the comms folder.'); return; }
+    state = seed2;
+    saveLocal();
+    renderAll();
+    toast('Reloaded seed file.');
+  });
+
+  document.getElementById('postForm').addEventListener('submit', (e) => {
+    e.preventDefault();
+    const post = collectForm();
+    if (!post.title) { toast('Title required.'); return; }
+    const idx = (state.posts||[]).findIndex(p => p.id === post.id);
+    if (idx >= 0) state.posts[idx] = {...state.posts[idx], ...post};
+    else {
+      if (!state.posts) state.posts = [];
+      state.posts.push(post);
+    }
+    saveLocal();
+    renderAll();
+    toast('Saved. Export JSON to backup the file on disk.');
+    activateTab('log');
+  });
+
+  document.getElementById('btnDelete').addEventListener('click', () => {
+    const id = document.getElementById('f_id').value;
+    if (!id) return;
+    if (!confirm('Delete this post from the log?')) return;
+    state.posts = (state.posts||[]).filter(p => p.id !== id);
+    saveLocal();
+    clearForm();
+    renderAll();
+    toast('Deleted.');
+  });
+}
+
+init();
+</script>
+</body>
+</html>
