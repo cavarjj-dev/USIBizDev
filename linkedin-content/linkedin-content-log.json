@@ -2,7 +2,7 @@
   "version": 2,
   "updated": "2026-08-12",
   "owner": "Julian C. Johnson",
-  "wave": "market-wave-2-experiential",
+  "wave": "market-wave-2-sn-experiential",
   "pillars": [
     {
       "id": "room",
@@ -70,8 +70,7 @@
       "pillar": "market",
       "audiences": [
         "S",
-        "L",
-        "P"
+        "L"
       ],
       "funnel": "TOF",
       "status": "ready",
@@ -79,13 +78,13 @@
       "published_date": "",
       "source_file": "linkedin-posts-wave2-ship-set.md#post-1",
       "hook": "I left a session last week with that familiar weight in my chest.",
-      "caption": "I left a session last week with that familiar weight in my chest.\n\nNot because the leader was failing. Because what he was carrying would never show up in a product dashboard. Incomplete information. A team frozen in a way no curriculum names cleanly. A life question dressed up as a performance problem. We did real work. None of it would compress into an interaction count.\n\nThen I went home and read the capital story. ADP Ventures into Valence after a pilot past a thousand users and tens of thousands of coaching interactions. Conversation volume starting to look like a product metric. That layer is real. Fluency at scale is a real job. I respect it.\n\nI used to feel pressure to pick a tribe. Scale story or depth story.\n\nI don't anymore. Different jobs. I choose the hours where complexity is the brief, not the obstacle. Whole person. High touch. Movement after truth.\n\nIf you buy or lead above the director line, fund the layer that matches the weight you are actually carrying.\n\n#executivecoaching #leadershipdevelopment #AIcoaching",
-      "first_comment": "Some recent readings going into my thinking here:\n\nADP Ventures invests in Valence (30 Jul 2026):\nhttps://mediacenter.adp.com/adp-ventures-invests-in-valence\n\nHR Executive \u2014 The new coaching stack (4 Mar 2026):\nhttps://hrexecutive.com/the-new-coaching-stack-a-3-tier-model-for-ai-and-human-coaching/\n\nThe rooms came first. These helped me name the split.",
+      "caption": "I left a session last week with that familiar weight in my chest.\n\nNot because the leader was failing. Because what he was carrying would never show up in a product dashboard: incomplete information, a team frozen in a way no curriculum names cleanly, a life question dressed up as a performance problem. We did real work. None of it would compress into an interaction count.\n\nThen I went home and read the capital story. ADP Ventures into Valence. Conversation volume starting to look like a product metric. That layer is real. Fluency at scale is a real job. I respect it.\n\nI used to feel pressure to pick a tribe, scale story or depth story. I don't anymore. Different jobs. I choose the hours where complexity is the brief, not the obstacle.\n\nIf you buy or lead above the director line, fund the layer that matches the weight you are actually carrying.\n\n#executivecoaching #leadershipdevelopment #peoplestrategy",
+      "first_comment": "Some recent readings going into my thinking here:\n\nADP Ventures invests in Valence (30 Jul 2026):\nhttps://mediacenter.adp.com/adp-ventures-invests-in-valence\n\nHR Executive, The new coaching stack (4 Mar 2026):\nhttps://hrexecutive.com/the-new-coaching-stack-a-3-tier-model-for-ai-and-human-coaching/\n\nThe rooms came first. These helped me name the split.",
       "research_fuel": "ADP Ventures to Valence (30 Jul 2026); HR Executive coaching stack. #research market intel 2026-08-06.",
       "hashtags": [
         "executivecoaching",
         "leadershipdevelopment",
-        "AIcoaching"
+        "peoplestrategy"
       ],
       "visual": "text",
       "quality": {
@@ -109,8 +108,8 @@
         "day7_done": false,
         "day28_done": false
       },
-      "notes": "2026-08-12 experiential rewrite. Session residue before capital story.",
-      "mouth_risks": "weight in chest must be true; residual pull toward scale work may need unfinished edge instead of I don't anymore."
+      "notes": "2026-08-12 SN+voice pass: killed cascade, thinned capital, dropped AIcoaching tag, audiences S/L only.",
+      "mouth_risks": "weight in chest must be true; if residual pull toward scale remains, soften I don't anymore."
     },
     {
       "id": "w2-p2",
@@ -128,13 +127,13 @@
       "published_date": "",
       "source_file": "linkedin-posts-wave2-ship-set.md#post-2",
       "hook": "A leader came in with a clean deck and a dirty problem.",
-      "caption": "A leader came in with a clean deck and a dirty problem.\n\nEvery box on the transformation plan was green. Sponsors were getting updates. The team was \"aligned\" in every forum that required a slide. Nothing that mattered was actually moving. You could feel the air in the room get careful when we got near the real issue.\n\nWe didn't fix the deck. We sat with the sentence he had been avoiding: he was performing progress for the system, because real progress would force a conflict he did not want to own yet.\n\nOnce that was named, the work got simpler and harder at the same time. One decision. One conversation. One person who had been protected by the theater.\n\nI read a lot about content, modules, and AI practice reps right now. Some of that is useful. Skill gaps are real.\n\nWhat I care about when I close the laptop after a session is narrower.\n\nDid we produce movement, or evidence of movement?\n\nThose are not the same craft.\n\n#executivecoaching #leadership #change",
+      "caption": "A leader came in with a clean deck and a dirty problem.\n\nEvery box on the transformation plan was green. Sponsors were getting updates. The team was \"aligned\" in every forum that required a slide. Nothing that mattered was actually moving. You could feel the air in the room get careful when we got near the real issue.\n\nWe didn't fix the deck. We sat with the sentence he had been avoiding: he was performing progress for the system, because real progress would force a conflict he did not want to own yet.\n\nOnce that was named, the work got simpler and harder at the same time. The next move was one hard conversation he had been protecting people from having.\n\nI read a lot about content, modules, and AI practice reps right now. Some of that is useful.\n\nWhat I care about when I close the laptop after a session is narrower: did we produce movement, or evidence of movement?\n\nThose are not the same craft.\n\n#executivecoaching #leadership #changemanagement",
       "first_comment": "I keep this next to the market noise on purpose. More on what whole-person work means in practice:\nhttps://unifiedsolutionsinc.com/articles/holistic-coaching-what-it-actually-means",
       "research_fuel": "None required. Optional market rhyme only.",
       "hashtags": [
         "executivecoaching",
         "leadership",
-        "change"
+        "changemanagement"
       ],
       "visual": "text",
       "quality": {
@@ -158,8 +157,8 @@
         "day7_done": false,
         "day28_done": false
       },
-      "notes": "Movement not theater. Sensory air beat added 2026-08-12.",
-      "mouth_risks": "Keep anonymization generic unless one industry-agnostic texture detail helps. Do not stack theater three times same week."
+      "notes": "2026-08-12 SN+voice: killed One decision cascade; one hard conversation instead.",
+      "mouth_risks": "Keep anonymization generic. Do not stack theater three times same week."
     },
     {
       "id": "w2-p3",
@@ -177,7 +176,7 @@
       "published_date": "",
       "source_file": "linkedin-posts-wave2-ship-set.md#post-3",
       "hook": "When I was leading teams inside Fortune 500 transformations, the plan was rarely what kept me up.",
-      "caption": "When I was leading teams inside Fortune 500 transformations, the plan was rarely what kept me up.\n\nWhat kept me up was whether the work would hold when a real customer, peer, or sponsor pushed back on a Friday afternoon. Pretty problem statements died in those rooms. So did clever frameworks that looked sharp on Tuesday and folded by week's end.\n\nI still coach for that test.\n\nWith leaders and cohorts now, we push past theory into application: clear problem and solution statements, decision quality, operating metrics, risk and gaps. I read the room fast, challenge what is avoided, and keep checking whether the session is hitting the real goal. Then we adjust. Gut still has a job when the playbook stops matching the people in front of me.\n\nHome taught me the same thing quieter. Attention is finite. If I give the polished version of myself to work and the leftovers to the people I love, both places feel it.\n\nI don't coach the title. I coach the whole person who showed up, because that is who has to execute when the room gets sharp.\n\n#leadership #executivecoaching #wholeperson",
+      "caption": "When I was leading teams inside Fortune 500 transformations, the plan was rarely what kept me up.\n\nWhat kept me up was whether the work would hold when a real customer, peer, or sponsor pushed back on a Friday afternoon. Pretty problem statements died in those rooms. So did clever frameworks that looked sharp on Tuesday and folded by week's end.\n\nI still coach for that test.\n\nIn the room now I am less interested in whether the language sounds sharp and more interested in whether the decision still stands when someone important pushes. Gut still has a job when the playbook stops matching the people in front of me.\n\nHome taught me the same thing quieter. Attention is finite. If I give the polished version of myself to work and the leftovers to the people I love, both places feel it.\n\nI don't coach the title. I coach the whole person who showed up, because that is who has to execute when the room gets sharp.\n\n#leadership #executivecoaching #wholeperson",
       "first_comment": "",
       "research_fuel": "Lived authority only.",
       "hashtags": [
@@ -207,8 +206,8 @@
         "day7_done": false,
         "day28_done": false
       },
-      "notes": "Triangular bridge: operator x coaching x home attention. Gut line added 2026-08-12.",
-      "mouth_risks": "Bio-adjacent middle may feel resume. Cut one clause if needed. No kids names. Gut line only if mouth-true."
+      "notes": "2026-08-12 SN+voice: killed resume middle (problem/solution/metrics list); decision-holds beat.",
+      "mouth_risks": "Gut line only if mouth-true. No kids names on home beat."
     },
     {
       "id": "w2-p4",
@@ -218,21 +217,21 @@
       "pillar": "discern",
       "audiences": [
         "S",
-        "P"
+        "L"
       ],
       "funnel": "TOF",
       "status": "ready",
       "planned_date": "2026-08-21",
       "published_date": "",
       "source_file": "linkedin-posts-wave2-ship-set.md#post-4",
-      "hook": "Here's something I keep relearning the hard way in commercial and design rooms.",
-      "caption": "Here's something I keep relearning the hard way in commercial and design rooms.\n\nSomeone falls in love with a syllabus, a faculty name, a brand. The energy in the room goes up. Then six months later the sponsor cannot defend the buy, because nobody named the package before they named the modules.\n\nBenefit portal seats, academy pathways, private cohorts, closed cohorts of an open program, full custom. Different mechanisms. Different sponsors. Different success dashboards. Skip package altitude and you get scope thrash dressed up as design work.\n\nI have watched serious buyers lock business priority first: profit, cost, or risk. Then what leaders must do differently. Then metrics. Then design. The ones who start with a faculty wish list and \"we need a leadership program\" usually buy recognition. That can be valid. It is not the same purchase as transformation.\n\nI sit closer to private-cohort and high-stakes human work on purpose. Intact teams. Sponsor-tied application. Rooms with executive directors and VPs where judgment under pressure is the constraint, not seat count.\n\nName the package before you fall in love with the syllabus.\n\n#leadershipdevelopment #executiveeducation #CHRO",
-      "first_comment": "Frames going into my thinking here (public packaging, not a client story):\n\nEmeritus Enterprise \u2014 Accelerate / Academies / private cohorts:\nhttps://emeritus.org/enterprise/\n\nHarvard Business Impact \u2014 business priority before curriculum:\nhttps://www.harvardbusiness.org/insight/how-to-create-a-successful-leadership-development-program/\n\nPackage match first. Content second.",
+      "hook": "I watched a serious buyer light up over a syllabus before anyone named what they were actually buying.",
+      "caption": "I watched a serious buyer light up over a syllabus before anyone named what they were actually buying.\n\nFaculty name. Brand heat. Energy in the room went up. Six months later the sponsor could not defend the spend, because package altitude never got locked. Seats, academy pathway, private cohort, full custom: those are different buys with different success dashboards.\n\nI keep relearning this the hard way in design rooms. Start with business priority (profit, cost, or risk), then what leaders must do differently, then metrics, then design. Start with a wish list and \"we need a leadership program\" and you often buy recognition. That can be valid. It is not the same purchase as transformation.\n\nI sit closer to private-cohort and high-stakes human work on purpose: intact teams, sponsor-tied application, rooms where judgment under pressure is the constraint, not seat count.\n\nName the package before you fall in love with the syllabus.\n\n#leadershipdevelopment #executiveeducation #peoplestrategy",
+      "first_comment": "Frames going into my thinking here (public packaging, not a client story):\n\nEmeritus Enterprise Accelerate / Academies / private cohorts:\nhttps://emeritus.org/enterprise/\n\nHarvard Business Impact, business priority before curriculum:\nhttps://www.harvardbusiness.org/insight/how-to-create-a-successful-leadership-development-program/\n\nPackage match first. Content second.",
       "research_fuel": "PD immersion 2026-08-10: Emeritus ladder, HBI priority-first. Public packaging only.",
       "hashtags": [
         "leadershipdevelopment",
         "executiveeducation",
-        "CHRO"
+        "peoplestrategy"
       ],
       "visual": "text-or-carousel-later",
       "quality": {
@@ -256,8 +255,8 @@
         "day7_done": false,
         "day28_done": false
       },
-      "notes": "PD/commercial fluency with episodic syllabus-love beat. Not an Emeritus employer pitch in body.",
-      "mouth_risks": "If too sales-room, swap open to one owned discovery moment."
+      "notes": "2026-08-12 SN+voice: scene-first open for S1; thinned mechanism list; dropped CHRO hashtag cosplay.",
+      "mouth_risks": "Buyer scene must stay anonymized. Not an Emeritus employer pitch in body."
     },
     {
       "id": "w2-p5",
@@ -275,7 +274,7 @@
       "published_date": "",
       "source_file": "linkedin-posts-wave2-ship-set.md#post-5",
       "hook": "A company sent me a high-performing director and called it a leadership problem.",
-      "caption": "A company sent me a high-performing director and called it a leadership problem.\n\nShe was sharp. Willing. Already carrying more than her title suggested. By session two I could feel it in my gut: the bottleneck was not her capability. It was a leadership team that could not make a clean decision without reopening it three forums later. She was being asked to outrun a rhythm nobody wanted to name.\n\nWe still did the individual work. Identity, presence, how she was landing. We also put the system on the table. Quietly. Without turning the coaching into a blame session.\n\nIndividual certificates without team-level change are a common buy. Sometimes they help. Often they become a private gym membership next to a broken operating rhythm.\n\nI care about the person in the chair. I also care whether the intact team can execute after the insight lands. Otherwise we did theater with better language.\n\nIf you sponsor development, ask what has to change in the room around them, not only in them.\n\n#teamcoaching #executivecoaching #leadership",
+      "caption": "A company sent me a high-performing director and called it a leadership problem.\n\nShe was sharp. Willing. Already carrying more than her title suggested. By session two I could feel it in my gut: the bottleneck was not her capability. It was a leadership team that could not make a clean decision without reopening it three forums later. She was being asked to outrun a rhythm nobody wanted to name.\n\nWe still did the individual work: identity, presence, how she was landing. We also put the system on the table, quietly, without turning the coaching into a blame session.\n\nIndividual certificates without team-level change are a common buy. Sometimes they help. Often they become a private gym membership next to a broken operating rhythm.\n\nI care about the person in the chair. I also care whether the intact team can execute after the insight lands. Otherwise we did theater with better language.\n\nIf you sponsor development, ask what has to change in the room around them, not only in them.\n\n#teamcoaching #executivecoaching #leadership",
       "first_comment": "Public market rhyme (not the client): individual learning without team execution change is the attack surface a lot of buyers are finally naming. ExecOnline's Teamraderie move was one clean public statement of that thesis.",
       "research_fuel": "Lived room + optional EO Teamraderie public thesis in comment.",
       "hashtags": [
@@ -305,8 +304,8 @@
         "day7_done": false,
         "day28_done": false
       },
-      "notes": "Team as unit of execution. Gut + intact team language 2026-08-12.",
-      "mouth_risks": "Gendered she is fine if true pattern; swap if you want fully generic. Gut line only if mouth-true."
+      "notes": "Strongest Room. 2026-08-12: light cascade fix on identity/presence line only.",
+      "mouth_risks": "Gendered she fine if true pattern. Gut line only if mouth-true."
     },
     {
       "id": "w2-p6",
@@ -316,7 +315,7 @@
       "pillar": "whole",
       "audiences": [
         "L",
-        "P"
+        "S"
       ],
       "funnel": "MOF",
       "status": "ready",
@@ -324,13 +323,13 @@
       "published_date": "",
       "source_file": "linkedin-posts-wave2-ship-set.md#post-6",
       "hook": "Here's something I wrestle with.",
-      "caption": "Here's something I wrestle with.\n\nThe field keeps publishing what a lot of us already feel in our bodies. Leaders under rising stress. Thin bench confidence. Frontline managers more afraid of AI obsolescence than the people above them. CHROs trying to fund readiness while cost optimization sits near the top of the enterprise stack.\n\nI don't doubt the numbers. I doubt our response.\n\nMore content is the easy answer. More AI practice is the fashionable one. Both can help at the right layer. Neither automatically builds a leader who can stay human while the system tightens.\n\nWhat I trust more, slowly, is a relationship dense enough for the real sentence. The one under the performance narrative. Why a capable person goes still, or leaves, or performs green while the work dies. I have sat across from that sentence enough times to know it does not arrive on a content calendar.\n\nI do not have a clean package name for that. I have a choice about where I put my hours.\n\nI am still building what works when the stress is not a quarter, but a climate.\n\n#leadership #executivecoaching #workforce",
+      "caption": "Here's something I wrestle with.\n\nThe field keeps publishing what a lot of us already feel in our bodies: leaders under rising stress, thin bench confidence, cost pressure sitting next to readiness goals. I don't doubt the numbers. I doubt our response.\n\nMore content is the easy answer. More AI practice is the fashionable one. Both can help at the right layer. Neither automatically builds a leader who can stay human while the system tightens.\n\nWhat I trust more, slowly, is a relationship dense enough for the real sentence under the performance narrative. Why a capable person goes still, or leaves, or performs green while the work dies. I have sat across from that sentence enough times to know it does not arrive on a content calendar.\n\nI do not have a clean package name for that. I have a choice about where I put my hours.\n\nI am still building what works when the stress is not a quarter, but a climate.\n\n#leadership #executivecoaching #peoplestrategy",
       "first_comment": "Macro pattern sources sitting behind this (directional, not a lit review): DDI Global Leadership Forecast threads on leader stress and bench confidence; CHRO priority stacks that keep putting leader/manager development and change/resiliency near the top while cost pressure rises.",
       "research_fuel": "Weekly macro 2026-08-10 DDI stress/bench + CHRO priorities. Soft cite only.",
       "hashtags": [
         "leadership",
         "executivecoaching",
-        "workforce"
+        "peoplestrategy"
       ],
       "visual": "text",
       "quality": {
@@ -354,8 +353,8 @@
         "day7_done": false,
         "day28_done": false
       },
-      "notes": "2026-08-12: killed bait-Q close; ends on unfinished practice.",
-      "mouth_risks": "product SKU may feel commercial; swap to clean package name if stiff."
+      "notes": "2026-08-12 SN+voice: compressed macro cascade into one sentence; audiences L/S; peoplestrategy tag.",
+      "mouth_risks": "Unfinished climate close is the point. Do not tidy it."
     },
     {
       "id": "w2-p7",
@@ -372,14 +371,14 @@
       "planned_date": "2026-08-28",
       "published_date": "",
       "source_file": "linkedin-posts-wave2-ship-set.md#post-7",
-      "hook": "I do not learn the CHRO agenda from a slide first. I learn it from the rooms.",
-      "caption": "I do not learn the CHRO agenda from a slide first. I learn it from the rooms.\n\nLeader and manager development still sits first. Change and workforce resiliency climbed. HR tech and AI strategy stopped being separate hobbies. Culture stays near the top. Engagement, as a lead frame, lost altitude. That map only matters if you can feel where the organization is already spending money and attention.\n\nI work where those investments get messy in practice: leaders, intact teams, and cohorts who need movement, not theater. Not as a content library. As applied work under real load.\n\nOver 1,500 hours with 250+ senior leaders and founders, globally, has not made me romantic about any of this. It has made me practical. Decision quality. Operating metrics. Risk and gaps. Work that holds when a customer, peer, or sponsor pushes back.\n\nIf you own that agenda, the useful split is still the same. Scale where scale fits. Depth where depth is the actual requirement.\n\n#CHRO #leadershipdevelopment #executivecoaching",
-      "first_comment": "I keep this simple in buyer rooms:\n\n1) Leader and manager development\n2) Change and workforce resiliency\n3) Human side of HR tech / AI strategy\n\nIf you want the fuller \"movement, not theater\" frame:\nhttps://unifiedsolutionsinc.com",
+      "hook": "I do not learn the CHRO agenda from a slide first.",
+      "caption": "I do not learn the CHRO agenda from a slide first.\n\nI learn it when a people leader is trying to fund readiness while the enterprise is still optimizing cost, and the room goes quiet around what will actually get sponsored. Leader development still wins airtime. Change and resiliency climbed. Tech and AI stopped being side hobbies. Engagement, as the lead frame, lost altitude. That map only matters if you can feel where money and attention already go.\n\nI work where those investments get messy: leaders and intact teams who need movement, not theater. Applied work under real load, not a content library.\n\nOver 1,500 hours with 250+ senior leaders and founders, globally, has not made me romantic about any of this. It has made me practical about what holds when a customer, peer, or sponsor pushes back.\n\nIf you own that agenda, the useful split is still the same. Scale where scale fits. Depth where depth is the actual requirement.\n\n#leadershipdevelopment #executivecoaching #peoplestrategy",
+      "first_comment": "I keep this simple in buyer rooms:\n\n1) Leader and manager development\n2) Change and workforce resiliency\n3) Human side of HR tech / AI strategy\n\nIf you want the fuller movement-not-theater frame:\nhttps://unifiedsolutionsinc.com",
       "research_fuel": "Weekly macro 2026-08-10 Evanta/Gartner CHRO priority pattern.",
       "hashtags": [
-        "CHRO",
         "leadershipdevelopment",
-        "executivecoaching"
+        "executivecoaching",
+        "peoplestrategy"
       ],
       "visual": "text",
       "quality": {
@@ -403,8 +402,8 @@
         "day7_done": false,
         "day28_done": false
       },
-      "notes": "Rooms-first open 2026-08-12. Go-forward proof numbers.",
-      "mouth_risks": "Priority list lives in first comment; body map sentence may still feel cascade on reread."
+      "notes": "2026-08-12 SN+voice: quiet room open before map; killed decision/metrics cascade; dropped #CHRO tag cosplay; proof one sentence.",
+      "mouth_risks": "Proof line keep go-forward 1500+/250+. Priority list stays in first comment."
     },
     {
       "id": "w2-p8",
@@ -414,7 +413,8 @@
       "pillar": "discern",
       "audiences": [
         "B",
-        "L"
+        "L",
+        "S"
       ],
       "funnel": "BOF",
       "status": "ready",
@@ -452,8 +452,8 @@
         "day7_done": false,
         "day28_done": false
       },
-      "notes": "Monthly BOF only. Quiet USI link. Sat in quieter room beat 2026-08-12.",
-      "mouth_risks": "BOF energy. Ship after trust posts, not first. cannot sleep only if pattern stands."
+      "notes": "Monthly BOF only. Ship after trust. Audiences include S for sponsor door.",
+      "mouth_risks": "cannot sleep only if pattern stands. Not first post of wave."
     }
   ]
 }
