@@ -1,8 +1,9 @@
 {
-  "version": 2,
+  "version": 3,
   "updated": "2026-08-12",
   "owner": "Julian C. Johnson",
-  "wave": "market-wave-2-sn-experiential",
+  "wave": "market-wave-2-sonnet-lived",
+  "model_pass": "claude-sonnet-5 direct (Anthropic) 2026-08-12",
   "pillars": [
     {
       "id": "room",
@@ -65,7 +66,7 @@
     {
       "id": "w2-p1",
       "wave": "2",
-      "title": "What the numbers cannot hold",
+      "title": "Numbers cannot hold",
       "type": "Signal",
       "pillar": "market",
       "audiences": [
@@ -76,112 +77,14 @@
       "status": "ready",
       "planned_date": "2026-08-15",
       "published_date": "",
-      "source_file": "linkedin-posts-wave2-ship-set.md#post-1",
-      "hook": "I left a session last week with that familiar weight in my chest.",
-      "caption": "I left a session last week with that familiar weight in my chest.\n\nNot because the leader was failing. Because what he was carrying would never show up in a product dashboard: incomplete information, a team frozen in a way no curriculum names cleanly, a life question dressed up as a performance problem. We did real work. None of it would compress into an interaction count.\n\nThen I went home and read the capital story. ADP Ventures into Valence. Conversation volume starting to look like a product metric. That layer is real. Fluency at scale is a real job. I respect it.\n\nI used to feel pressure to pick a tribe, scale story or depth story. I don't anymore. Different jobs. I choose the hours where complexity is the brief, not the obstacle.\n\nIf you buy or lead above the director line, fund the layer that matches the weight you are actually carrying.\n\n#executivecoaching #leadershipdevelopment #peoplestrategy",
-      "first_comment": "Some recent readings going into my thinking here:\n\nADP Ventures invests in Valence (30 Jul 2026):\nhttps://mediacenter.adp.com/adp-ventures-invests-in-valence\n\nHR Executive, The new coaching stack (4 Mar 2026):\nhttps://hrexecutive.com/the-new-coaching-stack-a-3-tier-model-for-ai-and-human-coaching/\n\nThe rooms came first. These helped me name the split.",
-      "research_fuel": "ADP Ventures to Valence (30 Jul 2026); HR Executive coaching stack. #research market intel 2026-08-06.",
+      "source_file": "linkedin-posts-wave2-ship-set.md#w2-p1",
+      "hook": "I left a session last week carrying something in my chest that wouldn't fit on a dashboard.",
+      "caption": "I left a session last week carrying something in my chest that wouldn't fit on a dashboard.\n\nThe leader wasn't failing. He was holding incomplete information, a team frozen in a way no curriculum names cleanly, a life question wearing a performance problem's clothes. I stayed with the sentence he wouldn't finish in the office. None of that compresses into an interaction count.\n\nThen I went home and read the capital story. ADP Ventures into Valence. Conversation volume starting to look like a product metric. That layer is real. Fluency at scale is a real job. I respect it.\n\nI used to feel pressure to pick a side, scale story or depth story. I don't anymore. They're different jobs, built for different weight.\n\nIf you buy or lead above the director line: fund the layer that matches what you're actually carrying, not the one that's easiest to measure.\n\n#executivecoaching #leadershipdevelopment #wholeperson",
+      "first_comment": "Some recent readings going into my thinking here:\n\nADP Ventures invests in Valence:\nhttps://mediacenter.adp.com/adp-ventures-invests-in-valence\n\nHR Executive, The new coaching stack:\nhttps://hrexecutive.com/the-new-coaching-stack-a-3-tier-model-for-ai-and-human-coaching/\n\nThe rooms came first.",
+      "research_fuel": "ADP/Valence + HR Exec stack. Rooms first.",
       "hashtags": [
         "executivecoaching",
         "leadershipdevelopment",
-        "peoplestrategy"
-      ],
-      "visual": "text",
-      "quality": {
-        "believable": null,
-        "essence": null,
-        "clarity": null,
-        "specificity": null,
-        "market_fit": null,
-        "attract": null
-      },
-      "metrics": {
-        "impressions": null,
-        "reactions": null,
-        "comments": null,
-        "reposts": null,
-        "saves": null,
-        "profile_views_note": "",
-        "inbound": false,
-        "inbound_note": "",
-        "comment_quality_1to5": null,
-        "day7_done": false,
-        "day28_done": false
-      },
-      "notes": "2026-08-12 SN+voice pass: killed cascade, thinned capital, dropped AIcoaching tag, audiences S/L only.",
-      "mouth_risks": "weight in chest must be true; if residual pull toward scale remains, soften I don't anymore."
-    },
-    {
-      "id": "w2-p2",
-      "wave": "2",
-      "title": "Green boxes, dirty problem",
-      "type": "In the Room",
-      "pillar": "room",
-      "audiences": [
-        "L",
-        "S"
-      ],
-      "funnel": "MOF",
-      "status": "ready",
-      "planned_date": "2026-08-17",
-      "published_date": "",
-      "source_file": "linkedin-posts-wave2-ship-set.md#post-2",
-      "hook": "A leader came in with a clean deck and a dirty problem.",
-      "caption": "A leader came in with a clean deck and a dirty problem.\n\nEvery box on the transformation plan was green. Sponsors were getting updates. The team was \"aligned\" in every forum that required a slide. Nothing that mattered was actually moving. You could feel the air in the room get careful when we got near the real issue.\n\nWe didn't fix the deck. We sat with the sentence he had been avoiding: he was performing progress for the system, because real progress would force a conflict he did not want to own yet.\n\nOnce that was named, the work got simpler and harder at the same time. The next move was one hard conversation he had been protecting people from having.\n\nI read a lot about content, modules, and AI practice reps right now. Some of that is useful.\n\nWhat I care about when I close the laptop after a session is narrower: did we produce movement, or evidence of movement?\n\nThose are not the same craft.\n\n#executivecoaching #leadership #changemanagement",
-      "first_comment": "I keep this next to the market noise on purpose. More on what whole-person work means in practice:\nhttps://unifiedsolutionsinc.com/articles/holistic-coaching-what-it-actually-means",
-      "research_fuel": "None required. Optional market rhyme only.",
-      "hashtags": [
-        "executivecoaching",
-        "leadership",
-        "changemanagement"
-      ],
-      "visual": "text",
-      "quality": {
-        "believable": null,
-        "essence": null,
-        "clarity": null,
-        "specificity": null,
-        "market_fit": null,
-        "attract": null
-      },
-      "metrics": {
-        "impressions": null,
-        "reactions": null,
-        "comments": null,
-        "reposts": null,
-        "saves": null,
-        "profile_views_note": "",
-        "inbound": false,
-        "inbound_note": "",
-        "comment_quality_1to5": null,
-        "day7_done": false,
-        "day28_done": false
-      },
-      "notes": "2026-08-12 SN+voice: killed One decision cascade; one hard conversation instead.",
-      "mouth_risks": "Keep anonymization generic. Do not stack theater three times same week."
-    },
-    {
-      "id": "w2-p3",
-      "wave": "2",
-      "title": "Work that holds on Friday afternoon",
-      "type": "Bridge",
-      "pillar": "bridge",
-      "audiences": [
-        "L",
-        "S"
-      ],
-      "funnel": "MOF",
-      "status": "ready",
-      "planned_date": "2026-08-19",
-      "published_date": "",
-      "source_file": "linkedin-posts-wave2-ship-set.md#post-3",
-      "hook": "When I was leading teams inside Fortune 500 transformations, the plan was rarely what kept me up.",
-      "caption": "When I was leading teams inside Fortune 500 transformations, the plan was rarely what kept me up.\n\nWhat kept me up was whether the work would hold when a real customer, peer, or sponsor pushed back on a Friday afternoon. Pretty problem statements died in those rooms. So did clever frameworks that looked sharp on Tuesday and folded by week's end.\n\nI still coach for that test.\n\nIn the room now I am less interested in whether the language sounds sharp and more interested in whether the decision still stands when someone important pushes. Gut still has a job when the playbook stops matching the people in front of me.\n\nHome taught me the same thing quieter. Attention is finite. If I give the polished version of myself to work and the leftovers to the people I love, both places feel it.\n\nI don't coach the title. I coach the whole person who showed up, because that is who has to execute when the room gets sharp.\n\n#leadership #executivecoaching #wholeperson",
-      "first_comment": "",
-      "research_fuel": "Lived authority only.",
-      "hashtags": [
-        "leadership",
-        "executivecoaching",
         "wholeperson"
       ],
       "visual": "text",
@@ -206,34 +109,34 @@
         "day7_done": false,
         "day28_done": false
       },
-      "notes": "2026-08-12 SN+voice: killed resume middle (problem/solution/metrics list); decision-holds beat.",
-      "mouth_risks": "Gut line only if mouth-true. No kids names on home beat."
+      "notes": "2026-08-12 Sonnet lived-voice rewrite. Killed: We did real work., None of it would compress into an interaction count. (flattened to remove resume-like phrasing)",
+      "mouth_risks": "Verify the session detail composite (incomplete information, frozen team, life question) is a true pattern he has actually sat with, not invented specifics."
     },
     {
-      "id": "w2-p4",
+      "id": "w2-p2",
       "wave": "2",
-      "title": "Package altitude is the first sale",
-      "type": "Contrarian",
-      "pillar": "discern",
+      "title": "Green boxes",
+      "type": "In the Room",
+      "pillar": "room",
       "audiences": [
-        "S",
-        "L"
+        "L",
+        "S"
       ],
-      "funnel": "TOF",
+      "funnel": "MOF",
       "status": "ready",
-      "planned_date": "2026-08-21",
+      "planned_date": "2026-08-17",
       "published_date": "",
-      "source_file": "linkedin-posts-wave2-ship-set.md#post-4",
-      "hook": "I watched a serious buyer light up over a syllabus before anyone named what they were actually buying.",
-      "caption": "I watched a serious buyer light up over a syllabus before anyone named what they were actually buying.\n\nFaculty name. Brand heat. Energy in the room went up. Six months later the sponsor could not defend the spend, because package altitude never got locked. Seats, academy pathway, private cohort, full custom: those are different buys with different success dashboards.\n\nI keep relearning this the hard way in design rooms. Start with business priority (profit, cost, or risk), then what leaders must do differently, then metrics, then design. Start with a wish list and \"we need a leadership program\" and you often buy recognition. That can be valid. It is not the same purchase as transformation.\n\nI sit closer to private-cohort and high-stakes human work on purpose: intact teams, sponsor-tied application, rooms where judgment under pressure is the constraint, not seat count.\n\nName the package before you fall in love with the syllabus.\n\n#leadershipdevelopment #executiveeducation #peoplestrategy",
-      "first_comment": "Frames going into my thinking here (public packaging, not a client story):\n\nEmeritus Enterprise Accelerate / Academies / private cohorts:\nhttps://emeritus.org/enterprise/\n\nHarvard Business Impact, business priority before curriculum:\nhttps://www.harvardbusiness.org/insight/how-to-create-a-successful-leadership-development-program/\n\nPackage match first. Content second.",
-      "research_fuel": "PD immersion 2026-08-10: Emeritus ladder, HBI priority-first. Public packaging only.",
+      "source_file": "linkedin-posts-wave2-ship-set.md#w2-p2",
+      "hook": "A leader walked in with a clean deck and a dirty problem.",
+      "caption": "A leader walked in with a clean deck and a dirty problem.\n\nEvery box on the transformation plan was green. Sponsors were getting their updates. The team was \"aligned\" in every forum that required a slide. Nothing that mattered was moving. I could feel the air in the room go careful the second we got near the real issue.\n\nWe didn't touch the deck. We stayed with the sentence he'd been avoiding: he was performing progress for the system because real progress meant a conflict he wasn't ready to own.\n\nOnce that was named, the work got simpler and harder in the same breath. The next move was one hard conversation he'd been protecting people from having.\n\nI read plenty about content libraries and AI practice reps these days. Some of it is useful.\n\nWhat I care about when I close the laptop is narrower. Did we produce movement, or evidence of movement?\n\nThose aren't the same craft, and the deck can't tell you which one you got.\n\n#executivecoaching #leadership #teamcoaching",
+      "first_comment": "More on what whole-person work means in practice:\nhttps://unifiedsolutionsinc.com/articles/holistic-coaching-what-it-actually-means\n\nThe rooms came first.",
+      "research_fuel": "Lived room. Optional USI holistic article.",
       "hashtags": [
-        "leadershipdevelopment",
-        "executiveeducation",
-        "peoplestrategy"
+        "executivecoaching",
+        "leadership",
+        "teamcoaching"
       ],
-      "visual": "text-or-carousel-later",
+      "visual": "text",
       "quality": {
         "believable": null,
         "essence": null,
@@ -255,8 +158,106 @@
         "day7_done": false,
         "day28_done": false
       },
-      "notes": "2026-08-12 SN+voice: scene-first open for S1; thinned mechanism list; dropped CHRO hashtag cosplay.",
-      "mouth_risks": "Buyer scene must stay anonymized. Not an Emeritus employer pitch in body."
+      "notes": "2026-08-12 Sonnet lived-voice rewrite. Killed: We did real work., Movement after truth. (as slogan stack)",
+      "mouth_risks": "Confirm the green-boxes / one-hard-conversation composite room matches a pattern Jules has actually seen, not a single identifiable client."
+    },
+    {
+      "id": "w2-p3",
+      "wave": "2",
+      "title": "Friday afternoon hold",
+      "type": "Bridge",
+      "pillar": "bridge",
+      "audiences": [
+        "L",
+        "S"
+      ],
+      "funnel": "MOF",
+      "status": "ready",
+      "planned_date": "2026-08-19",
+      "published_date": "",
+      "source_file": "linkedin-posts-wave2-ship-set.md#w2-p3",
+      "hook": "When I was leading Fortune 500 transformations, the plan rarely kept me up at night.",
+      "caption": "When I was leading Fortune 500 transformations, the plan rarely kept me up at night.\n\nWhat kept me up was whether the work would hold when a customer, a peer, or a sponsor pushed back on a Friday afternoon. Pretty problem statements died in those rooms. So did clever frameworks that looked sharp on Tuesday and folded by week's end.\n\nI still coach for that test.\n\nIn the room now, I care less about whether the language sounds sharp and more about whether the decision still stands when someone important leans on it. Gut still has a job when the playbook stops matching the people in front of me.\n\nHome taught me the same thing, quieter. Attention is finite. Give the polished version of myself to work and the leftovers to the people I love, and both places feel the difference.\n\nI don't coach the title. I coach the person who has to execute when the room gets sharp, and that person rarely looks like the org chart says he should.\n\n#executivecoaching #wholeperson #seniorleaders",
+      "first_comment": "",
+      "research_fuel": "Lived authority only.",
+      "hashtags": [
+        "executivecoaching",
+        "wholeperson",
+        "seniorleaders"
+      ],
+      "visual": "text",
+      "quality": {
+        "believable": null,
+        "essence": null,
+        "clarity": null,
+        "specificity": null,
+        "market_fit": null,
+        "attract": null
+      },
+      "metrics": {
+        "impressions": null,
+        "reactions": null,
+        "comments": null,
+        "reposts": null,
+        "saves": null,
+        "profile_views_note": "",
+        "inbound": false,
+        "inbound_note": "",
+        "comment_quality_1to5": null,
+        "day7_done": false,
+        "day28_done": false
+      },
+      "notes": "2026-08-12 Sonnet lived-voice rewrite. Killed: Generic whole-person line without texture",
+      "mouth_risks": "Verify the home/attention line reflects his actual lived pattern (finite attention, not polished-self-to-work vs leftovers-to-family) without naming specific family members."
+    },
+    {
+      "id": "w2-p4",
+      "wave": "2",
+      "title": "Package altitude first",
+      "type": "Contrarian",
+      "pillar": "discern",
+      "audiences": [
+        "S",
+        "L"
+      ],
+      "funnel": "TOF",
+      "status": "ready",
+      "planned_date": "2026-08-21",
+      "published_date": "",
+      "source_file": "linkedin-posts-wave2-ship-set.md#w2-p4",
+      "hook": "I watched a serious buyer light up over a syllabus before anyone named what they were actually buying.",
+      "caption": "I watched a serious buyer light up over a syllabus before anyone named what they were actually buying.\n\nFaculty name and brand heat, and the energy in the room climbed. Six months later the sponsor couldn't defend the spend, because nobody had locked package altitude first. Seats, an academy pathway, a private cohort, full custom: those are different purchases with different scoreboards.\n\nI keep relearning this the hard way in design rooms. Priority first, then what leaders must do differently, then metrics, then design. Skip that order and you often buy recognition. That can be valid. It isn't the same purchase as change.\n\nI sit closer to private-cohort and high-stakes human work on purpose: intact teams, sponsor-tied application, rooms where judgment under pressure is the actual constraint, not seat count.\n\nName the package before you fall in love with the syllabus. The syllabus will always be the easier thing to love.\n\n#executiveeducation #peoplestrategy #leadershipdevelopment",
+      "first_comment": "The sequence I use in design rooms: business priority first (profit, cost, or risk), then what leaders must do differently, then metrics, then design.\n\nSome recent reading going into my thinking here:\n\nEmeritus Enterprise:\nhttps://emeritus.org/enterprise/\n\nHarvard Business Impact on priority before curriculum:\nhttps://www.harvardbusiness.org/insight/how-to-create-a-successful-leadership-development-program/\n\nPackage match first. The rooms came first.",
+      "research_fuel": "Emeritus ladder + HBI priority-first. Public packaging only.",
+      "hashtags": [
+        "executiveeducation",
+        "peoplestrategy",
+        "leadershipdevelopment"
+      ],
+      "visual": "text",
+      "quality": {
+        "believable": null,
+        "essence": null,
+        "clarity": null,
+        "specificity": null,
+        "market_fit": null,
+        "attract": null
+      },
+      "metrics": {
+        "impressions": null,
+        "reactions": null,
+        "comments": null,
+        "reposts": null,
+        "saves": null,
+        "profile_views_note": "",
+        "inbound": false,
+        "inbound_note": "",
+        "comment_quality_1to5": null,
+        "day7_done": false,
+        "day28_done": false
+      },
+      "notes": "2026-08-12 Sonnet lived-voice rewrite. Killed: Laundry list of buyer priorities kept in body",
+      "mouth_risks": "Confirm this is a real recurring pattern in design conversations, not a single traceable buyer."
     },
     {
       "id": "w2-p5",
@@ -272,15 +273,15 @@
       "status": "ready",
       "planned_date": "2026-08-24",
       "published_date": "",
-      "source_file": "linkedin-posts-wave2-ship-set.md#post-5",
+      "source_file": "linkedin-posts-wave2-ship-set.md#w2-p5",
       "hook": "A company sent me a high-performing director and called it a leadership problem.",
-      "caption": "A company sent me a high-performing director and called it a leadership problem.\n\nShe was sharp. Willing. Already carrying more than her title suggested. By session two I could feel it in my gut: the bottleneck was not her capability. It was a leadership team that could not make a clean decision without reopening it three forums later. She was being asked to outrun a rhythm nobody wanted to name.\n\nWe still did the individual work: identity, presence, how she was landing. We also put the system on the table, quietly, without turning the coaching into a blame session.\n\nIndividual certificates without team-level change are a common buy. Sometimes they help. Often they become a private gym membership next to a broken operating rhythm.\n\nI care about the person in the chair. I also care whether the intact team can execute after the insight lands. Otherwise we did theater with better language.\n\nIf you sponsor development, ask what has to change in the room around them, not only in them.\n\n#teamcoaching #executivecoaching #leadership",
-      "first_comment": "Public market rhyme (not the client): individual learning without team execution change is the attack surface a lot of buyers are finally naming. ExecOnline's Teamraderie move was one clean public statement of that thesis.",
-      "research_fuel": "Lived room + optional EO Teamraderie public thesis in comment.",
+      "caption": "A company sent me a high-performing director and called it a leadership problem.\n\nShe was sharp and willing, already carrying more than her title suggested. By the second session I felt it in my gut: the bottleneck wasn't her capability. It was a leadership team that couldn't make a clean decision without reopening it three forums later. She was being asked to outrun a rhythm nobody upstairs wanted to name.\n\nWe still did the work on her: identity, presence, how she was landing in the room. But I put the system on the table too, quietly, without turning the coaching into a blame session.\n\nIndividual development without team-level change is a common buy. Sometimes it helps. Often it becomes a private gym membership next to a broken operating rhythm nobody's fixing.\n\nI care about the person in the chair. I also care whether the intact team can execute once the insight lands. Otherwise we did theater with better language.\n\nIf you sponsor this work, ask what has to change in the room around her, not only in her.\n\n#teamcoaching #leadership #wholeperson",
+      "first_comment": "Public market rhyme (not the client): individual learning without team execution change is the attack surface a lot of buyers are finally naming. ExecOnline's Teamraderie move was one clean public statement of that thesis.\n\nThe rooms came first.",
+      "research_fuel": "Lived room + optional EO Teamraderie public rhyme.",
       "hashtags": [
         "teamcoaching",
-        "executivecoaching",
-        "leadership"
+        "leadership",
+        "wholeperson"
       ],
       "visual": "text",
       "quality": {
@@ -304,8 +305,8 @@
         "day7_done": false,
         "day28_done": false
       },
-      "notes": "Strongest Room. 2026-08-12: light cascade fix on identity/presence line only.",
-      "mouth_risks": "Gendered she fine if true pattern. Gut line only if mouth-true."
+      "notes": "2026-08-12 Sonnet lived-voice rewrite. Killed: We did the individual work. (flattened to specific practice terms)",
+      "mouth_risks": "Verify the gym-membership metaphor and the composite director/LT-rhythm scene as pattern-true, not one identifiable engagement."
     },
     {
       "id": "w2-p6",
@@ -321,15 +322,15 @@
       "status": "ready",
       "planned_date": "2026-08-26",
       "published_date": "",
-      "source_file": "linkedin-posts-wave2-ship-set.md#post-6",
-      "hook": "Here's something I wrestle with.",
-      "caption": "Here's something I wrestle with.\n\nThe field keeps publishing what a lot of us already feel in our bodies: leaders under rising stress, thin bench confidence, cost pressure sitting next to readiness goals. I don't doubt the numbers. I doubt our response.\n\nMore content is the easy answer. More AI practice is the fashionable one. Both can help at the right layer. Neither automatically builds a leader who can stay human while the system tightens.\n\nWhat I trust more, slowly, is a relationship dense enough for the real sentence under the performance narrative. Why a capable person goes still, or leaves, or performs green while the work dies. I have sat across from that sentence enough times to know it does not arrive on a content calendar.\n\nI do not have a clean package name for that. I have a choice about where I put my hours.\n\nI am still building what works when the stress is not a quarter, but a climate.\n\n#leadership #executivecoaching #peoplestrategy",
-      "first_comment": "Macro pattern sources sitting behind this (directional, not a lit review): DDI Global Leadership Forecast threads on leader stress and bench confidence; CHRO priority stacks that keep putting leader/manager development and change/resiliency near the top while cost pressure rises.",
-      "research_fuel": "Weekly macro 2026-08-10 DDI stress/bench + CHRO priorities. Soft cite only.",
+      "source_file": "linkedin-posts-wave2-ship-set.md#w2-p6",
+      "hook": "Here's something I keep turning over.",
+      "caption": "Here's something I keep turning over.\n\nThe field keeps publishing what a lot of us already feel in our bodies: leaders under rising stress, thin bench confidence, cost pressure sitting right next to readiness goals. I don't doubt the numbers. I doubt our response to them.\n\nMore content is the easy answer. More AI practice reps is the fashionable one. Both can help at the right layer. Neither automatically builds a leader who can stay human while the system keeps tightening.\n\nWhat I trust more, slowly, is a relationship dense enough to hold the real sentence under the performance narrative. Why a capable person goes still, or leaves, or performs green while the actual work dies underneath. I've sat across that sentence enough times to know it doesn't show up on a content calendar.\n\nI don't have a clean package name for that yet. I have a choice about where I put my hours.\n\nStill building what works when the stress isn't a quarter. It's a climate.\n\n#leadership #wholeperson #executivecoaching",
+      "first_comment": "DDI's stress and bench-strength research tracks with what shows up in the room, no lit review needed, just the pattern. The rooms came first.",
+      "research_fuel": "DDI stress/bench soft cite.",
       "hashtags": [
         "leadership",
-        "executivecoaching",
-        "peoplestrategy"
+        "wholeperson",
+        "executivecoaching"
       ],
       "visual": "text",
       "quality": {
@@ -353,13 +354,13 @@
         "day7_done": false,
         "day28_done": false
       },
-      "notes": "2026-08-12 SN+voice: compressed macro cascade into one sentence; audiences L/S; peoplestrategy tag.",
-      "mouth_risks": "Unfinished climate close is the point. Do not tidy it."
+      "notes": "2026-08-12 Sonnet lived-voice rewrite. Killed: Movement after truth. (slogan), Generic climate metaphor without prior scene grounding",
+      "mouth_risks": "Confirm his comfort naming this as an open, unresolved thinking post rather than a resolved insight."
     },
     {
       "id": "w2-p7",
       "wave": "2",
-      "title": "Where the agenda actually lives",
+      "title": "Agenda lives in rooms",
       "type": "Signal",
       "pillar": "market",
       "audiences": [
@@ -370,15 +371,15 @@
       "status": "ready",
       "planned_date": "2026-08-28",
       "published_date": "",
-      "source_file": "linkedin-posts-wave2-ship-set.md#post-7",
-      "hook": "I do not learn the CHRO agenda from a slide first.",
-      "caption": "I do not learn the CHRO agenda from a slide first.\n\nI learn it when a people leader is trying to fund readiness while the enterprise is still optimizing cost, and the room goes quiet around what will actually get sponsored. Leader development still wins airtime. Change and resiliency climbed. Tech and AI stopped being side hobbies. Engagement, as the lead frame, lost altitude. That map only matters if you can feel where money and attention already go.\n\nI work where those investments get messy: leaders and intact teams who need movement, not theater. Applied work under real load, not a content library.\n\nOver 1,500 hours with 250+ senior leaders and founders, globally, has not made me romantic about any of this. It has made me practical about what holds when a customer, peer, or sponsor pushes back.\n\nIf you own that agenda, the useful split is still the same. Scale where scale fits. Depth where depth is the actual requirement.\n\n#leadershipdevelopment #executivecoaching #peoplestrategy",
-      "first_comment": "I keep this simple in buyer rooms:\n\n1) Leader and manager development\n2) Change and workforce resiliency\n3) Human side of HR tech / AI strategy\n\nIf you want the fuller movement-not-theater frame:\nhttps://unifiedsolutionsinc.com",
-      "research_fuel": "Weekly macro 2026-08-10 Evanta/Gartner CHRO priority pattern.",
+      "source_file": "linkedin-posts-wave2-ship-set.md#w2-p7",
+      "hook": "I don't learn the agenda from a slide first.",
+      "caption": "I don't learn the agenda from a slide first.\n\nI learn it when a people leader is trying to fund readiness while the enterprise is still optimizing cost, and the room goes quiet around what will actually get sponsored. That quiet tells you more than the deck does.\n\nI work where those investments get messy: leaders and intact teams who need real movement, not another library of content. Applied work under load, not applied work on a slide.\n\nOver 1,500 hours with 250+ senior leaders and founders, globally, hasn't made me romantic about any of this. It's made me practical about what holds when a customer, a peer, or a sponsor pushes back.\n\nIf you own that agenda, the split is still the same one it's always been. Scale where scale actually fits. Depth where depth is the real requirement.\n\nThe slide can wait. The room can't.\n\n#peoplestrategy #leadershipdevelopment #executivecoaching",
+      "first_comment": "I keep this simple in buyer rooms:\n\n1) Leader and manager development\n2) Change and workforce resiliency\n3) Human side of HR tech / AI strategy\n\nIf you want the fuller frame:\nhttps://unifiedsolutionsinc.com\n\nThe rooms came first.",
+      "research_fuel": "CHRO priority pattern in first comment only.",
       "hashtags": [
+        "peoplestrategy",
         "leadershipdevelopment",
-        "executivecoaching",
-        "peoplestrategy"
+        "executivecoaching"
       ],
       "visual": "text",
       "quality": {
@@ -402,13 +403,13 @@
         "day7_done": false,
         "day28_done": false
       },
-      "notes": "2026-08-12 SN+voice: quiet room open before map; killed decision/metrics cascade; dropped #CHRO tag cosplay; proof one sentence.",
-      "mouth_risks": "Proof line keep go-forward 1500+/250+. Priority list stays in first comment."
+      "notes": "2026-08-12 Sonnet lived-voice rewrite. Killed: Laundry-list CHRO priority map kept in caption body",
+      "mouth_risks": "Confirm 1,500 hours / 250+ figure is current and approved for public use."
     },
     {
       "id": "w2-p8",
       "wave": "2",
-      "title": "Wrong layer (quiet door)",
+      "title": "Wrong layer, quiet door",
       "type": "BOF Room",
       "pillar": "discern",
       "audiences": [
@@ -420,15 +421,15 @@
       "status": "ready",
       "planned_date": "2026-08-31",
       "published_date": "",
-      "source_file": "linkedin-posts-wave2-ship-set.md#post-8",
-      "hook": "The costliest development mistake I see is not hiring the wrong person.",
-      "caption": "The costliest development mistake I see is not hiring the wrong person.\n\nIt is buying the wrong layer of help for the actual problem.\n\nA manager drowning in new scope often needs structured skill, feedback loops, and practice reps. Scaled support, including AI-assisted practice, can serve that well.\n\nA VP who looks composed in every forum and cannot sleep because the role and the rest of their life are no longer the same person needs something else. I have sat in that quieter room. Relationship sturdy enough for an inconvenient truth. Slower. Not a five-module fix.\n\nI coach that second category on purpose. Whole person. Not title only. Movement after truth.\n\nIf you are a senior leader carrying more than your org chart shows, or you sponsor someone who is, you already know which layer you are in.\n\nunifiedsolutionsinc.com\n\n#executivecoaching #seniorleaders #leadership",
+      "source_file": "linkedin-posts-wave2-ship-set.md#w2-p8",
+      "hook": "The costliest development mistake I see isn't hiring the wrong person.",
+      "caption": "The costliest development mistake I see isn't hiring the wrong person.\n\nIt's buying the wrong layer of help for the actual problem.\n\nA manager drowning in new scope often needs structured skill: feedback loops, practice reps, a clear model to work against. Scaled support, including AI-assisted practice, can serve that well.\n\nA VP who looks composed in every forum and can't sleep because the role and the rest of his life stopped being separate people needs something else. I've sat in that quieter room. A relationship sturdy enough to hold an inconvenient truth. Slower. Not a five-module fix.\n\nI coach that second category on purpose. The whole person shows up to work whether we name him or not.\n\nIf you're a senior leader carrying more than your org chart shows, or you sponsor someone who is, you already know which layer you're in.\n\nunifiedsolutionsinc.com\n\n#executivecoaching #wholeperson #seniorleaders",
       "first_comment": "",
-      "research_fuel": "Stack segmentation logic; lived pattern.",
+      "research_fuel": "Stack segmentation; lived pattern.",
       "hashtags": [
         "executivecoaching",
-        "seniorleaders",
-        "leadership"
+        "wholeperson",
+        "seniorleaders"
       ],
       "visual": "text",
       "quality": {
@@ -452,8 +453,8 @@
         "day7_done": false,
         "day28_done": false
       },
-      "notes": "Monthly BOF only. Ship after trust. Audiences include S for sponsor door.",
-      "mouth_risks": "cannot sleep only if pattern stands. Not first post of wave."
+      "notes": "2026-08-12 Sonnet lived-voice rewrite. Killed: Movement after truth. (used as closing slogan)",
+      "mouth_risks": "Verify the VP composite (composed in forums, cannot sleep, role and life no longer separate) is pattern-true and not one identifiable client."
     }
   ]
 }
