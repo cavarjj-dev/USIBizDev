@@ -235,12 +235,14 @@
     <div>
       <h1>LinkedIn Content OS <em>Scorecard</em></h1>
       <div class="sub">Wave posts, five pillars, quality vs effectiveness. Browser saves locally; Export JSON to keep the repo seed current. Live: cavarjj-dev.github.io/USIBizDev/linkedin-content/ · KPI: humans moved.</div>
+      <div class="sub" id="seedMeta" style="margin-top:8px;color:rgba(255,255,255,0.72);font-size:12px;"></div>
+      <div id="seedUpdateBanner" style="display:none;margin-top:10px;padding:10px 12px;border-radius:8px;background:rgba(196,144,58,0.18);border:1px solid rgba(196,144,58,0.55);color:#F7F3ED;font-size:13px;max-width:640px;line-height:1.4;"></div>
     </div>
     <div class="header-actions">
       <button class="ghost" id="btnImport">Import JSON</button>
       <button class="ghost" id="btnExport">Export JSON</button>
-      <button class="ghost" id="btnResetSeed">Reload seed file data</button>
-      <button class="primary" id="btnAdd">Add / edit post</button>
+      <button class="primary" id="btnResetSeed" title="Replace browser drafts with the latest linkedin-content-log.json from GitHub">Reload latest seed</button>
+      <button class="ghost" id="btnAdd">Add / edit post</button>
       <input type="file" id="fileImport" accept="application/json,.json" hidden />
     </div>
   </header>
@@ -1071,22 +1073,65 @@ function exportJson() {
   toast('Exported JSON backup.');
 }
 
+function seedIsNewer(seed, local) {
+  if (!seed || !local) return false;
+  const sv = Number(seed.version || 0);
+  const lv = Number(local.version || 0);
+  if (sv > lv) return true;
+  if ((seed.model_pass || '') && (seed.model_pass || '') !== (local.model_pass || '')) return true;
+  if ((seed.wave || '') && (seed.wave || '') !== (local.wave || '')) return true;
+  return false;
+}
+
+function updateSeedMeta(seed, local, usedSource) {
+  const el = document.getElementById('seedMeta');
+  const ban = document.getElementById('seedUpdateBanner');
+  if (!el) return;
+  const sVer = seed ? (seed.version ?? '?') : '—';
+  const lVer = local ? (local.version ?? '?') : '—';
+  const model = (usedSource && usedSource.model_pass) || (local && local.model_pass) || (seed && seed.model_pass) || 'n/a';
+  const wave = (usedSource && usedSource.wave) || (local && local.wave) || (seed && seed.wave) || '';
+  el.textContent = `Viewing: v${usedSource ? (usedSource.version ?? '?') : lVer} · ${wave} · ${model}  |  Browser cache v${lVer}  |  GitHub seed v${sVer}`;
+  if (ban) {
+    if (seed && local && seedIsNewer(seed, local) && usedSource === local) {
+      ban.style.display = 'block';
+      ban.innerHTML = `<strong>Newer seed on GitHub (v${sVer}).</strong> Your browser is still showing the old cached drafts (v${lVer}). Click <em>Reload latest seed</em> above to pull Sonnet / current captions. This replaces browser data for this site.`;
+    } else {
+      ban.style.display = 'none';
+      ban.textContent = '';
+    }
+  }
+}
+
 async function init() {
   const local = loadLocal();
   const seed = await loadSeedFile();
+  let used = null;
   if (local && local.posts && local.posts.length) {
-    state = local;
-    // merge pillar defs from seed if local is old
-    if (seed && seed.pillars) state.pillars = seed.pillars;
-    if (seed && seed.audiences) state.audiences = seed.audiences;
-    if (seed && seed.types) state.types = seed.types;
+    // If GitHub seed is newer, auto-adopt it so Drafts match repo (scores on old cache would be stale captions anyway)
+    if (seed && seed.posts && seed.posts.length && seedIsNewer(seed, local)) {
+      state = seed;
+      saveLocal();
+      used = seed;
+      setTimeout(() => toast('Loaded newer GitHub seed (replaced stale browser cache).'), 200);
+    } else {
+      state = local;
+      // merge pillar defs from seed if local is old
+      if (seed && seed.pillars) state.pillars = seed.pillars;
+      if (seed && seed.audiences) state.audiences = seed.audiences;
+      if (seed && seed.types) state.types = seed.types;
+      used = state;
+    }
   } else if (seed) {
     state = seed;
     saveLocal();
+    used = seed;
   } else {
     state = DEFAULT_SEED;
     saveLocal();
+    used = state;
   }
+  updateSeedMeta(seed, local, used);
   renderAll();
 
   document.getElementById('tabs').addEventListener('click', (e) => {
@@ -1120,13 +1165,19 @@ async function init() {
   });
 
   document.getElementById('btnResetSeed').addEventListener('click', async () => {
-    if (!confirm('Reload seed from linkedin-content-log.json and replace local browser data?')) return;
+    if (!confirm('Reload latest seed from linkedin-content-log.json and replace local browser drafts?')) return;
     const seed2 = await loadSeedFile();
-    if (!seed2) { toast('Could not load seed file. Open this HTML from the comms folder.'); return; }
+    if (!seed2) { toast('Could not load seed file. Check network / GitHub Pages.'); return; }
     state = seed2;
     saveLocal();
+    updateSeedMeta(seed2, seed2, seed2);
     renderAll();
-    toast('Reloaded seed file.');
+    toast('Reloaded latest seed v' + (seed2.version || '') + (seed2.model_pass ? ' · ' + seed2.model_pass : ''));
+    const first = sortPosts(state.posts || []).find(p => p.status === 'ready' || p.status === 'draft' || p.status === 'scheduled');
+    if (first) {
+      activateTab('drafts');
+      openDraft(first.id);
+    }
   });
 
   document.getElementById('postForm').addEventListener('submit', (e) => {
