@@ -234,7 +234,7 @@
   <header>
     <div>
       <h1>LinkedIn Content OS <em>Scorecard</em></h1>
-      <div class="sub">Wave posts, five pillars, quality vs effectiveness. Browser saves locally; Export JSON to keep the repo seed current. Live: cavarjj-dev.github.io/USIBizDev/linkedin-content/ · KPI: humans moved.</div>
+      <div class="sub">Wave posts, five pillars, dual-audit scoreboard (AI% lower is better), quality vs effectiveness. Browser saves locally; Export JSON to keep the repo seed current. Live: cavarjj-dev.github.io/USIBizDev/linkedin-content/ · KPI: humans moved.</div>
       <div class="sub" id="seedMeta" style="margin-top:8px;color:rgba(255,255,255,0.72);font-size:12px;"></div>
       <div id="seedUpdateBanner" style="display:none;margin-top:10px;padding:10px 12px;border-radius:8px;background:rgba(196,144,58,0.18);border:1px solid rgba(196,144,58,0.55);color:#F7F3ED;font-size:13px;max-width:640px;line-height:1.4;"></div>
     </div>
@@ -355,7 +355,7 @@
           <div class="risk-box" id="d_riskHint" style="display:none"></div>
           <div class="field-label">Internal notes</div>
           <textarea id="d_notes" class="draft-area small" spellcheck="true"></textarea>
-          <div class="field-label" style="margin-top:18px">Quick status</div>
+          <div class="field-label" style="margin-top:18px">Audit scoreboard (pre-ship)</div>
           <div class="form-grid" style="grid-template-columns:repeat(3,minmax(0,1fr))">
             <div>
               <label>Status</label>
@@ -368,15 +368,49 @@
               </select>
             </div>
             <div>
-              <label>Believable (1–10)</label>
+              <label>Believable (1-10) &gt;=6</label>
               <input id="d_believable" type="number" min="1" max="10" step="0.5" />
             </div>
             <div>
-              <label>Essence (1–10)</label>
+              <label>Essence (1-10) &gt;=8</label>
               <input id="d_essence" type="number" min="1" max="10" step="0.5" />
             </div>
+            <div>
+              <label>Sticky POV (1-10)</label>
+              <input id="d_sticky" type="number" min="1" max="10" step="0.5" />
+            </div>
+            <div>
+              <label>AI detect % (lower better)</label>
+              <input id="d_ai_pct" type="number" min="0" max="100" step="1" placeholder="0" />
+            </div>
+            <div>
+              <label>AI tool / verdict</label>
+              <input id="d_ai_verdict" type="text" placeholder="ZeroGPT · Human 0%" />
+            </div>
+            <div>
+              <label>Audit status</label>
+              <select id="d_audit_status">
+                <option value="pending">pending</option>
+                <option value="pass">pass</option>
+                <option value="pass_with_debt">pass_with_debt</option>
+                <option value="fail">fail</option>
+              </select>
+            </div>
+            <div>
+              <label>Human-not-AI craft (1-10)</label>
+              <input id="d_human" type="number" min="1" max="10" step="0.5" />
+            </div>
+            <div>
+              <label>Ship override?</label>
+              <select id="d_override">
+                <option value="false">no</option>
+                <option value="true">yes — log debt</option>
+              </select>
+            </div>
           </div>
-          <p class="tiny" style="margin-top:14px">Edits autosave to this browser when you hit Save draft. Export JSON after a review session so the live seed stays current for other devices.</p>
+          <div class="field-label" style="margin-top:12px">Override / debt reason</div>
+          <textarea id="d_override_reason" class="draft-area small" spellcheck="true" placeholder="Only if shipping under essence/sticky bar"></textarea>
+          <p class="tiny" style="margin-top:14px">Dual audit is mandatory: Sonnet voice + GLM critique + ZeroGPT (AI% lower is better, target 0). Save draft stores scores in this browser. Export JSON so the live seed stays current.</p>
         </div>
       </div>
     </div>
@@ -388,7 +422,26 @@
       <div class="card">
         <h2>Quality dimensions (published / scored)</h2>
         <div id="qualityBars" class="pillars"></div>
-        <p class="muted" style="margin-top:12px">Ship bar: Believable ≥ 6 and Essence ≥ 8.</p>
+        <p class="muted" style="margin-top:12px">Ship bar: Believable ≥ 6 and Essence ≥ 8. Sticky POV aim ≥ 7.</p>
+      </div>
+      <div class="card">
+        <h2>AI detection + audit board</h2>
+        <p class="muted" style="margin:0 0 10px">Lower AI % is better. Target 0. Dual audit: Sonnet + GLM + ZeroGPT.</p>
+        <div style="overflow-x:auto">
+          <table>
+            <thead>
+              <tr>
+                <th>Post</th>
+                <th>Bel</th>
+                <th>Ess</th>
+                <th>Sticky</th>
+                <th>AI%</th>
+                <th>Audit</th>
+              </tr>
+            </thead>
+            <tbody id="auditBody"></tbody>
+          </table>
+        </div>
       </div>
       <div class="card">
         <h2>Effectiveness (day-7 style)</h2>
@@ -789,8 +842,16 @@ function openDraft(id) {
   document.getElementById('d_notes').value = p.notes || '';
   document.getElementById('d_status').value = p.status || 'draft';
   const q = p.quality || {};
-  document.getElementById('d_believable').value = q.believable ?? '';
-  document.getElementById('d_essence').value = q.essence ?? '';
+  const a = p.audit || {};
+  document.getElementById('d_believable').value = (q.believable ?? a.believable) ?? '';
+  document.getElementById('d_essence').value = (q.essence ?? a.essence) ?? '';
+  document.getElementById('d_sticky').value = a.sticky_pov ?? '';
+  document.getElementById('d_ai_pct').value = a.ai_percent ?? '';
+  document.getElementById('d_ai_verdict').value = a.ai_verdict || (a.ai_detector ? (a.ai_detector + (a.ai_percent!=null?(' · '+a.ai_percent+'%'):'')) : '');
+  document.getElementById('d_audit_status').value = a.status || 'pending';
+  document.getElementById('d_human').value = a.human_not_ai ?? '';
+  document.getElementById('d_override').value = a.ship_override ? 'true' : 'false';
+  document.getElementById('d_override_reason').value = a.ship_override_reason || '';
   const hint = document.getElementById('d_riskHint');
   if (p.mouth_risks) {
     hint.style.display = 'block';
@@ -819,6 +880,20 @@ function saveDraftPane() {
   if (!p.quality) p.quality = {};
   p.quality.believable = numOrNull(document.getElementById('d_believable').value);
   p.quality.essence = numOrNull(document.getElementById('d_essence').value);
+  if (!p.audit) p.audit = {};
+  p.audit.believable = p.quality.believable;
+  p.audit.essence = p.quality.essence;
+  p.audit.sticky_pov = numOrNull(document.getElementById('d_sticky').value);
+  p.audit.ai_percent = numOrNull(document.getElementById('d_ai_pct').value);
+  p.audit.ai_verdict = (document.getElementById('d_ai_verdict').value || '').trim();
+  p.audit.status = document.getElementById('d_audit_status').value || 'pending';
+  p.audit.human_not_ai = numOrNull(document.getElementById('d_human').value);
+  p.audit.ship_override = document.getElementById('d_override').value === 'true';
+  p.audit.ship_override_reason = (document.getElementById('d_override_reason').value || '').trim();
+  if (!p.audit.ai_detector) p.audit.ai_detector = 'zerogpt';
+  if (!p.audit.voice_model) p.audit.voice_model = 'claude-sonnet-5';
+  if (!p.audit.critique_model) p.audit.critique_model = 'glm-5.2';
+  p.audit.audited_at = new Date().toISOString().slice(0,16);
   if (p.status === 'published' && !p.published_date) {
     p.published_date = new Date().toISOString().slice(0, 10);
   }
@@ -888,6 +963,31 @@ function renderLog() {
       activateTab('drafts');
     });
   });
+}
+
+
+function renderAuditBoard() {
+  const body = document.getElementById('auditBody');
+  if (!body) return;
+  const posts = sortPosts(state.posts || []).filter(p => p.status !== 'killed');
+  body.innerHTML = posts.map(p => {
+    const a = p.audit || {};
+    const q = p.quality || {};
+    const bel = q.believable ?? a.believable;
+    const ess = q.essence ?? a.essence;
+    const sticky = a.sticky_pov;
+    const ai = a.ai_percent;
+    const st = a.status || (bel!=null || ess!=null ? 'scored' : 'pending');
+    const aiCls = (ai==null) ? '' : (ai <= 0 ? 'score good' : (ai <= 10 ? 'score mid' : 'score bad'));
+    return `<tr>
+      <td><strong>${escapeHtml(p.title||p.id||'')}</strong><div class="hook">${escapeHtml(p.id||'')} · ${escapeHtml(p.planned_date||p.published_date||'')}</div></td>
+      <td class="score ${scoreClass(bel)}">${bel==null?'—':bel}</td>
+      <td class="score ${scoreClass(ess)}">${ess==null?'—':ess}</td>
+      <td class="score ${scoreClass(sticky)}">${sticky==null?'—':sticky}</td>
+      <td class="${aiCls}">${ai==null?'—':ai+'%'}</td>
+      <td><span class="status ${p.status||'draft'}">${escapeHtml(st)}</span></td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="6" class="empty">No posts.</td></tr>';
 }
 
 function renderScores() {
@@ -1052,6 +1152,8 @@ function renderAll() {
   renderLog();
   renderScores();
   renderDraftList();
+
+  renderAuditBoard();
 }
 
 function activateTab(name) {
