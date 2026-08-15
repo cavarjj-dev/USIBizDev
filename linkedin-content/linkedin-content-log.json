@@ -1,9 +1,9 @@
 {
-  "version": 3,
+  "version": 3.1,
   "updated": "2026-08-13",
   "owner": "Julian C. Johnson",
   "wave": "market-wave-2-sonnet-lived",
-  "model_pass": "claude-sonnet-5 direct (Anthropic) 2026-08-12",
+  "model_pass": "claude-sonnet-5 primary; glm-5.2 critique; humanizer/jazz; ZeroGPT external 2026-08-15",
   "pillars": [
     {
       "id": "room",
@@ -79,7 +79,7 @@
       "published_date": "",
       "source_file": "linkedin-posts-wave2-ship-set.md#w2-p1",
       "hook": "I left a session last week carrying something in my chest that wouldn't fit on a dashboard.",
-      "caption": "I left a session last week carrying something in my chest that wouldn't fit on a dashboard.\n\nThe leader wasn't failing. He was holding incomplete information, a team frozen in a way no curriculum names cleanly, a life question wearing a performance problem's clothes. I stayed with the sentence he wouldn't finish in the office. None of that compresses into an interaction count.\n\nThen I went home and read the capital story. ADP Ventures into Valence. Conversation volume starting to look like a product metric. That layer is real. Fluency at scale is a real job. I respect it.\n\nI used to feel pressure to pick a side, scale story or depth story. I don't anymore. They're different jobs, built for different weight.\n\nIf you buy or lead above the director line: fund the layer that matches what you're actually carrying, not the one that's easiest to measure.\n\n#executivecoaching #leadershipdevelopment #wholeperson",
+      "caption": "I left a session last week carrying something in my chest that wouldn't fit on a dashboard.\n\nThe leader wasn't failing. He was holding incomplete information, a team stuck in a way no curriculum names cleanly, and a life question wearing a performance problem's clothes. I stayed with the sentence he wouldn't finish in the office. None of that compresses into an interaction count.\n\nThat night I read the ADP Ventures announcement backing Valence, AI coaching at scale. Conversation volume is starting to look like a product metric. Fluency at that layer is a real job, and I respect it.\n\nI used to feel pressure to pick a side between scale and depth. I don't anymore. They're different jobs, built for different weight.\n\nIf you buy or lead above the director line: fund the layer that matches what you're actually carrying, not the one that's easiest to measure.\n\n#leadershipdevelopment #peoplestrategy #executivecoaching",
       "first_comment": "Some recent readings going into my thinking here:\n\nADP Ventures invests in Valence:\nhttps://mediacenter.adp.com/adp-ventures-invests-in-valence\n\nHR Executive, The new coaching stack:\nhttps://hrexecutive.com/the-new-coaching-stack-a-3-tier-model-for-ai-and-human-coaching/\n\nThe rooms came first.",
       "research_fuel": "ADP/Valence + HR Exec stack. Rooms first.",
       "hashtags": [
@@ -110,8 +110,11 @@
         "day28_done": false
       },
       "notes": "2026-08-12 Sonnet lived-voice rewrite. Killed: We did real work., None of it would compress into an interaction count. (flattened to remove resume-like phrasing)",
-      "mouth_risks": "Verify the session detail composite (incomplete information, frozen team, life question) is a true pattern he has actually sat with, not invented specifics.",
-      "cadence_note": "Slipped after organic Butlerian post 2026-08-13; 24-48h air then Wave P1 Mon."
+      "mouth_risks": "Composite room pattern must stay true; chest line is intentional human texture (keep).",
+      "cadence_note": "Slipped after organic Butlerian post 2026-08-13; 24-48h air then Wave P1 Mon.",
+      "word_count": 148,
+      "model_pass": "claude-sonnet-5 + glm-5.2 critique + zerogpt 2026-08-15",
+      "audit_notes": "Pre-ship dual audit 2026-08-15: cascade kill; Valence AI-coaching named; hashtags S/L hygiene; ZeroGPT 0% AI on prior draft."
     },
     {
       "id": "w2-p2",
@@ -457,5 +460,6 @@
       "notes": "2026-08-12 Sonnet lived-voice rewrite. Killed: Movement after truth. (used as closing slogan)",
       "mouth_risks": "Verify the VP composite (composed in forums, cannot sleep, role and life no longer separate) is pattern-true and not one identifiable client."
     }
-  ]
+  ],
+  "updated_at": "2026-08-15T12:11"
 }
