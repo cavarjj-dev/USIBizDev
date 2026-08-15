@@ -114,7 +114,20 @@
       "cadence_note": "Slipped after organic Butlerian post 2026-08-13; 24-48h air then Wave P1 Mon.",
       "word_count": 148,
       "model_pass": "claude-sonnet-5 + glm-5.2 critique + zerogpt 2026-08-15",
-      "audit_notes": "Pre-ship dual audit 2026-08-15: cascade kill; Valence AI-coaching named; hashtags S/L hygiene; ZeroGPT 0% AI on prior draft."
+      "audit_notes": "Pre-ship dual audit 2026-08-15: cascade kill; Valence AI-coaching named; hashtags S/L hygiene; ZeroGPT 0% AI on prior draft.",
+      "scores": {
+        "believable": 6,
+        "essence": 4,
+        "clarity": null,
+        "scored_at": "2026-08-15T12:29",
+        "scorer": "Jules mouth",
+        "never_say": null,
+        "missing_true_line": "not yet — wants stickier POV from consulting/coaching/group coaching later",
+        "ship_override": true,
+        "ship_override_reason": "Jules: good enough for now; sticky POV is future craft debt, not block",
+        "notes": "Believable 6 meets bar. Essence 3-4 fails bar (>=8). Explicit go-for-it 2026-08-15."
+      },
+      "mouth_status": "cleared_with_essence_debt"
     },
     {
       "id": "w2-p2",
