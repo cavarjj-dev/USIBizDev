@@ -1,5 +1,5 @@
 {
-  "version": 3.3,
+  "version": 3.4,
   "updated": "2026-08-17",
   "owner": "Julian C. Johnson",
   "wave": "market-wave-2-sonnet-lived",
@@ -172,9 +172,9 @@
         "S"
       ],
       "funnel": "MOF",
-      "status": "ready",
+      "status": "published",
       "planned_date": "2026-08-17",
-      "published_date": "",
+      "published_date": "2026-08-17",
       "source_file": "linkedin-posts-wave2-ship-set.md#w2-p2",
       "hook": "A leader walked in with every box green and nothing moving.",
       "caption": "A leader walked in with every box green and nothing moving.\n\nSponsors were getting their updates. The team was \"aligned\" in every forum that required a slide. The room got careful the second we stopped talking about the slides.\n\nWe didn't touch the deck. We stayed with the sentence he'd been avoiding: he was performing progress for the system because real progress meant a conflict he wasn't ready to own. Once that was named, the next move was one hard conversation he'd been protecting people from having.\n\nWhen I reflect on the day, what stands out is not a greener plan. It is when a leader takes motivated action: something they could do, want to do, and will do, with a path clear enough to stay accountable. We check that by hearing how the action shifted the landscape, or them.\n\nNone of it works if we skip what is real in front of them. Clear sight. Then movement that can land.\n\nI am not here to be agreeable for its own sake. That does not serve my clients.\n\n#executivecoaching #leadership #teamcoaching",
@@ -207,11 +207,11 @@
         "day7_done": false,
         "day28_done": false
       },
-      "notes": "2026-08-12 Sonnet lived-voice rewrite. Killed: We did real work., Movement after truth. (as slogan stack) | 2026-08-17 mouth minigame: killed laptop close + movement/evidence workshop line; Jules gold in: motivated action (could/want/will + accountable path), ground in reality, anti-agreeableness. Candidate B locked bel7/ess7.",
+      "notes": "2026-08-12 Sonnet lived-voice rewrite. Killed: We did real work., Movement after truth. (as slogan stack) | 2026-08-17 mouth minigame: killed laptop close + movement/evidence workshop line; Jules gold in: motivated action (could/want/will + accountable path), ground in reality, anti-agreeableness. Candidate B locked bel7/ess7. | PUBLISHED 2026-08-17. First comment live. Day-0: 1 like.",
       "mouth_risks": "Essence 7 vs bar 8. Confirm composite room stays non-identifiable. Dual audit (Sonnet surgical + GLM + ZeroGPT) still pending before paste if running full board.",
       "cadence_note": "Wave week lock 2026-08-15: P1 shipped Sat (week open). Remaining this week Mon/Wed/Fri (P2–P4). Next week Mon/Wed/Fri + BOF Mon (P5–P8).",
       "audit": {
-        "status": "mouth_pass",
+        "status": "shipped_mouth_pass",
         "voice_model": "claude-sonnet-5",
         "critique_model": "glm-5.2",
         "ai_detector": "zerogpt",
@@ -231,7 +231,9 @@
         "ship_override_reason": "",
         "learnings_applied": [],
         "notes": "2026-08-17 Jules mouth: Candidate B locked. Bel 7 ess 7. No never-say. Essence 1 under ship bar 8 — optional debt if ship before dual audit.",
-        "audited_at": null
+        "audited_at": null,
+        "ship_note": "Published 2026-08-17 after mouth lock Candidate B. First comment live. Early engagement: 1 like (day-0). Dual audit board optional catch-up if Jules wants tracker fill; essence debt 7 vs bar 8 named.",
+        "day0_note": "1 reaction (like) noted by Jules at publish window."
       },
       "pre_ship_checklist": "Dual audit + ZeroGPT before ship; sticky POV pass; cascade scan; hashtag hygiene"
     },
@@ -282,10 +284,10 @@
         "day28_done": false
       },
       "notes": "2026-08-12 Sonnet lived-voice rewrite. Killed: Generic whole-person line without texture",
-      "mouth_risks": "Verify the home/attention line reflects his actual lived pattern (finite attention, not polished-self-to-work vs leftovers-to-family) without naming specific family members.",
+      "mouth_risks": "Verify the home/attention line reflects his actual lived pattern (finite attention, not polished-self-to-work vs leftovers-to-family) without naming specific family members. | Process: mouth minigame with Jules first, then dual audit before ship.",
       "cadence_note": "Wave week lock 2026-08-15: P1 shipped Sat (week open). Remaining this week Mon/Wed/Fri (P2–P4). Next week Mon/Wed/Fri + BOF Mon (P5–P8).",
       "audit": {
-        "status": "pending",
+        "status": "awaiting_mouth_then_dual_audit",
         "voice_model": "claude-sonnet-5",
         "critique_model": "glm-5.2",
         "ai_detector": "zerogpt",
@@ -356,10 +358,10 @@
         "day28_done": false
       },
       "notes": "2026-08-12 Sonnet lived-voice rewrite. Killed: Laundry list of buyer priorities kept in body",
-      "mouth_risks": "Confirm this is a real recurring pattern in design conversations, not a single traceable buyer.",
+      "mouth_risks": "Confirm this is a real recurring pattern in design conversations, not a single traceable buyer. | Process: mouth minigame with Jules first, then dual audit before ship.",
       "cadence_note": "Wave week lock 2026-08-15: P1 shipped Sat (week open). Remaining this week Mon/Wed/Fri (P2–P4). Next week Mon/Wed/Fri + BOF Mon (P5–P8).",
       "audit": {
-        "status": "pending",
+        "status": "awaiting_mouth_then_dual_audit",
         "voice_model": "claude-sonnet-5",
         "critique_model": "glm-5.2",
         "ai_detector": "zerogpt",
@@ -430,10 +432,10 @@
         "day28_done": false
       },
       "notes": "2026-08-12 Sonnet lived-voice rewrite. Killed: We did the individual work. (flattened to specific practice terms)",
-      "mouth_risks": "Verify the gym-membership metaphor and the composite director/LT-rhythm scene as pattern-true, not one identifiable engagement.",
+      "mouth_risks": "Verify the gym-membership metaphor and the composite director/LT-rhythm scene as pattern-true, not one identifiable engagement. | Process: mouth minigame with Jules first, then dual audit before ship.",
       "cadence_note": "Wave week lock 2026-08-15: P1 shipped Sat (week open). Remaining this week Mon/Wed/Fri (P2–P4). Next week Mon/Wed/Fri + BOF Mon (P5–P8).",
       "audit": {
-        "status": "pending",
+        "status": "awaiting_mouth_then_dual_audit",
         "voice_model": "claude-sonnet-5",
         "critique_model": "glm-5.2",
         "ai_detector": "zerogpt",
@@ -504,10 +506,10 @@
         "day28_done": false
       },
       "notes": "2026-08-12 Sonnet lived-voice rewrite. Killed: Movement after truth. (slogan), Generic climate metaphor without prior scene grounding",
-      "mouth_risks": "Confirm his comfort naming this as an open, unresolved thinking post rather than a resolved insight.",
+      "mouth_risks": "Confirm his comfort naming this as an open, unresolved thinking post rather than a resolved insight. | Process: mouth minigame with Jules first, then dual audit before ship.",
       "cadence_note": "Wave week lock 2026-08-15: P1 shipped Sat (week open). Remaining this week Mon/Wed/Fri (P2–P4). Next week Mon/Wed/Fri + BOF Mon (P5–P8).",
       "audit": {
-        "status": "pending",
+        "status": "awaiting_mouth_then_dual_audit",
         "voice_model": "claude-sonnet-5",
         "critique_model": "glm-5.2",
         "ai_detector": "zerogpt",
@@ -578,10 +580,10 @@
         "day28_done": false
       },
       "notes": "2026-08-12 Sonnet lived-voice rewrite. Killed: Laundry-list CHRO priority map kept in caption body",
-      "mouth_risks": "Confirm 1,500 hours / 250+ figure is current and approved for public use.",
+      "mouth_risks": "Confirm 1,500 hours / 250+ figure is current and approved for public use. | Process: mouth minigame with Jules first, then dual audit before ship.",
       "cadence_note": "Wave week lock 2026-08-15: P1 shipped Sat (week open). Remaining this week Mon/Wed/Fri (P2–P4). Next week Mon/Wed/Fri + BOF Mon (P5–P8).",
       "audit": {
-        "status": "pending",
+        "status": "awaiting_mouth_then_dual_audit",
         "voice_model": "claude-sonnet-5",
         "critique_model": "glm-5.2",
         "ai_detector": "zerogpt",
@@ -653,10 +655,10 @@
         "day28_done": false
       },
       "notes": "2026-08-12 Sonnet lived-voice rewrite. Killed: Movement after truth. (used as closing slogan)",
-      "mouth_risks": "Verify the VP composite (composed in forums, cannot sleep, role and life no longer separate) is pattern-true and not one identifiable client.",
+      "mouth_risks": "Verify the VP composite (composed in forums, cannot sleep, role and life no longer separate) is pattern-true and not one identifiable client. | Process: mouth minigame with Jules first, then dual audit before ship.",
       "cadence_note": "Wave week lock 2026-08-15: P1 shipped Sat (week open). Remaining this week Mon/Wed/Fri (P2–P4). Next week Mon/Wed/Fri + BOF Mon (P5–P8).",
       "audit": {
-        "status": "pending",
+        "status": "awaiting_mouth_then_dual_audit",
         "voice_model": "claude-sonnet-5",
         "critique_model": "glm-5.2",
         "ai_detector": "zerogpt",
@@ -690,7 +692,8 @@
     "Buyer hashtag hygiene: peoplestrategy/leadershipdevelopment over cosplay tags",
     "Sticky POV debt: extract from consulting + 1:1 + group + coach-on; not only industry contrast",
     "Ship override allowed if Jules owns essence debt; log it",
-    "Apply all learnings to every future post; dual audit is mandatory not optional"
+    "Apply all learnings to every future post; dual audit is mandatory not optional",
+    "2026-08-17: Wave mouth process = collaborative minigame (Jules gold lines) → lock candidate → dual audit board → ship. P2: killed laptop/evidence-of-movement; gold=motivated action + grounded reality + anti-agreeableness. Bel7/Ess7."
   ],
   "audit_protocol": {
     "mandatory_pre_ship": true,
@@ -725,5 +728,28 @@
     "P6": "Wed 2026-08-26 Thinking Out Loud",
     "P7": "Fri 2026-08-28 Signal",
     "P8": "Mon 2026-08-31 BOF Room"
+  },
+  "mouth_process": {
+    "locked": "2026-08-17",
+    "name": "mouth-minigame-then-dual-audit",
+    "steps": [
+      "Open Drafts one post only",
+      "Jules mouth: worst lines / gold dump / candidate pick",
+      "Score believable essence never-say missing-line",
+      "Optional surgical Sonnet (li) only if needed",
+      "GLM 5.2 Green critique",
+      "ZeroGPT (lower % better target 0)",
+      "Log audit{} + quality{} in seed",
+      "Ship + first comment + Find handshake"
+    ],
+    "applies_to": [
+      "w2-p3",
+      "w2-p4",
+      "w2-p5",
+      "w2-p6",
+      "w2-p7",
+      "w2-p8"
+    ],
+    "notes": "P2 set the pattern 2026-08-17. Do not mass-rewrite wave on Grok. LI craft=Sonnet. Mouth before polish."
   }
 }
