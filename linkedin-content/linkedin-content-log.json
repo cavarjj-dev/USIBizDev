@@ -1,6 +1,6 @@
 {
-  "version": 3.2,
-  "updated": "2026-08-15",
+  "version": 3.3,
+  "updated": "2026-08-17",
   "owner": "Julian C. Johnson",
   "wave": "market-wave-2-sonnet-lived",
   "model_pass": "claude-sonnet-5 primary; glm-5.2 critique; ZeroGPT AI-detect; learnings locked 2026-08-15",
@@ -176,8 +176,8 @@
       "planned_date": "2026-08-17",
       "published_date": "",
       "source_file": "linkedin-posts-wave2-ship-set.md#w2-p2",
-      "hook": "A leader walked in with a clean deck and a dirty problem.",
-      "caption": "A leader walked in with a clean deck and a dirty problem.\n\nEvery box on the transformation plan was green. Sponsors were getting their updates. The team was \"aligned\" in every forum that required a slide. Nothing that mattered was moving. I could feel the air in the room go careful the second we got near the real issue.\n\nWe didn't touch the deck. We stayed with the sentence he'd been avoiding: he was performing progress for the system because real progress meant a conflict he wasn't ready to own.\n\nOnce that was named, the work got simpler and harder in the same breath. The next move was one hard conversation he'd been protecting people from having.\n\nI read plenty about content libraries and AI practice reps these days. Some of it is useful.\n\nWhat I care about when I close the laptop is narrower. Did we produce movement, or evidence of movement?\n\nThose aren't the same craft, and the deck can't tell you which one you got.\n\n#executivecoaching #leadership #teamcoaching",
+      "hook": "A leader walked in with every box green and nothing moving.",
+      "caption": "A leader walked in with every box green and nothing moving.\n\nSponsors were getting their updates. The team was \"aligned\" in every forum that required a slide. The room got careful the second we stopped talking about the slides.\n\nWe didn't touch the deck. We stayed with the sentence he'd been avoiding: he was performing progress for the system because real progress meant a conflict he wasn't ready to own. Once that was named, the next move was one hard conversation he'd been protecting people from having.\n\nWhen I reflect on the day, what stands out is not a greener plan. It is when a leader takes motivated action: something they could do, want to do, and will do, with a path clear enough to stay accountable. We check that by hearing how the action shifted the landscape, or them.\n\nNone of it works if we skip what is real in front of them. Clear sight. Then movement that can land.\n\nI am not here to be agreeable for its own sake. That does not serve my clients.\n\n#executivecoaching #leadership #teamcoaching",
       "first_comment": "More on what whole-person work means in practice:\nhttps://unifiedsolutionsinc.com/articles/holistic-coaching-what-it-actually-means\n\nThe rooms came first.",
       "research_fuel": "Lived room. Optional USI holistic article.",
       "hashtags": [
@@ -187,8 +187,8 @@
       ],
       "visual": "text",
       "quality": {
-        "believable": null,
-        "essence": null,
+        "believable": 7,
+        "essence": 7,
         "clarity": null,
         "specificity": null,
         "market_fit": null,
@@ -207,11 +207,11 @@
         "day7_done": false,
         "day28_done": false
       },
-      "notes": "2026-08-12 Sonnet lived-voice rewrite. Killed: We did real work., Movement after truth. (as slogan stack)",
-      "mouth_risks": "Confirm the green-boxes / one-hard-conversation composite room matches a pattern Jules has actually seen, not a single identifiable client.",
+      "notes": "2026-08-12 Sonnet lived-voice rewrite. Killed: We did real work., Movement after truth. (as slogan stack) | 2026-08-17 mouth minigame: killed laptop close + movement/evidence workshop line; Jules gold in: motivated action (could/want/will + accountable path), ground in reality, anti-agreeableness. Candidate B locked bel7/ess7.",
+      "mouth_risks": "Essence 7 vs bar 8. Confirm composite room stays non-identifiable. Dual audit (Sonnet surgical + GLM + ZeroGPT) still pending before paste if running full board.",
       "cadence_note": "Wave week lock 2026-08-15: P1 shipped Sat (week open). Remaining this week Mon/Wed/Fri (P2–P4). Next week Mon/Wed/Fri + BOF Mon (P5–P8).",
       "audit": {
-        "status": "pending",
+        "status": "mouth_pass",
         "voice_model": "claude-sonnet-5",
         "critique_model": "glm-5.2",
         "ai_detector": "zerogpt",
@@ -219,8 +219,8 @@
         "ai_verdict": null,
         "ai_tool_secondary": null,
         "ai_percent_secondary": null,
-        "believable": null,
-        "essence": null,
+        "believable": 7,
+        "essence": 7,
         "clarity": null,
         "engage": null,
         "human_not_ai": null,
@@ -230,7 +230,7 @@
         "ship_override": false,
         "ship_override_reason": "",
         "learnings_applied": [],
-        "notes": "",
+        "notes": "2026-08-17 Jules mouth: Candidate B locked. Bel 7 ess 7. No never-say. Essence 1 under ship bar 8 — optional debt if ship before dual audit.",
         "audited_at": null
       },
       "pre_ship_checklist": "Dual audit + ZeroGPT before ship; sticky POV pass; cascade scan; hashtag hygiene"
