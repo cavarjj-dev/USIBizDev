@@ -263,8 +263,8 @@
       ],
       "visual": "text",
       "quality": {
-        "believable": null,
-        "essence": null,
+        "believable": 7,
+        "essence": 7,
         "clarity": null,
         "specificity": null,
         "market_fit": null,
@@ -283,11 +283,11 @@
         "day7_done": false,
         "day28_done": false
       },
-      "notes": "2026-08-19 mouth lock A2. Dual audit logged. ZeroGPT 0%. Awaiting Jules bel/ess/never-say/missing.",
+      "notes": "2026-08-19 mouth: bel7 ess~7 essence debt. Dual audit ZeroGPT 0%. Not published until Jules ships or takes felt-line lift.",
       "mouth_risks": "Graf 2 density / three-Friday list on phone. Home line is Jules dump — do not sand because GLM flinched. Optional: cut one Friday if reread feels resume.",
       "cadence_note": "Wave week lock 2026-08-15: P1 shipped Sat (week open). Remaining this week Mon/Wed/Fri (P2–P4). Next week Mon/Wed/Fri + BOF Mon (P5–P8).",
       "audit": {
-        "status": "awaiting_mouth_scores",
+        "status": "mouth_scored_essence_debt",
         "voice_model": "claude-sonnet-5 + jules-mouth",
         "critique_model": "glm-5.2",
         "ai_detector": "zerogpt",
@@ -295,13 +295,13 @@
         "ai_verdict": "Your Text is Human written",
         "ai_tool_secondary": null,
         "ai_percent_secondary": null,
-        "believable": null,
-        "essence": null,
+        "believable": 7,
+        "essence": 7,
         "clarity": 6.5,
         "engage": 7,
         "human_not_ai": 8,
         "never_say": null,
-        "missing_true_line": null,
+        "missing_true_line": "Felt wait for the Friday call while it still looks fine (Jules named, then said none missing)",
         "sticky_pov": 8,
         "ship_override": false,
         "ship_override_reason": "",
@@ -312,10 +312,11 @@
           "ZeroGPT target 0",
           "do not sand gold because GLM flinched"
         ],
-        "notes": "GLM scored harsh (bel4/ess7/clarity5/engage3/human2). Tre override on home + three Fridays + jargon. Graf 2 density is the live risk. Proof: _p3_zerogpt.png",
-        "audited_at": "2026-08-19T08:45"
+        "notes": "GLM scored harsh (bel4/ess7/clarity5/engage3/human2). Tre override on home + three Fridays + jargon. Graf 2 density is the live risk. Proof: _p3_zerogpt.png | Mouth 2026-08-19: bel7 ess~7 (he said 6 or 7). Never-say none. Essence under bar. Felt-line offer on table.",
+        "audited_at": "2026-08-19T08:53"
       },
-      "pre_ship_checklist": "Mouth scores still required. Then ship + first comment + Find handshake (L1 views)."
+      "pre_ship_checklist": "Mouth scores still required. Then ship + first comment + Find handshake (L1 views).",
+      "mouth_status": "scored_essence_debt"
     },
     {
       "id": "w2-p4",
@@ -689,7 +690,7 @@
       "pre_ship_checklist": "Mandatory dual audit (Sonnet voice + GLM critique + ZeroGPT) before Jules mouth gate"
     }
   ],
-  "updated_at": "2026-08-19T08:44",
+  "updated_at": "2026-08-19T08:53",
   "learnings": [
     "Sonnet primary voice; GLM-5.2 Green critique every pre-ship",
     "ZeroGPT (or equal) AI-detect; target 0% AI; lower is better",
