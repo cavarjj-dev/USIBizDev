@@ -1,5 +1,5 @@
 {
-  "version": 3.5,
+  "version": 3.6,
   "updated": "2026-08-19",
   "owner": "Julian C. Johnson",
   "wave": "market-wave-2-sonnet-lived",
@@ -248,9 +248,9 @@
         "S"
       ],
       "funnel": "MOF",
-      "status": "ready",
+      "status": "published",
       "planned_date": "2026-08-19",
-      "published_date": "",
+      "published_date": "2026-08-19",
       "source_file": "linkedin-posts-wave2-ship-set.md#w2-p3",
       "hook": "The plan never kept me up. Friday afternoon did.",
       "caption": "The plan never kept me up. Friday afternoon did.\n\nWhat that looked like was not a red number on a slide. A peer who was not actually aligned, already walking the pushback up to the SLT. A sponsor who vetoed after a Big Four pack got pushed harder than it got verified, and the cost and features were not what business and IT had agreed was the priority. Or an acquisition where the CEO and president of the company being bought talked past the vertical they were entering, and nobody slowed down long enough to get in a room and figure it out.\n\nI still coach for that test. Not the deck. The real conversations, the real relationships, the people who actually have to be influenced.\n\nHome taught me the same thing, quieter. Attention is finite. You can think you are aligned and be way off if clarity and honesty are missing.\n\nWhat I check at the end of the day is whether a decision still stands after someone important leaned on it.\n\n#decisionmaking #strategicalignment #leadershipdevelopment",
@@ -283,11 +283,11 @@
         "day7_done": false,
         "day28_done": false
       },
-      "notes": "2026-08-19 mouth: bel7 ess~7 essence debt. Dual audit ZeroGPT 0%. Not published until Jules ships or takes felt-line lift.",
+      "notes": "PUBLISHED 2026-08-19 A2. Mouth bel7 ess~7. Dual audit ZeroGPT 0%. Essence debt named: rooms without the wait-for-the-call body. Felt-line offered, Jules shipped A2. First comment: rooms / slide alignment.",
       "mouth_risks": "Graf 2 density / three-Friday list on phone. Home line is Jules dump — do not sand because GLM flinched. Optional: cut one Friday if reread feels resume.",
       "cadence_note": "Wave week lock 2026-08-15: P1 shipped Sat (week open). Remaining this week Mon/Wed/Fri (P2–P4). Next week Mon/Wed/Fri + BOF Mon (P5–P8).",
       "audit": {
-        "status": "mouth_scored_essence_debt",
+        "status": "pass_with_debt",
         "voice_model": "claude-sonnet-5 + jules-mouth",
         "critique_model": "glm-5.2",
         "ai_detector": "zerogpt",
@@ -301,10 +301,10 @@
         "engage": 7,
         "human_not_ai": 8,
         "never_say": null,
-        "missing_true_line": "Felt wait for the Friday call while it still looks fine (Jules named, then said none missing)",
+        "missing_true_line": "Wait for the Friday call while it still looked fine (named, not shipped)",
         "sticky_pov": 8,
-        "ship_override": false,
-        "ship_override_reason": "",
+        "ship_override": true,
+        "ship_override_reason": "Jules posted A2 with essence ~7 vs bar 8; felt-line offered and declined by shipping",
         "learnings_applied": [
           "mouth first then dual audit",
           "kill bio open / manifesto closer / cosplay hashtags",
@@ -313,10 +313,12 @@
           "do not sand gold because GLM flinched"
         ],
         "notes": "GLM scored harsh (bel4/ess7/clarity5/engage3/human2). Tre override on home + three Fridays + jargon. Graf 2 density is the live risk. Proof: _p3_zerogpt.png | Mouth 2026-08-19: bel7 ess~7 (he said 6 or 7). Never-say none. Essence under bar. Felt-line offer on table.",
-        "audited_at": "2026-08-19T08:53"
+        "audited_at": "2026-08-19T09:54",
+        "ship_note": "Published 2026-08-19 after A2 lock + dual audit. Essence debt written. URL not yet provided.",
+        "day0_note": ""
       },
       "pre_ship_checklist": "Mouth scores still required. Then ship + first comment + Find handshake (L1 views).",
-      "mouth_status": "scored_essence_debt"
+      "mouth_status": "published_with_essence_debt"
     },
     {
       "id": "w2-p4",
@@ -690,7 +692,7 @@
       "pre_ship_checklist": "Mandatory dual audit (Sonnet voice + GLM critique + ZeroGPT) before Jules mouth gate"
     }
   ],
-  "updated_at": "2026-08-19T08:53",
+  "updated_at": "2026-08-19T09:55",
   "learnings": [
     "Sonnet primary voice; GLM-5.2 Green critique every pre-ship",
     "ZeroGPT (or equal) AI-detect; target 0% AI; lower is better",
