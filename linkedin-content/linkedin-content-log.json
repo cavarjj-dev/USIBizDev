@@ -1,9 +1,9 @@
 {
-  "version": 3.4,
-  "updated": "2026-08-17",
+  "version": 3.5,
+  "updated": "2026-08-19",
   "owner": "Julian C. Johnson",
   "wave": "market-wave-2-sonnet-lived",
-  "model_pass": "claude-sonnet-5 primary; glm-5.2 critique; ZeroGPT AI-detect; learnings locked 2026-08-15",
+  "model_pass": "claude-sonnet-5 primary; Jules mouth A2; glm-5.2 critique; ZeroGPT 0%",
   "pillars": [
     {
       "id": "room",
@@ -252,14 +252,14 @@
       "planned_date": "2026-08-19",
       "published_date": "",
       "source_file": "linkedin-posts-wave2-ship-set.md#w2-p3",
-      "hook": "When I was leading Fortune 500 transformations, the plan rarely kept me up at night.",
-      "caption": "When I was leading Fortune 500 transformations, the plan rarely kept me up at night.\n\nWhat kept me up was whether the work would hold when a customer, a peer, or a sponsor pushed back on a Friday afternoon. Pretty problem statements died in those rooms. So did clever frameworks that looked sharp on Tuesday and folded by week's end.\n\nI still coach for that test.\n\nIn the room now, I care less about whether the language sounds sharp and more about whether the decision still stands when someone important leans on it. Gut still has a job when the playbook stops matching the people in front of me.\n\nHome taught me the same thing, quieter. Attention is finite. Give the polished version of myself to work and the leftovers to the people I love, and both places feel the difference.\n\nI don't coach the title. I coach the person who has to execute when the room gets sharp, and that person rarely looks like the org chart says he should.\n\n#executivecoaching #wholeperson #seniorleaders",
-      "first_comment": "",
+      "hook": "The plan never kept me up. Friday afternoon did.",
+      "caption": "The plan never kept me up. Friday afternoon did.\n\nWhat that looked like was not a red number on a slide. A peer who was not actually aligned, already walking the pushback up to the SLT. A sponsor who vetoed after a Big Four pack got pushed harder than it got verified, and the cost and features were not what business and IT had agreed was the priority. Or an acquisition where the CEO and president of the company being bought talked past the vertical they were entering, and nobody slowed down long enough to get in a room and figure it out.\n\nI still coach for that test. Not the deck. The real conversations, the real relationships, the people who actually have to be influenced.\n\nHome taught me the same thing, quieter. Attention is finite. You can think you are aligned and be way off if clarity and honesty are missing.\n\nWhat I check at the end of the day is whether a decision still stands after someone important leaned on it.\n\n#decisionmaking #strategicalignment #leadershipdevelopment",
+      "first_comment": "The rooms came first. Alignment that only lives on a slide is not alignment.",
       "research_fuel": "Lived authority only.",
       "hashtags": [
-        "executivecoaching",
-        "wholeperson",
-        "seniorleaders"
+        "decisionmaking",
+        "strategicalignment",
+        "leadershipdevelopment"
       ],
       "visual": "text",
       "quality": {
@@ -283,33 +283,39 @@
         "day7_done": false,
         "day28_done": false
       },
-      "notes": "2026-08-12 Sonnet lived-voice rewrite. Killed: Generic whole-person line without texture",
-      "mouth_risks": "Verify the home/attention line reflects his actual lived pattern (finite attention, not polished-self-to-work vs leftovers-to-family) without naming specific family members. | Process: mouth minigame with Jules first, then dual audit before ship.",
+      "notes": "2026-08-19 mouth lock A2. Dual audit logged. ZeroGPT 0%. Awaiting Jules bel/ess/never-say/missing.",
+      "mouth_risks": "Graf 2 density / three-Friday list on phone. Home line is Jules dump — do not sand because GLM flinched. Optional: cut one Friday if reread feels resume.",
       "cadence_note": "Wave week lock 2026-08-15: P1 shipped Sat (week open). Remaining this week Mon/Wed/Fri (P2–P4). Next week Mon/Wed/Fri + BOF Mon (P5–P8).",
       "audit": {
-        "status": "awaiting_mouth_then_dual_audit",
-        "voice_model": "claude-sonnet-5",
+        "status": "awaiting_mouth_scores",
+        "voice_model": "claude-sonnet-5 + jules-mouth",
         "critique_model": "glm-5.2",
         "ai_detector": "zerogpt",
-        "ai_percent": null,
-        "ai_verdict": null,
+        "ai_percent": 0,
+        "ai_verdict": "Your Text is Human written",
         "ai_tool_secondary": null,
         "ai_percent_secondary": null,
         "believable": null,
         "essence": null,
-        "clarity": null,
-        "engage": null,
-        "human_not_ai": null,
+        "clarity": 6.5,
+        "engage": 7,
+        "human_not_ai": 8,
         "never_say": null,
         "missing_true_line": null,
-        "sticky_pov": null,
+        "sticky_pov": 8,
         "ship_override": false,
         "ship_override_reason": "",
-        "learnings_applied": [],
-        "notes": "",
-        "audited_at": null
+        "learnings_applied": [
+          "mouth first then dual audit",
+          "kill bio open / manifesto closer / cosplay hashtags",
+          "sticky POV from consulting scars",
+          "ZeroGPT target 0",
+          "do not sand gold because GLM flinched"
+        ],
+        "notes": "GLM scored harsh (bel4/ess7/clarity5/engage3/human2). Tre override on home + three Fridays + jargon. Graf 2 density is the live risk. Proof: _p3_zerogpt.png",
+        "audited_at": "2026-08-19T08:45"
       },
-      "pre_ship_checklist": "Mandatory dual audit (Sonnet voice + GLM critique + ZeroGPT) before Jules mouth gate"
+      "pre_ship_checklist": "Mouth scores still required. Then ship + first comment + Find handshake (L1 views)."
     },
     {
       "id": "w2-p4",
@@ -683,7 +689,7 @@
       "pre_ship_checklist": "Mandatory dual audit (Sonnet voice + GLM critique + ZeroGPT) before Jules mouth gate"
     }
   ],
-  "updated_at": "2026-08-15T12:44",
+  "updated_at": "2026-08-19T08:44",
   "learnings": [
     "Sonnet primary voice; GLM-5.2 Green critique every pre-ship",
     "ZeroGPT (or equal) AI-detect; target 0% AI; lower is better",
