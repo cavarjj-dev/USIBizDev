@@ -3,7 +3,7 @@
   "updated": "2026-08-24",
   "owner": "Julian C. Johnson",
   "wave": "market-wave-2-sonnet-lived",
-  "model_pass": "Jules mouth P4 Candidate B; package-altitude hill parked",
+  "model_pass": "P5 shipped mouth bel7/ess8; carousel parked",
   "pillars": [
     {
       "id": "room",
@@ -406,7 +406,7 @@
     {
       "id": "w2-p5",
       "wave": "2",
-      "title": "Not only her capability",
+      "title": "Need air",
       "type": "In the Room",
       "pillar": "room",
       "audiences": [
@@ -414,23 +414,23 @@
         "L"
       ],
       "funnel": "MOF",
-      "status": "ready",
+      "status": "published",
       "planned_date": "2026-08-24",
-      "published_date": "",
+      "published_date": "2026-08-24",
       "source_file": "linkedin-posts-wave2-ship-set.md#w2-p5",
-      "hook": "A company sent me a high-performing director and called it a leadership problem.",
-      "caption": "A company sent me a high-performing director and called it a leadership problem.\n\nShe was sharp and willing, already carrying more than her title suggested. By the second session I felt it in my gut: the bottleneck wasn't her capability. It was a leadership team that couldn't make a clean decision without reopening it three forums later. She was being asked to outrun a rhythm nobody upstairs wanted to name.\n\nWe still did the work on her: identity, presence, how she was landing in the room. But I put the system on the table too, quietly, without turning the coaching into a blame session.\n\nIndividual development without team-level change is a common buy. Sometimes it helps. Often it becomes a private gym membership next to a broken operating rhythm nobody's fixing.\n\nI care about the person in the chair. I also care whether the intact team can execute once the insight lands. Otherwise we did theater with better language.\n\nIf you sponsor this work, ask what has to change in the room around her, not only in her.\n\n#teamcoaching #leadership #wholeperson",
-      "first_comment": "Public market rhyme (not the client): individual learning without team execution change is the attack surface a lot of buyers are finally naming. ExecOnline's Teamraderie move was one clean public statement of that thesis.\n\nThe rooms came first.",
+      "hook": "Most of the people I sit with are already performing.",
+      "caption": "Most of the people I sit with are already performing. The room does not doubt their competence. What they need is air. A higher altitude on their own thinking.\n\nCulture is always in motion. Politics is just the cheap name we give it when the motion feels personal.\n\nSometimes someone falls out of sync with a system that already changed underneath them. The person who used to translate the room for them is gone. That is not a character flaw. It is a pattern.\n\nI am listening for what rubs people the wrong way. The chuckle. The eyebrow. The sentence that trails off because trust is not built yet. I let it sit until they are ready to pull that thread themselves.\n\nMy path was never going to be theirs. I do not assume it is. So I try not to force anything.\n\nThe answers usually live in whatever tension nobody wants to name yet. Sometimes it is a values violation wearing a scheduling problem's clothes.\n\nWhat is the thing in your room right now that you already noticed and decided not to look at?\n\n#leadership #decisionmaking #teamcoaching",
+      "first_comment": "The rooms came first.",
       "research_fuel": "Lived room + optional EO Teamraderie public rhyme.",
       "hashtags": [
-        "teamcoaching",
         "leadership",
-        "wholeperson"
+        "decisionmaking",
+        "teamcoaching"
       ],
       "visual": "text",
       "quality": {
-        "believable": null,
-        "essence": null,
+        "believable": 7,
+        "essence": 8,
         "clarity": null,
         "specificity": null,
         "market_fit": null,
@@ -449,11 +449,11 @@
         "day7_done": false,
         "day28_done": false
       },
-      "notes": "2026-08-12 Sonnet lived-voice rewrite. Killed: We did the individual work. (flattened to specific practice terms)",
-      "mouth_risks": "Verify the gym-membership metaphor and the composite director/LT-rhythm scene as pattern-true, not one identifiable engagement. | Process: mouth minigame with Jules first, then dual audit before ship.",
+      "notes": "2026-08-12 Sonnet lived-voice rewrite. Killed: We did the individual work. (flattened to specific practice terms) | PUBLISHED 2026-08-24 Jules mouth. Surgical B + his add after path line: 'So I try not to force anything.' Bel 7 ess 8. Text-only. Carousel PDF parked. Caption reconstructed from last Sonnet surgical + named edit (he did not paste the full posted body).",
+      "mouth_risks": "Shipped text-only. Confidentiality brochure stayed off. First comment was not confirmed; rooms-first placeholder. Find handshake still due (L1 views).",
       "cadence_note": "Wave week lock 2026-08-15: P1 shipped Sat (week open). Remaining this week Mon/Wed/Fri (P2–P4). Next week Mon/Wed/Fri + BOF Mon (P5–P8).",
       "audit": {
-        "status": "awaiting_mouth_then_dual_audit",
+        "status": "shipped_mouth_pass",
         "voice_model": "claude-sonnet-5",
         "critique_model": "glm-5.2",
         "ai_detector": "zerogpt",
@@ -461,19 +461,20 @@
         "ai_verdict": null,
         "ai_tool_secondary": null,
         "ai_percent_secondary": null,
-        "believable": null,
-        "essence": null,
+        "believable": 7,
+        "essence": 8,
         "clarity": null,
         "engage": null,
         "human_not_ai": null,
-        "never_say": null,
-        "missing_true_line": null,
-        "sticky_pov": null,
+        "never_say": "I do not open with presence; confidentiality brochure; invented quotes",
+        "missing_true_line": "So I try not to force anything (Jules add)",
+        "sticky_pov": 7,
         "ship_override": false,
         "ship_override_reason": "",
         "learnings_applied": [],
-        "notes": "",
-        "audited_at": null
+        "notes": "Mouth 2026-08-24. Bel 7 ess 8. Wave 3 recast from dump. craft: sonnet → glm → mouth.",
+        "audited_at": "2026-08-24T12:30:00",
+        "ship_note": "Published text-only. No visual."
       },
       "pre_ship_checklist": "Mandatory dual audit (Sonnet voice + GLM critique + ZeroGPT) before Jules mouth gate"
     },
@@ -701,7 +702,7 @@
       "pre_ship_checklist": "Mandatory dual audit (Sonnet voice + GLM critique + ZeroGPT) before Jules mouth gate"
     }
   ],
-  "updated_at": "2026-08-24T08:55:00",
+  "updated_at": "2026-08-24T12:30:00",
   "learnings": [
     "Sonnet primary voice; GLM-5.2 Green critique every pre-ship",
     "ZeroGPT (or equal) AI-detect; target 0% AI; lower is better",
