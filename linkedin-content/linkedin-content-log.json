@@ -336,9 +336,9 @@
         "P"
       ],
       "funnel": "TOF",
-      "status": "mouth_pass",
+      "status": "published",
       "planned_date": "2026-08-21",
-      "published_date": "",
+      "published_date": "2026-08-21",
       "source_file": "linkedin-posts-wave2-ship-set.md#w2-p4",
       "hook": "I have spent most of my career in the delivery chair.",
       "caption": "I have spent most of my career in the delivery chair. Educator. Facilitator. Coach. Consultant. The room, and what leaders actually do with what they just heard.\n\nI have designed adult education programs at a university too. Wrote them, submitted them, ran them.\n\nI have been blessed to work with a program director who has been a mentor to me. He ran learning and development for a large organization. He was an officer in the United States military. Now he is doing that work from a different seat, showing me what actually makes a design successful. I come in tactical. People like that expand the strategic grasp faster than studying it, or taking the role alone. I have always found my way to them.\n\nWhat I am seeing from that seat is how much of a session was already decided before anyone walked in. Alignment, outcomes, who is in the room, implementation, the measure: those keep looping in small iterations through the whole engagement, and past it, across programs.\n\nDone well is not a static executive education script. It is industry people in the room, tools that feed the next session, and a thread aimed at the behavior the organization named up front.\n\nDelivery is still where I am strongest. Seeing the cycle from the inside is changing what I watch for as a coach, and what I can actually partner on.\n\n#executiveeducation #peoplestrategy #leadershipdevelopment",
@@ -371,7 +371,7 @@
         "day7_done": false,
         "day28_done": false
       },
-      "notes": "2026-08-21 mouth lock Candidate B. bel8/ess8. Killed: syllabus buyer open, package altitude catalog, I sit closer brochure, 21st-century close, Doug/client/largest program.",
+      "notes": "2026-08-21 mouth lock Candidate B. bel8/ess8. Killed: syllabus buyer open, package altitude catalog, I sit closer brochure, 21st-century close, Doug/client/largest program. | PUBLISHED (Jules 2026-08-24): already on LinkedIn with engagement. Metrics not pasted. Do not invent day-7.",
       "mouth_risks": "Do not name mentor/client/program. Apprentice energy on sponsor Friday is owned. Package-altitude hill parked. Military/L&D details are about the mentor, not Jules.",
       "cadence_note": "Wave week lock 2026-08-15: P1 shipped Sat (week open). Remaining this week Mon/Wed/Fri (P2–P4). Next week Mon/Wed/Fri + BOF Mon (P5–P8).",
       "audit": {
@@ -701,7 +701,7 @@
       "pre_ship_checklist": "Mandatory dual audit (Sonnet voice + GLM critique + ZeroGPT) before Jules mouth gate"
     }
   ],
-  "updated_at": "2026-08-24T08:00:00",
+  "updated_at": "2026-08-24T08:55:00",
   "learnings": [
     "Sonnet primary voice; GLM-5.2 Green critique every pre-ship",
     "ZeroGPT (or equal) AI-detect; target 0% AI; lower is better",
