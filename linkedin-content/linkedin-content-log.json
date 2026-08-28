@@ -1,9 +1,9 @@
 {
-  "version": 3.7,
-  "updated": "2026-08-24",
+  "version": 3.9,
+  "updated": "2026-08-28",
   "owner": "Julian C. Johnson",
   "wave": "market-wave-2-sonnet-lived",
-  "model_pass": "P5 shipped mouth bel7/ess8; carousel parked",
+  "model_pass": "P6 mouth-locked 2026-08-28 (A + partnership close). P7 slipped off 8/28. Fortune 500 paste fired 8/26.",
   "pillars": [
     {
       "id": "room",
@@ -490,19 +490,19 @@
       ],
       "funnel": "MOF",
       "status": "ready",
-      "planned_date": "2026-08-26",
+      "planned_date": "2026-08-28",
       "published_date": "",
       "source_file": "linkedin-posts-wave2-ship-set.md#w2-p6",
-      "hook": "Here's something I keep turning over.",
-      "caption": "Here's something I keep turning over.\n\nThe field keeps publishing what a lot of us already feel in our bodies: leaders under rising stress, thin bench confidence, cost pressure sitting right next to readiness goals. I don't doubt the numbers. I doubt our response to them.\n\nMore content is the easy answer. More AI practice reps is the fashionable one. Both can help at the right layer. Neither automatically builds a leader who can stay human while the system keeps tightening.\n\nWhat I trust more, slowly, is a relationship dense enough to hold the real sentence under the performance narrative. Why a capable person goes still, or leaves, or performs green while the actual work dies underneath. I've sat across that sentence enough times to know it doesn't show up on a content calendar.\n\nI don't have a clean package name for that yet. I have a choice about where I put my hours.\n\nStill building what works when the stress isn't a quarter. It's a climate.\n\n#leadership #wholeperson #executivecoaching",
-      "first_comment": "DDI's stress and bench-strength research tracks with what shows up in the room, no lit review needed, just the pattern. The rooms came first.",
-      "research_fuel": "DDI stress/bench soft cite.",
+      "hook": "The stress I keep seeing lasts longer than the quarter that is supposed to contain it.",
+      "caption": "The stress I keep seeing lasts longer than the quarter that is supposed to contain it.\n\nA capable person goes still, or leaves, or keeps performing green while the actual work dies underneath. Competence is usually still there. The pressure around them just never lets up.\n\nI'll share a book, a podcast, or a course that actually speaks to the situation they are in. Then we talk about it. Sometimes I sit with a presentation they are about to walk into, or a relationship they cannot get clean.\n\nMost often there is a story they have been living by. We hold it up and check whether it still belongs in the day they are in.\n\nThey already hear they are smart and capable. What I love, especially in a group, is helping them challenge what they think they know about themselves.\n\nWhat I pay close attention to is after the resource: what actually shifted, what they noticed, what they tried. The real work happens between the sessions.\n\nThe shift I am most moved by often sounds like, huh, what was stopping me from doing this in the first place. That conversation comes through a real partnership. That is the gift of coaching, and the beauty of the work I get to do with people.\n\n#leadership #decisionmaking #teamcoaching",
+      "first_comment": "The rooms came first. If it is the person in the seat, that is 1:1. If it is the pattern between them, it is the team. If they have no honest room, it is a group.\nhttps://unifiedsolutionsinc.com",
+      "research_fuel": "Mouth lock 2026-08-28 from three Jules dumps. Work visible. Partnership close. Door in first comment.",
       "hashtags": [
         "leadership",
-        "wholeperson",
-        "executivecoaching"
+        "decisionmaking",
+        "teamcoaching"
       ],
-      "visual": "text",
+      "visual": "still: HQ/comms/linkedin-p6-visuals/p6-kitchen-110827.png",
       "quality": {
         "believable": null,
         "essence": null,
@@ -524,11 +524,11 @@
         "day7_done": false,
         "day28_done": false
       },
-      "notes": "2026-08-12 Sonnet lived-voice rewrite. Killed: Movement after truth. (slogan), Generic climate metaphor without prior scene grounding",
-      "mouth_risks": "Confirm his comfort naming this as an open, unresolved thinking post rather than a resolved insight. | Process: mouth minigame with Jules first, then dual audit before ship.",
-      "cadence_note": "Wave week lock 2026-08-15: P1 shipped Sat (week open). Remaining this week Mon/Wed/Fri (P2–P4). Next week Mon/Wed/Fri + BOF Mon (P5–P8).",
+      "notes": "Mouth locked 2026-08-28. Jules: A looks good, close to the real, publish. Scores not numbered. Dual audit optional not run. Tre does not post. Do not mark published until he says it is up. Visual Comfy SDXL kitchen-table still, no people.",
+      "mouth_risks": "214 over 180 by his ask. Gift of coaching is his close. Cottage-table still not a full kitchen. If Fortune 500 organic never went up, do not stack.",
+      "cadence_note": "If this ships 2026-08-28, P7 slips. Fortune 500 paste fired 2026-08-26. 48h air if that post is live.",
       "audit": {
-        "status": "awaiting_mouth_then_dual_audit",
+        "status": "mouth_locked_dual_optional",
         "voice_model": "claude-sonnet-5",
         "critique_model": "glm-5.2",
         "ai_detector": "zerogpt",
@@ -547,10 +547,10 @@
         "ship_override": false,
         "ship_override_reason": "",
         "learnings_applied": [],
-        "notes": "",
-        "audited_at": null
+        "notes": "Locked 2026-08-28 without 1-10 ritual. Dual audit not forced.",
+        "audited_at": "2026-08-28T06:40:00"
       },
-      "pre_ship_checklist": "Mandatory dual audit (Sonnet voice + GLM critique + ZeroGPT) before Jules mouth gate"
+      "pre_ship_checklist": "Mouth locked. Dual audit optional. Jules posts. Tre does not."
     },
     {
       "id": "w2-p7",
@@ -564,17 +564,17 @@
       ],
       "funnel": "TOF",
       "status": "ready",
-      "planned_date": "2026-08-28",
+      "planned_date": "2026-09-03",
       "published_date": "",
       "source_file": "linkedin-posts-wave2-ship-set.md#w2-p7",
-      "hook": "I don't learn the agenda from a slide first.",
-      "caption": "I don't learn the agenda from a slide first.\n\nI learn it when a people leader is trying to fund readiness while the enterprise is still optimizing cost, and the room goes quiet around what will actually get sponsored. That quiet tells you more than the deck does.\n\nI work where those investments get messy: leaders and intact teams who need real movement, not another library of content. Applied work under load, not applied work on a slide.\n\nOver 1,500 hours with 250+ senior leaders and founders, globally, hasn't made me romantic about any of this. It's made me practical about what holds when a customer, a peer, or a sponsor pushes back.\n\nIf you own that agenda, the split is still the same one it's always been. Scale where scale actually fits. Depth where depth is the real requirement.\n\nThe slide can wait. The room can't.\n\n#peoplestrategy #leadershipdevelopment #executivecoaching",
-      "first_comment": "I keep this simple in buyer rooms:\n\n1) Leader and manager development\n2) Change and workforce resiliency\n3) Human side of HR tech / AI strategy\n\nIf you want the fuller frame:\nhttps://unifiedsolutionsinc.com\n\nThe rooms came first.",
-      "research_fuel": "CHRO priority pattern in first comment only.",
+      "hook": "The room goes quiet when a people leader tries to fund readiness and the enterprise is still optimizing cost.",
+      "caption": "The room goes quiet when a people leader tries to fund readiness and the enterprise is still optimizing cost.\n\nThat quiet tells you more than the deck does. It is usually the moment someone is about to buy another program, because a program is easier to defend than an honest room.\n\nI do not learn the agenda from the slide first. I learn it there.\n\nIf they already have the tools and still are not adopting, more content is the wrong door. The job is adoption in an honest room, especially when a seat is changing.\n\nI keep watching whether the next spend is going to produce anticipation, or something a leader will actually use on a Tuesday.\n\nWhich of those is your last leadership spend still producing?\n\n#peoplestrategy #leadershipdevelopment #decisionmaking",
+      "first_comment": "Four doors, one job.\nPerson in the seat: 1:1.\nPattern between them: team.\nNo honest room: cohort.\nThe seat itself is the passage: Succession Circle.\nhttps://unifiedsolutionsinc.com\nThe rooms came first.",
+      "research_fuel": "Referral lock 2026-08-26. Doors in first comment. No hours. No CHRO 1-2-3.",
       "hashtags": [
         "peoplestrategy",
         "leadershipdevelopment",
-        "executivecoaching"
+        "decisionmaking"
       ],
       "visual": "text",
       "quality": {
@@ -598,9 +598,9 @@
         "day7_done": false,
         "day28_done": false
       },
-      "notes": "2026-08-12 Sonnet lived-voice rewrite. Killed: Laundry-list CHRO priority map kept in caption body",
-      "mouth_risks": "Confirm 1,500 hours / 250+ figure is current and approved for public use. | Process: mouth minigame with Jules first, then dual audit before ship.",
-      "cadence_note": "Wave week lock 2026-08-15: P1 shipped Sat (week open). Remaining this week Mon/Wed/Fri (P2–P4). Next week Mon/Wed/Fri + BOF Mon (P5–P8).",
+      "notes": "2026-08-26 referral recast. Killed hours + CHRO 1-2-3 + command close. Unmouthed. Park if mouth cannot hold the quiet. Slipped 2026-08-28 → 2026-09-03 so P6 can ship.",
+      "mouth_risks": "Adoption-in-an-honest-room is the site lead. Confirm or dump plainer. Do not put hours back. Do not restore CHRO 1-2-3.",
+      "cadence_note": "Slipped off 2026-08-28 so P6 can have the Friday. Earliest Thu 2026-09-03 if P6 ships today. Do not stack.",
       "audit": {
         "status": "awaiting_mouth_then_dual_audit",
         "voice_model": "claude-sonnet-5",
@@ -642,14 +642,14 @@
       "planned_date": "2026-08-31",
       "published_date": "",
       "source_file": "linkedin-posts-wave2-ship-set.md#w2-p8",
-      "hook": "The costliest development mistake I see isn't hiring the wrong person.",
-      "caption": "The costliest development mistake I see isn't hiring the wrong person.\n\nIt's buying the wrong layer of help for the actual problem.\n\nA manager drowning in new scope often needs structured skill: feedback loops, practice reps, a clear model to work against. Scaled support, including AI-assisted practice, can serve that well.\n\nA VP who looks composed in every forum and can't sleep because the role and the rest of his life stopped being separate people needs something else. I've sat in that quieter room. A relationship sturdy enough to hold an inconvenient truth. Slower. Not a five-module fix.\n\nI coach that second category on purpose. The whole person shows up to work whether we name him or not.\n\nIf you're a senior leader carrying more than your org chart shows, or you sponsor someone who is, you already know which layer you're in.\n\nunifiedsolutionsinc.com\n\n#executivecoaching #wholeperson #seniorleaders",
-      "first_comment": "",
-      "research_fuel": "Stack segmentation; lived pattern.",
+      "hook": "The costliest development mistake I see is not hiring the wrong person.",
+      "caption": "The costliest development mistake I see is not hiring the wrong person.\n\nIt is buying the wrong layer of help for the actual problem.\n\nA manager drowning in new scope often needs structured skill. Feedback loops, practice reps, a model to work against. Scaled support can serve that well.\n\nA VP who looks composed in every forum, and cannot sleep because the role and the rest of life stopped being separate people, needs something else. I have sat in that quieter room. Slower. Not a five-module fix.\n\nI coach that second category on purpose. I will not pretend a platform seat and that room are the same purchase.\n\nIf you are trying to refer someone, the useful question is not whether they need a coach. It is which door matches the problem they are actually in.\n\n#leadershipdevelopment #peoplestrategy #decisionmaking",
+      "first_comment": "Person in the seat: 1:1.\nPattern between them: team.\nNo honest room: cohort.\nSeat change as a human passage: Succession Circle.\nhttps://unifiedsolutionsinc.com\nThe rooms came first.",
+      "research_fuel": "Referral lock 2026-08-26. Layer split. Doors in first comment.",
       "hashtags": [
-        "executivecoaching",
-        "wholeperson",
-        "seniorleaders"
+        "leadershipdevelopment",
+        "peoplestrategy",
+        "decisionmaking"
       ],
       "visual": "text",
       "quality": {
@@ -673,8 +673,8 @@
         "day7_done": false,
         "day28_done": false
       },
-      "notes": "2026-08-12 Sonnet lived-voice rewrite. Killed: Movement after truth. (used as closing slogan)",
-      "mouth_risks": "Verify the VP composite (composed in forums, cannot sleep, role and life no longer separate) is pattern-true and not one identifiable client. | Process: mouth minigame with Jules first, then dual audit before ship.",
+      "notes": "2026-08-26 referral recast. Layer split + referrer question. Doors in first comment. Unmouthed.",
+      "mouth_risks": "VP composite pattern-true only. Refer-someone close is the lock. If brochure, dump plainer and keep the layer split.",
       "cadence_note": "Wave week lock 2026-08-15: P1 shipped Sat (week open). Remaining this week Mon/Wed/Fri (P2–P4). Next week Mon/Wed/Fri + BOF Mon (P5–P8).",
       "audit": {
         "status": "awaiting_mouth_then_dual_audit",
@@ -702,7 +702,7 @@
       "pre_ship_checklist": "Mandatory dual audit (Sonnet voice + GLM critique + ZeroGPT) before Jules mouth gate"
     }
   ],
-  "updated_at": "2026-08-24T12:30:00",
+  "updated_at": "2026-08-28T06:40:00",
   "learnings": [
     "Sonnet primary voice; GLM-5.2 Green critique every pre-ship",
     "ZeroGPT (or equal) AI-detect; target 0% AI; lower is better",
@@ -744,8 +744,8 @@
     "P3": "Wed 2026-08-19 Bridge",
     "P4": "Fri 2026-08-21 Contrarian",
     "P5": "Mon 2026-08-24 In the Room",
-    "P6": "Wed 2026-08-26 Thinking Out Loud",
-    "P7": "Fri 2026-08-28 Signal",
+    "P6": "Fri 2026-08-28 Thinking Out Loud (mouth locked)",
+    "P7": "Thu 2026-09-03 Signal (slipped off 8/28)",
     "P8": "Mon 2026-08-31 BOF Room"
   },
   "mouth_process": {
