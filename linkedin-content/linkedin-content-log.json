@@ -1,9 +1,9 @@
 {
-  "version": 3.9,
+  "version": 3.10,
   "updated": "2026-08-28",
   "owner": "Julian C. Johnson",
   "wave": "market-wave-2-sonnet-lived",
-  "model_pass": "P6 mouth-locked 2026-08-28 (A + partnership close). P7 slipped off 8/28. Fortune 500 paste fired 8/26.",
+  "model_pass": "P6 published 2026-08-28 (Jules). First comment + L1 Find still due. P7 slipped to 9/03.",
   "pillars": [
     {
       "id": "room",
@@ -489,9 +489,9 @@
         "S"
       ],
       "funnel": "MOF",
-      "status": "ready",
+      "status": "published",
       "planned_date": "2026-08-28",
-      "published_date": "",
+      "published_date": "2026-08-28",
       "source_file": "linkedin-posts-wave2-ship-set.md#w2-p6",
       "hook": "The stress I keep seeing lasts longer than the quarter that is supposed to contain it.",
       "caption": "The stress I keep seeing lasts longer than the quarter that is supposed to contain it.\n\nA capable person goes still, or leaves, or keeps performing green while the actual work dies underneath. Competence is usually still there. The pressure around them just never lets up.\n\nI'll share a book, a podcast, or a course that actually speaks to the situation they are in. Then we talk about it. Sometimes I sit with a presentation they are about to walk into, or a relationship they cannot get clean.\n\nMost often there is a story they have been living by. We hold it up and check whether it still belongs in the day they are in.\n\nThey already hear they are smart and capable. What I love, especially in a group, is helping them challenge what they think they know about themselves.\n\nWhat I pay close attention to is after the resource: what actually shifted, what they noticed, what they tried. The real work happens between the sessions.\n\nThe shift I am most moved by often sounds like, huh, what was stopping me from doing this in the first place. That conversation comes through a real partnership. That is the gift of coaching, and the beauty of the work I get to do with people.\n\n#leadership #decisionmaking #teamcoaching",
@@ -524,11 +524,11 @@
         "day7_done": false,
         "day28_done": false
       },
-      "notes": "Mouth locked 2026-08-28. Jules: A looks good, close to the real, publish. Scores not numbered. Dual audit optional not run. Tre does not post. Do not mark published until he says it is up. Visual Comfy SDXL kitchen-table still, no people.",
-      "mouth_risks": "214 over 180 by his ask. Gift of coaching is his close. Cottage-table still not a full kitchen. If Fortune 500 organic never went up, do not stack.",
-      "cadence_note": "If this ships 2026-08-28, P7 slips. Fortune 500 paste fired 2026-08-26. 48h air if that post is live.",
+      "notes": "PUBLISHED 2026-08-28 Jules report. Kitchen-table still. Dual audit optional not run. First comment + L1 Find handshake still due unless he already pasted.",
+      "mouth_risks": "214 over 180 by his ask. Gift of coaching is his close. Cottage-table still not a full kitchen.",
+      "cadence_note": "Shipped 2026-08-28. P7 slipped to 2026-09-03. Do not stack P7. Day-7 due 2026-09-04.",
       "audit": {
-        "status": "mouth_locked_dual_optional",
+        "status": "shipped_mouth_pass",
         "voice_model": "claude-sonnet-5",
         "critique_model": "glm-5.2",
         "ai_detector": "zerogpt",
@@ -547,10 +547,11 @@
         "ship_override": false,
         "ship_override_reason": "",
         "learnings_applied": [],
-        "notes": "Locked 2026-08-28 without 1-10 ritual. Dual audit not forced.",
-        "audited_at": "2026-08-28T06:40:00"
+        "notes": "Locked 2026-08-28 without 1-10 ritual. Dual audit not forced. Jules posted 2026-08-28.",
+        "audited_at": "2026-08-28T06:40:00",
+        "ship_note": "Published 2026-08-28. Jules posts. Tre does not. First comment + L1 Find still due."
       },
-      "pre_ship_checklist": "Mouth locked. Dual audit optional. Jules posts. Tre does not."
+      "pre_ship_checklist": "Shipped. First comment. L1 views. Day-7 2026-09-04."
     },
     {
       "id": "w2-p7",
@@ -598,9 +599,9 @@
         "day7_done": false,
         "day28_done": false
       },
-      "notes": "2026-08-26 referral recast. Killed hours + CHRO 1-2-3 + command close. Unmouthed. Park if mouth cannot hold the quiet. Slipped 2026-08-28 → 2026-09-03 so P6 can ship.",
+      "notes": "2026-08-26 referral recast. Killed hours + CHRO 1-2-3 + command close. Unmouthed. Park if mouth cannot hold the quiet.",
       "mouth_risks": "Adoption-in-an-honest-room is the site lead. Confirm or dump plainer. Do not put hours back. Do not restore CHRO 1-2-3.",
-      "cadence_note": "Slipped off 2026-08-28 so P6 can have the Friday. Earliest Thu 2026-09-03 if P6 ships today. Do not stack.",
+      "cadence_note": "Wave week lock 2026-08-15: P1 shipped Sat (week open). Remaining this week Mon/Wed/Fri (P2–P4). Next week Mon/Wed/Fri + BOF Mon (P5–P8).",
       "audit": {
         "status": "awaiting_mouth_then_dual_audit",
         "voice_model": "claude-sonnet-5",
@@ -702,7 +703,7 @@
       "pre_ship_checklist": "Mandatory dual audit (Sonnet voice + GLM critique + ZeroGPT) before Jules mouth gate"
     }
   ],
-  "updated_at": "2026-08-28T06:40:00",
+  "updated_at": "2026-08-24T12:30:00",
   "learnings": [
     "Sonnet primary voice; GLM-5.2 Green critique every pre-ship",
     "ZeroGPT (or equal) AI-detect; target 0% AI; lower is better",
@@ -744,8 +745,8 @@
     "P3": "Wed 2026-08-19 Bridge",
     "P4": "Fri 2026-08-21 Contrarian",
     "P5": "Mon 2026-08-24 In the Room",
-    "P6": "Fri 2026-08-28 Thinking Out Loud (mouth locked)",
-    "P7": "Thu 2026-09-03 Signal (slipped off 8/28)",
+    "P6": "Fri 2026-08-28 Thinking Out Loud published",
+    "P7": "Thu 2026-09-03 Signal (slipped)",
     "P8": "Mon 2026-08-31 BOF Room"
   },
   "mouth_process": {
