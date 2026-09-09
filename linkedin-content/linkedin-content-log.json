@@ -1,9 +1,9 @@
 {
-  "version": 3.10,
-  "updated": "2026-08-28",
+  "version": 3.12,
+  "updated": "2026-09-09",
   "owner": "Julian C. Johnson",
-  "wave": "market-wave-2-sonnet-lived",
-  "model_pass": "P6 published 2026-08-28 (Jules). First comment + L1 Find still due. P7 slipped to 9/03.",
+  "wave": "wave-3-discretion-register",
+  "model_pass": "Wave 2 closed 2026-09-09. Remaining W2 drafts killed (P7 Agenda binary; old P8 Wrong layer). P8 Quiet Doors stays published 8/31. W3-1 in Drafts as draft (mouth, not paste-ready). Wave 3 is a register, not eight new hills. Jules: do not post leftover W2 drafts. Hard refresh + Reload latest seed. STORAGE_KEY v7.",
   "pillars": [
     {
       "id": "room",
@@ -564,7 +564,7 @@
         "L"
       ],
       "funnel": "TOF",
-      "status": "ready",
+      "status": "killed",
       "planned_date": "2026-09-03",
       "published_date": "",
       "source_file": "linkedin-posts-wave2-ship-set.md#w2-p7",
@@ -599,11 +599,11 @@
         "day7_done": false,
         "day28_done": false
       },
-      "notes": "2026-08-26 referral recast. Killed hours + CHRO 1-2-3 + command close. Unmouthed. Park if mouth cannot hold the quiet.",
+      "notes": "KILLED 2026-09-09 Jules: will not post remaining Wave 2 drafts. This row was the 8/26 binary (program vs room / four-door first comment / spend-question close). Queue had a 9/6 P7 shipped report; seed never left ready. Do not paste this caption. If a recast already went live on LinkedIn, leave the live post; this Drafts row stays killed.",
       "mouth_risks": "Adoption-in-an-honest-room is the site lead. Confirm or dump plainer. Do not put hours back. Do not restore CHRO 1-2-3.",
-      "cadence_note": "Wave week lock 2026-08-15: P1 shipped Sat (week open). Remaining this week Mon/Wed/Fri (P2–P4). Next week Mon/Wed/Fri + BOF Mon (P5–P8).",
+      "cadence_note": "Wave 2 closed. Remaining drafts will not ship.",
       "audit": {
-        "status": "awaiting_mouth_then_dual_audit",
+        "status": "killed_2026-09-09",
         "voice_model": "claude-sonnet-5",
         "critique_model": "glm-5.2",
         "ai_detector": "zerogpt",
@@ -625,12 +625,13 @@
         "notes": "",
         "audited_at": null
       },
-      "pre_ship_checklist": "Mandatory dual audit (Sonnet voice + GLM critique + ZeroGPT) before Jules mouth gate"
+      "pre_ship_checklist": "Killed. Do not paste. Do not recast as P9.",
+      "mouth_status": "killed_will_not_ship"
     },
     {
       "id": "w2-p8",
       "wave": "2",
-      "title": "Wrong layer, quiet door",
+      "title": "Quiet Doors",
       "type": "BOF Room",
       "pillar": "discern",
       "audiences": [
@@ -639,20 +640,20 @@
         "S"
       ],
       "funnel": "BOF",
-      "status": "ready",
+      "status": "published",
       "planned_date": "2026-08-31",
-      "published_date": "",
+      "published_date": "2026-08-31",
       "source_file": "linkedin-posts-wave2-ship-set.md#w2-p8",
-      "hook": "The costliest development mistake I see is not hiring the wrong person.",
-      "caption": "The costliest development mistake I see is not hiring the wrong person.\n\nIt is buying the wrong layer of help for the actual problem.\n\nA manager drowning in new scope often needs structured skill. Feedback loops, practice reps, a model to work against. Scaled support can serve that well.\n\nA VP who looks composed in every forum, and cannot sleep because the role and the rest of life stopped being separate people, needs something else. I have sat in that quieter room. Slower. Not a five-module fix.\n\nI coach that second category on purpose. I will not pretend a platform seat and that room are the same purchase.\n\nIf you are trying to refer someone, the useful question is not whether they need a coach. It is which door matches the problem they are actually in.\n\n#leadershipdevelopment #peoplestrategy #decisionmaking",
-      "first_comment": "Person in the seat: 1:1.\nPattern between them: team.\nNo honest room: cohort.\nSeat change as a human passage: Succession Circle.\nhttps://unifiedsolutionsinc.com\nThe rooms came first.",
-      "research_fuel": "Referral lock 2026-08-26. Layer split. Doors in first comment.",
+      "hook": "A leader can need a platform and still be in something deeper the same week.",
+      "caption": "A leader can need a platform and still be in something deeper the same week.\n\nI see both. I work both.\n\nSometimes the job is skill, reps, a model to work against. Sometimes it is slower. The role and the rest of life stopped being separate people. Same person. Different zoom.\n\nI stay with both, and I challenge both, including what we are still blind to, and the third option if there is one.\n\nThere is no script that works every time. No assessment will hand you that room. That is the work I make space for.\n\n#leadershipdevelopment #peoplestrategy #decisionmaking",
+      "first_comment": "The rooms came first.\n\nI wrote about using both mindsets on purpose, not picking a side:\nhttps://unifiedsolutionsinc.com/articles/consulting-mindset-vs-coaching-mindset",
+      "research_fuel": "Mouth recast 2026-08-31 from Jules dump. Both/and, zoom, third option. Consulting-mindset article in first comment. Old 8/26 either/or dead.",
       "hashtags": [
         "leadershipdevelopment",
         "peoplestrategy",
         "decisionmaking"
       ],
-      "visual": "text",
+      "visual": "still: HQ/comms/linkedin-p8-visuals/p8-doors-310832.png",
       "quality": {
         "believable": null,
         "essence": null,
@@ -674,11 +675,11 @@
         "day7_done": false,
         "day28_done": false
       },
-      "notes": "2026-08-26 referral recast. Layer split + referrer question. Doors in first comment. Unmouthed.",
-      "mouth_risks": "VP composite pattern-true only. Refer-someone close is the lock. If brochure, dump plainer and keep the layer split.",
-      "cadence_note": "Wave week lock 2026-08-15: P1 shipped Sat (week open). Remaining this week Mon/Wed/Fri (P2–P4). Next week Mon/Wed/Fri + BOF Mon (P5–P8).",
+      "notes": "PUBLISHED 2026-08-31 Jules report (Candidate B, Quiet Doors). Kitchen-table hallway still. Dual audit not run. First comment + light S/L Find still due unless he already pasted. | Wave 2 closed 2026-09-09. Old Wrong layer quiet door caption is dead. Quiet Doors is the shipped hill. Do not restore either/or.",
+      "mouth_risks": "I see both / Same person Different zoom can read slogan. No assessment line is his. Do not restore manager-vs-VP.",
+      "cadence_note": "Shipped 2026-08-31 Quiet Doors. Wave 2 closed. No P9. Day-7 still unpaid.",
       "audit": {
-        "status": "awaiting_mouth_then_dual_audit",
+        "status": "shipped_mouth_pass",
         "voice_model": "claude-sonnet-5",
         "critique_model": "glm-5.2",
         "ai_detector": "zerogpt",
@@ -697,13 +698,99 @@
         "ship_override": false,
         "ship_override_reason": "",
         "learnings_applied": [],
-        "notes": "",
+        "notes": "Locked 2026-08-31 without 1-10 ritual. Dual audit not forced. Jules posted Candidate B.",
+        "audited_at": "2026-08-31T12:00:00",
+        "ship_note": "Published 2026-08-31. Jules posts. Tre does not. First comment + S/L Find still due."
+      },
+      "pre_ship_checklist": "Shipped. First comment. Light S+L views. Day-7 2026-09-07.",
+      "word_count": 97,
+      "mouth_status": "published_mouth_pass"
+    },
+    {
+      "id": "w3-1",
+      "wave": "3",
+      "title": "Standing up in the chop",
+      "type": "Thinking Out Loud",
+      "pillar": "room",
+      "audiences": [
+        "L",
+        "S"
+      ],
+      "funnel": "MOF",
+      "status": "draft",
+      "planned_date": "",
+      "published_date": "",
+      "source_file": "linkedin-w3-1-MOUTH.md",
+      "hook": "This is a major theme I keep seeing when I lead groups through executive leadership programs, whether we have been together a few sessions or several months, and regardless of the topic.",
+      "caption": "This is a major theme I keep seeing when I lead groups through executive leadership programs, whether we have been together a few sessions or several months, and regardless of the topic.\n\nThe leaders who look like they are moving are not the ones with the best scorecard. They are the ones who found one or two peers at the same altitude and said the thing out loud. Named the blind spot instead of managing around it.\n\nSomething happens when you do that with others instead of alone. You put your finger on what actually matters. You stand up and get your feet anchored, together, instead of each person quietly treading water and calling it fine.\n\nSatisfaction scores are easy to collect. Standing up in the chop is not.\n\n#leadershipdevelopment #peoplestrategy",
+      "first_comment": "Some recent readings going into my thinking here:\n\nhttps://www.gogradia.com/executive-education-explained\nhttps://www.joinleland.com/library/a/leadership-training-programs",
+      "research_fuel": "2026-09-07 harvest. Gradia + Leland in first comment. ROI/satisfaction vs standing up in chop. Discretion register.",
+      "hashtags": [
+        "leadershipdevelopment",
+        "peoplestrategy"
+      ],
+      "visual": "lived still, no people, no text. Not a Document carousel.",
+      "quality": {
+        "believable": null,
+        "essence": null,
+        "clarity": null,
+        "specificity": null,
+        "market_fit": null,
+        "attract": null
+      },
+      "metrics": {
+        "impressions": null,
+        "reactions": null,
+        "comments": null,
+        "reposts": null,
+        "saves": null,
+        "profile_views_note": "",
+        "inbound": false,
+        "inbound_note": "",
+        "comment_quality_1to5": null,
+        "day7_done": false,
+        "day28_done": false
+      },
+      "notes": "Wave 3 register, not an eight-post factory. Candidate B3 from Jules dump 2026-09-07. Mouth, not paste-ready. Do not ship until he scores bel/ess/never-say/missing/preach. Craft: sonnet bones + Jules open/close. Grok did not write the caption. Ad hoc dumps may insert beside this hill. Do not blend diet furniture.",
+      "mouth_risks": "Open can still read as bio. Range clock is the discretion move; do not swap in 12th inning / capstone. No table question (he killed the close). Preach index must stay under 4. Identifying residue: no headcount, no live book, no cohort outing.",
+      "cadence_note": "Dump-first. Score before paste. Ad hoc organic allowed beside, not instead of, Find.",
+      "word_count": 129,
+      "model_pass": "claude-sonnet-5 bones + Jules mouth 2026-09-07. GLM not run. Awaiting scores.",
+      "mouth_status": "awaiting_scores",
+      "audit": {
+        "status": "awaiting_mouth_scores",
+        "voice_model": "claude-sonnet-5",
+        "critique_model": "glm-5.2",
+        "ai_detector": "zerogpt",
+        "ai_percent": null,
+        "ai_verdict": null,
+        "believable": null,
+        "essence": null,
+        "preach_index": null,
+        "ship_override": false,
+        "ship_override_reason": "",
+        "learnings_applied": [
+          "Wave 3 discretion register",
+          "storm not transcript",
+          "kill sitting-with close",
+          "kill live-arc clock",
+          "research in first comment only"
+        ],
+        "notes": "Unmouthed until Jules scores. Do not mark ready.",
         "audited_at": null
       },
-      "pre_ship_checklist": "Mandatory dual audit (Sonnet voice + GLM critique + ZeroGPT) before Jules mouth gate"
+      "pre_ship_checklist": "Mouth scores. Preach <4. Then optional GLM+ZeroGPT. First comment. L1 Find handshake. Jules posts. Tre does not.",
+      "scores": {
+        "believable": null,
+        "essence": null,
+        "never_say": null,
+        "missing_true_line": null,
+        "preach_index": null,
+        "scorer": null
+      }
     }
   ],
-  "updated_at": "2026-08-24T12:30:00",
+  "updated_at": "2026-09-09T12:00:00",
   "learnings": [
     "Sonnet primary voice; GLM-5.2 Green critique every pre-ship",
     "ZeroGPT (or equal) AI-detect; target 0% AI; lower is better",
@@ -746,8 +833,9 @@
     "P4": "Fri 2026-08-21 Contrarian",
     "P5": "Mon 2026-08-24 In the Room",
     "P6": "Fri 2026-08-28 Thinking Out Loud published",
-    "P7": "Thu 2026-09-03 Signal (slipped)",
-    "P8": "Mon 2026-08-31 BOF Room"
+    "P7": "Killed 2026-09-09 (remaining W2 draft will not ship)",
+    "P8": "Mon 2026-08-31 BOF Room published (Quiet Doors). Wave 2 closed.",
+    "W3-1": "Draft in mouth. Not paste-ready. Discretion register."
   },
   "mouth_process": {
     "locked": "2026-08-17",
@@ -771,5 +859,13 @@
       "w2-p8"
     ],
     "notes": "P2 set the pattern 2026-08-17. Do not mass-rewrite wave on Grok. LI craft=Sonnet. Mouth before polish."
+  },
+  "wave3": {
+    "kind": "register",
+    "not": "eight new dashboard rows",
+    "law": "linkedin-wave3-engagement-style-reset-2026-08-23.md + 2026-09-06 discretion addendum",
+    "ad_hoc": "Dump-first organic inserts allowed beside scheduled hills. Not a third wave. Diet stays diet. Wave stays Wave. Blending is the fail.",
+    "luxury": "Discretion and understatement. Not a luxury-brand reposition. Site already holds the buyer door.",
+    "kpi": "inbound conversation, not ICF-graph likes"
   }
 }
