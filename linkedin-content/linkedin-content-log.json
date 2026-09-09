@@ -1,9 +1,9 @@
 {
-  "version": 3.12,
+  "version": 3.13,
   "updated": "2026-09-09",
   "owner": "Julian C. Johnson",
   "wave": "wave-3-discretion-register",
-  "model_pass": "Wave 2 closed 2026-09-09. Remaining W2 drafts killed (P7 Agenda binary; old P8 Wrong layer). P8 Quiet Doors stays published 8/31. W3-1 in Drafts as draft (mouth, not paste-ready). Wave 3 is a register, not eight new hills. Jules: do not post leftover W2 drafts. Hard refresh + Reload latest seed. STORAGE_KEY v7.",
+  "model_pass": "W3 pack 2026-09-09: W3-2/3/4 Sonnet bones, mouth not locked. Lived stills on disk. STORAGE_KEY v8. Do not paste. Jules scores first.",
   "pillars": [
     {
       "id": "room",
@@ -788,9 +788,214 @@
         "preach_index": null,
         "scorer": null
       }
+    },
+    {
+      "id": "w3-2",
+      "wave": "3",
+      "title": "Manager confidence is not a literacy module",
+      "type": "Thinking Out Loud",
+      "pillar": "market",
+      "audiences": [
+        "S",
+        "L"
+      ],
+      "funnel": "TOF",
+      "status": "draft",
+      "planned_date": "",
+      "published_date": "",
+      "source_file": "linkedin-w3-2-MOUTH.md",
+      "hook": "Every senior team I sit with this year has already bought the tool.",
+      "caption": "Every senior team I sit with this year has already bought the tool. The platform is live, the license is paid for, someone in IT ran a demo. What is missing is not another module explaining how the tool works. It is a manager who can sit in the chop with their own people and name what everyone is quietly managing around.\n\nI watch this happen in faculty rooms full of sharp, credentialed leaders. They can explain the technology. What stalls them is the conversation after the explanation. The one where someone on the team asks, plainly, \"does this mean my job changes,\" and the manager has to answer as a person, not a slide.\n\nDigital dexterity gets taught. Adoption gets built, and it gets built in a room where someone is willing to say the honest thing out loud.\n\nI keep noticing how often we hand a manager a course when what they actually need is practice having the harder conversation, with someone steady enough to sit in it with them.\n\nWhere have you seen confidence come from a module versus a room?\n\n#leadershipdevelopment #peoplestrategy",
+      "first_comment": "Some recent readings going into my thinking here.\n\nhttps://unifiedsolutionsinc.com/articles/adoption-is-not-a-course\nhttps://www.hrdive.com/news/chros-split-on-whether-managers-can-lead-through-ai-driven-change/828244/",
+      "research_fuel": "Gallup CHRO manager-confidence gap. HR Dive. Adoption article. Not an AI-coach post.",
+      "hashtags": [
+        "leadershipdevelopment",
+        "peoplestrategy"
+      ],
+      "visual": "still: HQ/comms/linkedin-w3-2-visuals/w3-2-209021.png",
+      "quality": {
+        "believable": null,
+        "essence": null,
+        "clarity": null,
+        "specificity": null,
+        "market_fit": null,
+        "attract": null
+      },
+      "metrics": {
+        "impressions": null,
+        "reactions": null,
+        "comments": null,
+        "reposts": null,
+        "saves": null,
+        "profile_views_note": "",
+        "inbound": false,
+        "inbound_note": "",
+        "comment_quality_1to5": null,
+        "day7_done": false,
+        "day28_done": false
+      },
+      "notes": "Order 1 of 3. Sonnet 2026-09-09. Mouth risks: this year, faculty rooms, invented quote, bait close.",
+      "mouth_risks": "This year + faculty rooms = live-arc/bio. Invented quote banned. I keep noticing + bait question.",
+      "cadence_note": "Next after W3-1 scores, or first if Jules starts here.",
+      "word_count": 196,
+      "model_pass": "claude-sonnet-5 2026-09-09. GLM not run.",
+      "mouth_status": "awaiting_scores",
+      "audit": {
+        "status": "awaiting_mouth_scores",
+        "voice_model": "claude-sonnet-5",
+        "critique_model": "glm-5.2",
+        "ai_detector": "zerogpt",
+        "ai_percent": null,
+        "ai_verdict": null,
+        "believable": null,
+        "essence": null,
+        "preach_index": null,
+        "ship_override": false,
+        "ship_override_reason": "",
+        "notes": "Unmouthed. Do not mark ready.",
+        "audited_at": null
+      },
+      "pre_ship_checklist": "Mouth scores. Preach <4. Optional GLM+ZeroGPT. First comment. L1/S Find. Jules posts."
+    },
+    {
+      "id": "w3-3",
+      "wave": "3",
+      "title": "Who you are after the seat change",
+      "type": "Thinking Out Loud",
+      "pillar": "whole",
+      "audiences": [
+        "L",
+        "S"
+      ],
+      "funnel": "MOF",
+      "status": "draft",
+      "planned_date": "",
+      "published_date": "",
+      "source_file": "linkedin-w3-3-MOUTH.md",
+      "hook": "There is a moment in every succession conversation where the org chart stops being useful.",
+      "caption": "There is a moment in every succession conversation where the org chart stops being useful. The chart tells you who reports to whom after the seat changes. It does not tell you who the person in that seat has to become to hold it.\n\nI have sat with leaders the week before they step into a role they have wanted for years, and the question underneath their calm is rarely about competency. It is about identity. Who was I in the old seat. Who do I need to be in this one. What do I let go of on the way out the door, and what follows me in whether I choose it or not.\n\nThe search process finds the right name. The transition plan sequences the right milestones. Neither one sits with the person at two in the morning when they are quietly asking what their legacy actually is, separate from the title.\n\nI keep noticing how much of succession planning assumes the person is the same on both sides of the change. They rarely are.\n\nWhat do you think actually needs tending in the space between the old seat and the new one?\n\n#leadershipdevelopment #peoplestrategy",
+      "first_comment": "Some recent readings going into my thinking here.\n\nhttps://unifiedsolutionsinc.com/articles/succession-planning-senior-leaders",
+      "research_fuel": "Succession article. Not a Circle ad.",
+      "hashtags": [
+        "leadershipdevelopment",
+        "peoplestrategy"
+      ],
+      "visual": "still: HQ/comms/linkedin-w3-3-visuals/w3-3-209031.png",
+      "quality": {
+        "believable": null,
+        "essence": null,
+        "clarity": null,
+        "specificity": null,
+        "market_fit": null,
+        "attract": null
+      },
+      "metrics": {
+        "impressions": null,
+        "reactions": null,
+        "comments": null,
+        "reposts": null,
+        "saves": null,
+        "profile_views_note": "",
+        "inbound": false,
+        "inbound_note": "",
+        "comment_quality_1to5": null,
+        "day7_done": false,
+        "day28_done": false
+      },
+      "notes": "Order 2 of 3. Sonnet 2026-09-09. Mouth risks: telegram identity stack, 2am, bait close.",
+      "mouth_risks": "Who was I / who do I need to be telegram. Two in the morning. What do you think bait.",
+      "cadence_note": "After W3-2. Not a Succession Circle advertisement.",
+      "word_count": 191,
+      "model_pass": "claude-sonnet-5 2026-09-09. GLM not run.",
+      "mouth_status": "awaiting_scores",
+      "audit": {
+        "status": "awaiting_mouth_scores",
+        "voice_model": "claude-sonnet-5",
+        "critique_model": "glm-5.2",
+        "ai_detector": "zerogpt",
+        "ai_percent": null,
+        "ai_verdict": null,
+        "believable": null,
+        "essence": null,
+        "preach_index": null,
+        "ship_override": false,
+        "ship_override_reason": "",
+        "notes": "Unmouthed. Do not mark ready.",
+        "audited_at": null
+      },
+      "pre_ship_checklist": "Mouth scores. Preach <4. First comment. L1 Find. Jules posts."
+    },
+    {
+      "id": "w3-4",
+      "wave": "3",
+      "title": "Name the work, then the buy",
+      "type": "Thinking Out Loud",
+      "pillar": "discern",
+      "audiences": [
+        "S",
+        "L",
+        "B"
+      ],
+      "funnel": "BOF",
+      "status": "draft",
+      "planned_date": "",
+      "published_date": "",
+      "source_file": "linkedin-w3-4-MOUTH.md",
+      "hook": "Here is a question worth sitting with before you decide what kind of help you actually need.",
+      "caption": "Here is a question worth sitting with before you decide what kind of help you actually need. Can you name, specifically, the work that has to change. Not the department. The actual work. And can you name who owns that work on an ordinary Tuesday, after the announcement has worn off and the calendar looks normal again.\n\nIf you can answer both of those, custom support has somewhere real to land. You know the terrain well enough to point at it, and that is what makes tailored work useful instead of expensive guessing.\n\nIf you cannot answer them yet, that is not a failure. It usually means what you are actually looking for is a room full of peers wrestling with the same thing, or a cohort that gives you language before you need precision, or simply time to think without an agenda attached to it.\n\nThose are different buys. People mix them eventually, and that is normal.\n\nThe expensive mistake is starting with the wrong one, because you end up funding structure for a problem you have not finished naming yet.\n\nWhich one are you actually reaching for right now?\n\n#leadershipdevelopment #peoplestrategy",
+      "first_comment": "Some recent readings going into my thinking here.\n\nhttps://unifiedsolutionsinc.com/articles/group-vs-team-coaching",
+      "research_fuel": "Jules dump recast of wrong-container. Not four-door catalog. Group vs team article.",
+      "hashtags": [
+        "leadershipdevelopment",
+        "peoplestrategy"
+      ],
+      "visual": "still: HQ/comms/linkedin-w3-4-visuals/w3-4-209041.png",
+      "quality": {
+        "believable": null,
+        "essence": null,
+        "clarity": null,
+        "specificity": null,
+        "market_fit": null,
+        "attract": null
+      },
+      "metrics": {
+        "impressions": null,
+        "reactions": null,
+        "comments": null,
+        "reposts": null,
+        "saves": null,
+        "profile_views_note": "",
+        "inbound": false,
+        "inbound_note": "",
+        "comment_quality_1to5": null,
+        "day7_done": false,
+        "day28_done": false
+      },
+      "notes": "Order 3 of 3. Approachable selection POV. Mouth risks: sitting-with open, shop window, bait close.",
+      "mouth_risks": "Sitting-with open. Custom support / different buys shop window. Funnel close.",
+      "cadence_note": "After W3-3. Educational. Not enrollment.",
+      "word_count": 197,
+      "model_pass": "claude-sonnet-5 2026-09-09. GLM not run.",
+      "mouth_status": "awaiting_scores",
+      "audit": {
+        "status": "awaiting_mouth_scores",
+        "voice_model": "claude-sonnet-5",
+        "critique_model": "glm-5.2",
+        "ai_detector": "zerogpt",
+        "ai_percent": null,
+        "ai_verdict": null,
+        "believable": null,
+        "essence": null,
+        "preach_index": null,
+        "ship_override": false,
+        "ship_override_reason": "",
+        "notes": "Unmouthed. Do not mark ready.",
+        "audited_at": null
+      },
+      "pre_ship_checklist": "Mouth scores. Preach <4. First comment. S/L Find. Jules posts."
     }
   ],
-  "updated_at": "2026-09-09T12:00:00",
+  "updated_at": "2026-09-09T16:00:00",
   "learnings": [
     "Sonnet primary voice; GLM-5.2 Green critique every pre-ship",
     "ZeroGPT (or equal) AI-detect; target 0% AI; lower is better",
@@ -835,7 +1040,10 @@
     "P6": "Fri 2026-08-28 Thinking Out Loud published",
     "P7": "Killed 2026-09-09 (remaining W2 draft will not ship)",
     "P8": "Mon 2026-08-31 BOF Room published (Quiet Doors). Wave 2 closed.",
-    "W3-1": "Draft in mouth. Not paste-ready. Discretion register."
+    "W3-1": "Draft in mouth. Not paste-ready. Discretion register.",
+    "W3-2": "Draft mouth. Manager confidence. Start here after scores.",
+    "W3-3": "Draft mouth. Seat change.",
+    "W3-4": "Draft mouth. Selection, not catalog."
   },
   "mouth_process": {
     "locked": "2026-08-17",
