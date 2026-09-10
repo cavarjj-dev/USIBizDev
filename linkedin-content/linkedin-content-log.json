@@ -1,9 +1,9 @@
 {
-  "version": 3.13,
-  "updated": "2026-09-09",
+  "version": 3.14,
+  "updated": "2026-09-10",
   "owner": "Julian C. Johnson",
   "wave": "wave-3-discretion-register",
-  "model_pass": "W3 pack 2026-09-09: W3-2/3/4 Sonnet bones, mouth not locked. Lived stills on disk. STORAGE_KEY v8. Do not paste. Jules scores first.",
+  "model_pass": "W3 visuals 2026-09-10: distinct lived stills locked (peers / after-demo / vacated-seat / one-page). Captions still mouth, not paste-ready. STORAGE_KEY v8. Jules scores first.",
   "pillars": [
     {
       "id": "room",
@@ -729,7 +729,7 @@
         "leadershipdevelopment",
         "peoplestrategy"
       ],
-      "visual": "lived still, no people, no text. Not a Document carousel.",
+      "visual": "still: HQ/comms/linkedin-w3-1-visuals/w3-1-peers.png",
       "quality": {
         "believable": null,
         "essence": null,
@@ -812,7 +812,7 @@
         "leadershipdevelopment",
         "peoplestrategy"
       ],
-      "visual": "still: HQ/comms/linkedin-w3-2-visuals/w3-2-209021.png",
+      "visual": "still: HQ/comms/linkedin-w3-2-visuals/w3-2-after-demo.png",
       "quality": {
         "believable": null,
         "essence": null,
@@ -880,7 +880,7 @@
         "leadershipdevelopment",
         "peoplestrategy"
       ],
-      "visual": "still: HQ/comms/linkedin-w3-3-visuals/w3-3-209031.png",
+      "visual": "still: HQ/comms/linkedin-w3-3-visuals/w3-3-vacated-seat.png",
       "quality": {
         "believable": null,
         "essence": null,
@@ -949,7 +949,7 @@
         "leadershipdevelopment",
         "peoplestrategy"
       ],
-      "visual": "still: HQ/comms/linkedin-w3-4-visuals/w3-4-209041.png",
+      "visual": "still: HQ/comms/linkedin-w3-4-visuals/w3-4-one-page.png",
       "quality": {
         "believable": null,
         "essence": null,
